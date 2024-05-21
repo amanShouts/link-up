@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  username      String
+  name          String
+  age           Int?
+  lastLogin     DateTime?
+  createdAt     DateTime  @default(now())
+  industryField String?
+  type          UserType  @default(USER)
+
+  posts            Post[]
+  comments         Comment[]
+  sentMessages     Chat[]         @relation("Sender")
+  receivedMessages Chat[]         @relation("Receiver")
+  mentor           Mentor[]       @relation("Mentor")
+  entrepreneur     Entrepreneur[] @relation("Entrepreneur")
+}
+
+model Mentor {
+  id             Int  @id @default(autoincrement())
+  userId         Int
+  entrepreneurId Int?
+
+  User         User           @relation("Mentor", fields: [userId], references: [id])
+  Entrepreneur Entrepreneur[]
+}
+
+model Entrepreneur {
+  id       Int @id @default(autoincrement())
+  userId   Int
+  mentorId Int
+
+  User   User   @relation("Entrepreneur", fields: [userId], references: [id])
+  Mentor Mentor @relation(fields: [mentorId], references: [id])
+}
+
+model Post {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  title     String
+  desc      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+  type      PostType
+  labelId   Int?
+  like      Int       @default(0)
+  comment   Int       @default(0)
+  view      Int       @default(0)
+
+  user     User      @relation(fields: [userId], references: [id])
+  label    Label?    @relation(fields: [labelId], references: [id])
+  comments Comment[]
+}
+
+model Label {
+  id         Int    @id @default(autoincrement())
+  labelTitle String
+  posts      Post[]
+}
+
+model Comment {
+  id        Int       @id @default(autoincrement())
+  userId    Int
+  postId    Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+  post Post @relation(fields: [postId], references: [id])
+}
+
+model Resource {
+  id        Int          @id @default(autoincrement())
+  type      ResourceType
+  content   String
+  title     String
+  createdAt DateTime     @default(now())
+}
+
+model Chat {
+  id         Int      @id @default(autoincrement())
+  content    String
+  receiverId Int
+  senderId   Int
+  createdAt  DateTime @default(now())
+  chatType   ChatType
+  fileLink   String?
+
+  sender   User @relation("Sender", fields: [senderId], references: [id])
+  receiver User @relation("Receiver", fields: [receiverId], references: [id])
+}
+
+enum UserType {
+  USER
+  INVESTOR
+  ENTREPRENEUR
+}
+
+enum PostType {
+  TEXT
+  IMAGE
+  VIDEO
+  LINK
+}
+
+enum ResourceType {
+  ARTICLE
+  VIDEO
+  PODCAST
+  BOOK
+}
+
+enum ChatType {
+  TEXT
+  FILE
+  IMAGE
+}

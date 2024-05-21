@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  backend:
+    container_name: link_up_backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./backend:/backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+
+  frontend:
+    container_name: link_up_frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    volumes: 
+      - ./frontend:/frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+      - db
+
+  db:
+    container_name: db
+    image: postgres:9.6
+    environment:
+      POSTGRES_PASSWORD: admin123
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
