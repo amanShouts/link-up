@@ -8,10 +8,13 @@ services:
       dockerfile: Dockerfile.backend
     volumes:
       - ./backend:/backend
+      - /backend/node_modules
     ports:
       - "3000:3000"
+      - "5555:5555"
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   frontend:
     container_name: link_up_frontend
@@ -20,19 +23,27 @@ services:
       dockerfile: Dockerfile.frontend
     volumes: 
       - ./frontend:/frontend
+      - /frontend/node_modules
     ports:
       - "5173:5173"
     depends_on:
-      - backend
-      - db
+      db:
+        condition: service_healthy
 
   db:
     container_name: db
     restart: always
-    image: postgres:9.6
+    image: postgres:latest
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: admin123
+      POSTGRES_DB: postgres
     ports:
       - "5432:5432"
     volumes:
       - ./postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -d $${POSTGRES_DB} -U $${POSTGRES_USER}' ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
