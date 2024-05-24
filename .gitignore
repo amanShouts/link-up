@@ -1,3 +1,4 @@
 postgres-data
 bun.lockb
 .env
+.idea/

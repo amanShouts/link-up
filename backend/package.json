@@ -9,7 +9,11 @@
     "dev:docker": "npm run prisma:docker & npm run dev",
     "prisma:docker": "npm run prisma:migrate && npm run studio",
     "prisma:migrate": "prisma migrate deploy",
+    "db:seed": "npx prisma db seed",
     "studio": "npx prisma studio"
+  },
+  "prisma": {
+    "seed": "ts-node src/seed.ts"
   },
   "keywords": [],
   "author": "",
