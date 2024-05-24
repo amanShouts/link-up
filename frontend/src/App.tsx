@@ -1,12 +1,30 @@
-import {Button} from "@/components/ui/button.tsx";
+import { useUser } from "@clerk/clerk-react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CustomSignIn from "./components/Signin/CustomSignIn";
+import Home from "./pages/Home";
+import CustomSignUp from "./components/Signup/CustomSignUp";
+import Landing from "./pages/Landing";
 
-function App() {
-    return (
-        <main className={"flex items-center justify-center flex-col h-screen w-screen gap-4"}>
-           <h1>Shadcn Button Working</h1>
-            <Button>Primary</Button>
-        </main>
-    );
+export default function App() {
+
+  const { isSignedIn, user, isLoaded } = useUser();
+
+  console.log('isSignedIn', isSignedIn)
+  console.log('user', user)
+  console.log('isLoaded', isLoaded)
+
+
+  return (
+    <>
+     <BrowserRouter>
+        <Routes>
+          {/* <Navbar/> */}
+          <Route path="/login" element={<CustomSignIn/>}/>
+          <Route path="/signup" element={<CustomSignUp/>}/>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/landing" element={<Landing/>}/>
+        </Routes>
+      </BrowserRouter>
+    </>
+  )
 }
-
-export default App;
