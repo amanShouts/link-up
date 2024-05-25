@@ -12,6 +12,7 @@ model User {
   username      String    @unique
   name          String
   age           Int?
+  img           String?
   lastLogin     DateTime?
   createdAt     DateTime  @default(now())
   industryField String?
