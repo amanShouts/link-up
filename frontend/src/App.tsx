@@ -1,31 +1,41 @@
 import { useUser } from "@clerk/clerk-react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import CustomSignIn from "./components/Signin/CustomSignIn";
 import Home from "./pages/Home";
 import CustomSignUp from "./components/Signup/CustomSignUp";
 import Landing from "./pages/Landing";
 import Onboarding from "./pages/Onboarding";
+import { useEffect } from "react";
 
 export default function App() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
+  const navigate = useNavigate();
 
-  console.log("isSignedIn", isSignedIn);
-  console.log("user", user);
-  console.log("isLoaded", isLoaded);
+  useEffect(() => {
+
+    const currentRoute = window.location.pathname;
+
+    const publicRoutes = ['/'];
+
+    if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute) ) {
+      navigate('/login');
+    }
+  }, [isLoaded, isSignedIn, navigate, window.location ]);
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          {/* <Navbar/> */}
-          <Route path="/login" element={<CustomSignIn />} />
-          <Route path="/signup" element={<CustomSignUp />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/landing" element={<Landing />} />
-          <Route path="/onboarding" element={<Onboarding />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        {/* <Navbar/> */}
+        <Route path="/" element={<Landing />} />
+        <Route path="/login" element={<CustomSignIn />} />
+        <Route path="/signup" element={<CustomSignUp />} />
+        <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
+        <Route path="/home" element={isSignedIn ? <Home /> : null} />
+      </Routes>
     </>
   );
 }
-
