@@ -18,7 +18,6 @@ export default function App() {
     <>
      <BrowserRouter>
         <Routes>
-          {/* <Navbar/> */}
           <Route path="/login" element={<CustomSignIn/>}/>
           <Route path="/signup" element={<CustomSignUp/>}/>
           <Route path="/" element={<Home/>}/>
