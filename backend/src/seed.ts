@@ -5,24 +5,26 @@ const prisma = new PrismaClient();
 async function main() {
     // Upsert users
     const user1 = await prisma.user.upsert({
-        where: { username: 'johndoe1' },
+        where: { username: 'batman' },
         update: {},
         create: {
-            username: 'johndoe1',
-            name: 'John Doe1',
+            username: 'batman',
+            name: 'Bat man',
             age: 30,
-            industryField: 'Technology',
+            img: 'https://img.etimg.com/thumb/width-1200,height-900,imgsize-40242,resizemode-75,msid-106905805/news/international/us/the-batman-2-heres-what-we-know-so-far-about-release-date-cast-plot-and-more.jpg',
+            industryField: 'Gotham',
             type: 'ENTREPRENEUR'
         }
     });
 
     const user2 = await prisma.user.upsert({
-        where: { username: 'janedoe2' },
+        where: { username: 'brucewayne' },
         update: {},
         create: {
-            username: 'janedoe2',
-            name: 'Jane Doe2',
+            username: 'brucewayne',
+            name: 'Bruce Wayne',
             age: 28,
+            img: 'https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/02/robert-pattinson-the-batman.jpg',
             industryField: 'Healthcare',
             type: 'INVESTOR'
         }
