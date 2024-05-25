@@ -1,4 +1,4 @@
-import { SignOutButton, useUser } fr/om "@clerk/clerk-react";
+import { SignOutButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
