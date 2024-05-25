@@ -4,26 +4,28 @@ import CustomSignIn from "./components/Signin/CustomSignIn";
 import Home from "./pages/Home";
 import CustomSignUp from "./components/Signup/CustomSignUp";
 import Landing from "./pages/Landing";
+import Onboarding from "./pages/Onboarding";
 
 export default function App() {
-
   const { isSignedIn, user, isLoaded } = useUser();
 
-  console.log('isSignedIn', isSignedIn)
-  console.log('user', user)
-  console.log('isLoaded', isLoaded)
-
+  console.log("isSignedIn", isSignedIn);
+  console.log("user", user);
+  console.log("isLoaded", isLoaded);
 
   return (
     <>
-     <BrowserRouter>
+      <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<CustomSignIn/>}/>
-          <Route path="/signup" element={<CustomSignUp/>}/>
-          <Route path="/" element={<Home/>}/>
-          <Route path="/landing" element={<Landing/>}/>
+          {/* <Navbar/> */}
+          <Route path="/login" element={<CustomSignIn />} />
+          <Route path="/signup" element={<CustomSignUp />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/landing" element={<Landing />} />
+          <Route path="/onboarding" element={<Onboarding />} />
         </Routes>
       </BrowserRouter>
     </>
-  )
+  );
 }
+

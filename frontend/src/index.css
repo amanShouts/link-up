@@ -85,3 +85,20 @@
     padding: 0;
     box-sizing: border-box;
   }
+
+.signin-container {
+  & {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.signup-container {
+  & {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
