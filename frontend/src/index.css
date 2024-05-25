@@ -1,10 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .cl-footer {
-  & { display: none; }
+  & {
+    display: none;
+  }
 }
 
 .signin-container {
-  & { height: 100vh; display: flex; align-items: center; justify-content: center; }
+  & {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 .signup-container {
-  & { height: 100vh; display: flex; align-items: center; justify-content: center; }
+  & {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
+
