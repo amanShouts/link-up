@@ -1,6 +1,5 @@
-import { Button } from "@/components/ui/button"
-import { decrement, increment } from "@/store/slice/counterSlice"
-import { useDispatch, useSelector } from "react-redux"
+import Navbar from "@/components/Navbar/Navbar";
+import HomePage from "@/components/home-page.tsx";
 
 export default function Home() {
 
@@ -9,9 +8,8 @@ export default function Home() {
 
   return (
     <div>
-      sample redux test { test }
-      <Button onClick={()=>{ dispatch(increment()) }}>+</Button>
-      <Button onClick={()=>{ dispatch(decrement()) }}>-</Button>
+      <Navbar/>
+      <HomePage />
     </div>
   )
 }
