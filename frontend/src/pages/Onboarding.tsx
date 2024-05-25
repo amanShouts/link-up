@@ -58,7 +58,7 @@ export default function Onboarding() {
         <div className="w-full h-screen flex flex-col items-center justify-center gap-2">
           <UserButton />
 
-          <div>Hello {user?.fullName}!</div>
+          <div>Welcome {user?.fullName}!</div>
 
           <div className="w-full flex flex-col items-center gap-4 justify-center">
             <div>{steps[question].title}</div>
