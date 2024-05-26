@@ -1,6 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
-const userRoutes = require('./routes/userRoutes');
+import { getAllUsersRoute, saveUserRoute } from './routes/userRoutes';
 const cors = require('cors')
 
 dotenv.config();
@@ -17,7 +17,11 @@ app.get("/", (req, res) => {
     })
 })
 
-app.use(userRoutes)
+// /users 
+app.use(getAllUsersRoute)
+
+// save-user
+app.use(saveUserRoute)
 
 app.listen(PORT, () => {
     console.log("Server running on port ", PORT)
