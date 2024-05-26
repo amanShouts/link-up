@@ -21,7 +21,7 @@ export const saveUserModel = async (req: Request) => {
         age,
         img,
         lastLogin,
-        industryField,
+        type: "ENTREPRENEUR" // fix this
       }
     })
   }
