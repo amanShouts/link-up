@@ -1,7 +1,8 @@
-const express = require('express');
-const router = express.Router();
-const userController = require('../controllers/userController');
+import { Router } from "express";
+import { getUsers, saveUserController } from "../controllers/userController";
 
-router.get('/users', userController.getUsers);
+export const getAllUsersRoute = Router();
+export const saveUserRoute = Router();
 
-module.exports = router;
+getAllUsersRoute.get('/users',getUsers);
+saveUserRoute.post('/save-user',saveUserController)
