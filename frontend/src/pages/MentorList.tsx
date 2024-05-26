@@ -1,6 +1,6 @@
 import MentorListCard from "@/components/MentorListCard";
 
-export default function MentorListPage() {
+export default function MentorList() {
   return (
     <main className="w-full flex flex-col items-center justify-center">
       <div className="text-3xl m-3">Connect to mentors</div>

@@ -9,9 +9,9 @@ import { useParams } from "react-router-dom";
 
 export default function MentorProfile() {
   const { mentorId } = useParams();
+  // Find mentor data
   console.log(mentorId);
   if (!mentorId) return;
-  // Find mentor data
   const data: UserDataType = { ...dummyData, mentorId: mentorId };
   return (
     <div className="w-full flex flex-col items-center justify-center space-y-2">
@@ -48,6 +48,7 @@ const dummyData = {
       {
         role: "Software Engineer",
         companyName: "Acme Inc. • 2019 - Present",
+        companyLogo: "https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png",
         desc: `Developed and maintained web applications using React,
         Node.js, and MongoDB. Collaborated with cross-functional
         teams to deliver high-quality software.`,
@@ -55,6 +56,7 @@ const dummyData = {
       {
         role: "Front-end Developer",
         companyName: "Widgets Inc. • 2016 - 2019",
+        companyLogo: "https://logowik.com/content/uploads/images/amazon6707.jpg",
         desc: `Designed and implemented responsive user interfaces using
         HTML, CSS, and JavaScript. Collaborated with designers and
         back-end developers to deliver high-quality web applications.`,

@@ -7,17 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id            Int       @id @default(autoincrement())
-  username      String    @unique
-  name          String
-  age           Int?
-  img           String?
-  lastLogin     DateTime?
-  createdAt     DateTime  @default(now())
-  industryField String?
-  type          UserType  @default(USER)
+//   industry: string[];
+//   skills: string[];
 
+model User {
+  id               Int            @id @default(autoincrement())
+  username         String         @unique
+  name             String
+  age              Int?
+  img              String?
+  bgImg            String?
+  city             String?
+  country          String?
+  lastLogin        DateTime?
+  createdAt        DateTime       @default(now())
+  type             UserType
+  isMentor         Boolean        @default(false)
+  desc             String?
+  currDesignation  String?
+  bio              String?
+  experience       Experience[]
+  industry         Industry[]
+  skill            Skill[]
   posts            Post[]
   comments         Comment[]
   sentMessages     Chat[]         @relation("Sender")
@@ -26,22 +37,48 @@ model User {
   entrepreneur     Entrepreneur[] @relation("Entrepreneur")
 }
 
+model Industry {
+  id     Int          @id @default(autoincrement())
+  usedId Int
+  userId User         @relation(fields: [usedId], references: [id])
+  type   IndustryType @default(NONE)
+}
+
+model Skill {
+  id     Int    @id @default(autoincrement())
+  usedId Int
+  userId User   @relation(fields: [usedId], references: [id])
+  type   String
+}
+
+model Experience {
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  User        User    @relation(fields: [userId], references: [id])
+  companyName String
+  companyLogo String?
+  role        String
+  desc        String
+  startYear   String
+  endYear     String
+}
+
 model Mentor {
-  id             Int  @id @default(autoincrement())
+  id             Int            @id @default(autoincrement())
   userId         Int
   entrepreneurId Int?
-
-  User         User           @relation("Mentor", fields: [userId], references: [id])
-  Entrepreneur Entrepreneur[]
+  company        String
+  User           User           @relation("Mentor", fields: [userId], references: [id])
+  Entrepreneur   Entrepreneur[]
 }
 
 model Entrepreneur {
-  id       Int @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   userId   Int
-  mentorId Int
-
-  User   User   @relation("Entrepreneur", fields: [userId], references: [id])
-  Mentor Mentor @relation(fields: [mentorId], references: [id])
+  mentorId Int?
+  company  String
+  User     User    @relation("Entrepreneur", fields: [userId], references: [id])
+  Mentor   Mentor? @relation(fields: [mentorId], references: [id])
 }
 
 model Post {
@@ -101,7 +138,6 @@ model Chat {
 }
 
 enum UserType {
-  USER
   INVESTOR
   ENTREPRENEUR
 }
@@ -124,4 +160,38 @@ enum ChatType {
   TEXT
   FILE
   IMAGE
+}
+
+enum IndustryType {
+  NONE
+  SaaS
+  Ecommerce
+  Healthcare
+  Finance
+  Retail
+  RealEState
+  Manufacturing
+  Automotive
+  Education
+  Energy
+  Telecommunications
+  Media
+  Entertainment
+  Travel
+  Hospitality
+  Agriculture
+  Logistics
+  Construction
+  Pharmaceuticals
+  Biotechnology
+  Insurance
+  LegalServices
+  FoodandBeverage
+  Aerospace
+  Fashion
+  Gaming
+  Advertising
+  Consulting
+  Mining
+  Utilities
 }

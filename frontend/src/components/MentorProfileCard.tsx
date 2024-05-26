@@ -31,11 +31,14 @@ export default function MentorProfileCard({ data }: { data: ProfileDataType }) {
         <p className="text-sm text-gray-500">{data.desc}</p>
         <p className="text-sm text-gray-500">{data.location}</p>
         <div className="flex mt-3">
-          <Button className="mr-2" variant="default">
+          <Button className="mr-2 active:ring-2" variant="default">
             Connect
           </Button>
-          <Button className="mr-2" variant="secondary">
+          <Button className="mr-2 active:ring-2" variant="secondary">
             Follow
+          </Button>
+          <Button className="mr-2 active:ring-2" variant="secondary">
+            DM
           </Button>
         </div>
       </div>

@@ -2,6 +2,7 @@ import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
 import { CardHeader, CardContent, Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 export default function MentorListCard({
   id,
@@ -78,6 +79,10 @@ export default function MentorListCard({
               </Badge>
             );
           })}
+        </div>
+        <div className="w-full flex justify-between">
+          <Button className="active:bg-slate-300">Connect</Button>
+          <Button className="active:bg-slate-300">Follow</Button>
         </div>
       </CardContent>
     </Card>

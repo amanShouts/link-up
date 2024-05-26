@@ -19,8 +19,15 @@ export default function WorkExperienceCard({
                   key={index}
                   className="grid grid-cols-[auto_1fr] items-center gap-4"
                 >
-                  <div className="bg-gray-100 rounded-md flex items-center justify-center aspect-square w-12 dark:bg-gray-800">
-                    <BriefcaseIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                  <div className="bg-gray-100 rounded-full flex items-center justify-center aspect-square w-12 dark:bg-gray-800">
+                    {each.companyLogo ? (
+                      <img
+                        src={each.companyLogo}
+                        className="h-full w-full rounded-full"
+                      />
+                    ) : (
+                      <BriefcaseIcon className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                    )}
                   </div>
                   <div className="space-y-1">
                     <div className="font-medium hover:underline">
@@ -67,6 +74,7 @@ export interface WorkExperienceDataType {
   company: {
     role: string;
     companyName: string;
+    companyLogo: string;
     desc: string;
   }[];
 }

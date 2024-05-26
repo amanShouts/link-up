@@ -7,7 +7,10 @@ import Landing from "./pages/Landing";
 import Onboarding from "./pages/Onboarding";
 import { useEffect } from "react";
 import { Loader2 } from "lucide-react";
-import Profile from "./pages/Profile";
+import Profile from "./pages/MentorProfile";
+import MentorList from "./pages/MentorList";
+import MentorProfile from "./pages/MentorProfile";
+import Navbar from "./components/Navbar/Navbar";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -25,7 +28,7 @@ export default function App() {
       console.log("user: ",user)
     }
     else {
-
+      console.log("user not signied in")
     }
 
   }, [isLoaded, isSignedIn, navigate, window.location ]);
@@ -45,17 +48,18 @@ export default function App() {
   }
 
   return (
-    <>
+    <main className="dark:bg-black">
+      <Navbar/>
       <Routes>
-        {/* <Navbar/> */}
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<CustomSignIn />} />
         <Route path="/signup" element={<CustomSignUp />} />
         <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
-
+        <Route path="/mentor" element={isSignedIn ? <MentorList/> : null} />
+        <Route path="/mentor/:mentorId" element={isSignedIn ? <MentorProfile/> : null} />
       </Routes>
-    </>
+    </main>
   );
 }
