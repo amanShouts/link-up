@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import { getAllUsersRoute, saveUserRoute } from './routes/userRoutes';
 const cors = require('cors')
+import mentorRoutes from './routes/mentorRoutes';
 
 dotenv.config();
 
@@ -16,6 +17,8 @@ app.get("/", (req, res) => {
         msg: "Server is fine"
     })
 })
+
+app.use('/api/mentor', mentorRoutes);
 
 // /users 
 app.use(getAllUsersRoute)

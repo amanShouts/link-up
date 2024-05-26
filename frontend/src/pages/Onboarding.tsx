@@ -7,7 +7,6 @@ import {
 } from "@clerk/clerk-react";
 
 import { useUser } from "@clerk/clerk-react";
-import { P } from "node_modules/@clerk/clerk-react/dist/controlComponents-CzpRUsyv.d.mts";
 import { useState } from "react";
 
 import { Progress } from "@/components/ui/progress";
@@ -63,7 +62,7 @@ export default function Onboarding() {
           <div className="w-full flex flex-col items-center gap-4 justify-center">
             <div>{steps[question].title}</div>
             <div className="flex flex-col gap-3">
-              <div className="w-full w-[400px]">
+              <div className="w-[400px]">
                 <Button onClick={updateState}> Next</Button>
                 <Progress className="mt-4" value={steps[question].state} />
               </div>
