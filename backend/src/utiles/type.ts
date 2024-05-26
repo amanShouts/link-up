@@ -1,4 +1,5 @@
 export interface MentorDataType {
+  id: string;
   name: string;
   desc?: string;
   imgSrc?: string;

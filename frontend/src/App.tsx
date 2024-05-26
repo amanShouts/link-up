@@ -37,7 +37,7 @@ export default function App() {
     return (
       <div
         className={
-          "w-screen h-screen bg-white dark:bg-black flex items-center justify-center"
+          "w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center"
         }
       >
         <Loader2
@@ -48,7 +48,7 @@ export default function App() {
   }
 
   return (
-    <main className="dark:bg-black">
+    <main className="dark:bg-black dark:text-white">
       <Navbar/>
       <Routes>
         <Route path="/" element={<Landing />} />

@@ -9,6 +9,7 @@ export async function getMentorList(req: Request, res: Response) {
     let mentors: MentorDataType[] | null = [];
     results.map((result) => {
       const mentor: MentorDataType = {
+        id: result.id.toString(),
         name: result.name,
         desc: result.desc || "",
         imgSrc: result.img || "",
@@ -34,9 +35,9 @@ export async function getMentorDetails(req: Request, res: Response) {
     const { mentorId } = req.params;
     const result = await getMentor(parseInt(mentorId))
     if (!result) {
-      return res.json({
+      return res.status(404).json({
         msg: "Invalid mentor Id"
-      }).status(404)
+      })
     }
     const mentorData: UserDataType = {
       userId: mentorId,
@@ -66,8 +67,8 @@ export async function getMentorDetails(req: Request, res: Response) {
     }
     return res.json(mentorData)
   } catch (error) {
-    return res.json({
+    return res.status(500).json({
       msg: "Internal Server Error"
-    }).status(500)
+    })
   }
 }

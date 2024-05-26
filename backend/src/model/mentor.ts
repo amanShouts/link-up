@@ -7,6 +7,7 @@ export async function getAllMentors() {
         isMentor: true
       },
       select: {
+        id: true,
         name: true,
         desc: true,
         currDesignation: true,

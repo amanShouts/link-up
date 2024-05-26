@@ -4,20 +4,11 @@ import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 
-export default function MentorListCard({
-  id,
-  data,
-}: {
-  id: string;
-  data?: MentorDataType | undefined;
-}) {
-  if (!data) {
-    data = dummyData;
-  }
+export default function MentorListCard({ data }: { data: MentorDataType }) {
   return (
-    <Card className="max-w-sm rounded-lg shadow-md  overflow-hidden hover:shadow-2xl dark:hover:shadow-slate-200 transition duration-500">
+    <Card className="max-w-sm rounded-lg shadow-md overflow-hidden hover:shadow-2xl dark:hover:shadow-slate-200 transition duration-500">
       <CardHeader>
-        <Link to={id}>
+        <Link to={data.id}>
           <div className="flex items-center gap-4">
             <Avatar>
               <AvatarImage alt="Mentor Avatar" src={data.imgSrc} />
@@ -89,29 +80,12 @@ export default function MentorListCard({
   );
 }
 
-const dummyData = {
-  imgSrc: "https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg",
-  name: "John Doe",
-  currPost: "Senior Product Manager",
-  desc: `John has over 10 years of experience in the tech industry, with a strong background in product management
-  and user experience design. He has worked on a variety of projects, from enterprise software to
-  consumer-facing applications.`,
-  industry: ["Software", "SaaS", "E-commerce"],
-  currMentor: ["Acme Inc.", "Acme Inc."],
-  skills: [
-    "Product Management",
-    "User Experience",
-    "Agile Methodologies",
-    "Market Analysis",
-    "Customer Insights",
-  ],
-};
-
 export interface MentorDataType {
-  imgSrc: string;
+  id: string;
   name: string;
-  currPost: string;
-  desc: string;
+  desc?: string;
+  imgSrc?: string;
+  currPost?: string;
   industry: string[];
   currMentor: string[];
   skills: string[];
