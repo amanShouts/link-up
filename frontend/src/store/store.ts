@@ -5,6 +5,9 @@ import usersReducer from './slice/userSlice';
 export const store = configureStore({
   reducer:  {
     counter: counterReducer,
-    user: usersReducer
+    users: usersReducer
   }
 })
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

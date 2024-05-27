@@ -11,10 +11,13 @@ import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
+import { useDispatch } from "react-redux";
+import { addUserDetails } from "./store/slice/userSlice";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const currentRoute = window.location.pathname;
@@ -32,6 +35,22 @@ export default function App() {
     }
 
   }, [isLoaded, isSignedIn, navigate, window.location ]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://localhost:3000'+ '/users');
+        const responseData = await response.json();
+        
+        console.log('responseData',responseData)
+        dispatch(addUserDetails(responseData));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   if (!isLoaded) {
     return (

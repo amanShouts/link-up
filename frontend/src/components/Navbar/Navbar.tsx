@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 import { ModeButton } from "@/components/mode-button.tsx";
 
 export default function Navbar() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn } = useUser();
 
   return (
     <div
       className={
-        "border-b flex justify-between dark:text-white pl-6 dark:border-neutral-800 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur"
+        "border-b flex justify-between dark:text-white pl-6 dark:border-neutral-800 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur px-6 py-3"
       }
     >
       <h1 className={"font-semibold"}>Link-up.</h1>
