@@ -1,3 +1,5 @@
+import { UserType } from "@prisma/client";
+
 export interface MentorDataType {
   id: string;
   name: string;
@@ -38,3 +40,14 @@ interface WorkExperienceDataType {
     endYear: string;
   }[];
 }
+
+export interface UpdateUserDataParams {
+  id: number;
+  userType: UserType;
+  isMentor: boolean;
+  age: number;
+  bio: string;
+  city: string;
+  country: string;
+}
+
