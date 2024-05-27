@@ -21,7 +21,7 @@ model User {
   country          String?
   lastLogin        DateTime?
   createdAt        DateTime       @default(now())
-  type             UserType
+  type             UserType?
   isMentor         Boolean        @default(false)
   desc             String?
   currDesignation  String?

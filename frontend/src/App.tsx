@@ -11,13 +11,17 @@ import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUserDetails } from "./store/slice/userSlice";
+import { BACKEND_URL } from "./config";
+import { RootState } from './store/store'
+import axios from "axios";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const storedUsers = useSelector(( state: RootState ) => state.users.users );
 
   useEffect(() => {
     const currentRoute = window.location.pathname;
@@ -39,10 +43,9 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:3000'+ '/users');
+        const response = await fetch(BACKEND_URL+ '/users');
         const responseData = await response.json();
         
-        console.log('responseData',responseData)
         dispatch(addUserDetails(responseData));
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -51,6 +54,35 @@ export default function App() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const usernameArray = storedUsers.map((el) => {
+      return el.username;
+    })
+
+
+
+    if ( user && user.username && !usernameArray.includes(user.username) ) {
+     
+      axios.post(BACKEND_URL+'/save-user',{
+        "username": user?.username,
+        "name": user.firstName,
+        "img":user.imageUrl,
+        "lastLogin": user.lastSignInAt,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    }
+
+    console.log(usernameArray)
+
+  }, [storedUsers, user])
+  
 
   if (!isLoaded) {
     return (
@@ -73,6 +105,7 @@ export default function App() {
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<CustomSignIn />} />
         <Route path="/signup" element={<CustomSignUp />} />
+        <Route path="/signup/continue" element={<CustomSignIn />} />
         <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />

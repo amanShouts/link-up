@@ -19,10 +19,9 @@ export const saveUserModel = async (req: Request) => {
       data: {
         username,
         name,
-        age,
         img,
         lastLogin,
-        type: "ENTREPRENEUR", // fix this
+        type: "ENTREPRENEUR",
       },
     });
   } catch (error) {
