@@ -26,13 +26,13 @@ export default function Onboarding() {
       description: "Set up your profile in a few steps to get started",
     },
     {
-      title: "second",
+      title: "second question",
       state: 33,
       description: "Set up your profile in a few steps to get started",
     },
 
     {
-      title: "third",
+      title: "third question",
       state: 66,
       description: "Set up your profile in a few steps to get started",
     },
