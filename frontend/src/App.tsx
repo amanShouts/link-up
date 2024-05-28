@@ -16,6 +16,7 @@ import { addUserDetails } from "./store/slice/userSlice";
 import { BACKEND_URL } from "./config";
 import { RootState } from './store/store'
 import axios from "axios";
+import EditProfile from "./pages/EditProfile";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -109,6 +110,7 @@ export default function App() {
         <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
+        <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
         <Route path="/mentor" element={isSignedIn ? <MentorList/> : null} />
         <Route path="/mentor/:mentorId" element={isSignedIn ? <MentorProfile/> : null} />
       </Routes>
