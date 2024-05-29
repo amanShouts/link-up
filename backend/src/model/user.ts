@@ -31,8 +31,8 @@ export const saveUserModel = async (req: Request) => {
 };
 
 export const updateUserData = async ({
-  id,
   userType,
+  username,
   isMentor,
   age,
   bio,
@@ -41,7 +41,7 @@ export const updateUserData = async ({
 }: UpdateUserDataParams) => {
   try {
     const user = await prisma.user.update({
-      where: { id },
+      where: { username },
       data: { type: userType, isMentor, age, bio, city, country },
     });
     console.log("Updated User Data", user);
