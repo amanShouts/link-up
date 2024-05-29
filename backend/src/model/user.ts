@@ -13,16 +13,15 @@ export const getAllUsers = async () => {
 };
 
 export const saveUserModel = async (req: Request) => {
-  const { username, name, age, img, lastLogin, industryField } = req.body;
+  const { username, name, age, img, lastLogin, type } = req.body;
   try {
     return await prisma.user.create({
       data: {
         username,
         name,
-        age,
         img,
         lastLogin,
-        type: "ENTREPRENEUR", // fix this
+        type: "ENTREPRENEUR",
       },
     });
   } catch (error) {
@@ -31,8 +30,8 @@ export const saveUserModel = async (req: Request) => {
 };
 
 export const updateUserData = async ({
-  id,
   userType,
+  username,
   isMentor,
   age,
   bio,
@@ -41,7 +40,7 @@ export const updateUserData = async ({
 }: UpdateUserDataParams) => {
   try {
     const user = await prisma.user.update({
-      where: { id },
+      where: { username },
       data: { type: userType, isMentor, age, bio, city, country },
     });
     console.log("Updated User Data", user);
