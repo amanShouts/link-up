@@ -5,72 +5,6 @@ import { Link } from "react-router-dom"
 export default function Landing() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 dark:bg-gray-950 dark:text-gray-50">
-      <nav className="bg-gray-950 border-b border-gray-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex">
-              <div className="flex-shrink-0 flex items-center">
-                <img
-                  alt="Workflow"
-                  className="block lg:hidden h-8 w-auto"
-                  height="32"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                  width="32"
-                />
-                <img
-                  alt="Workflow"
-                  className="hidden lg:block h-8 w-auto"
-                  height="32"
-                  src="/placeholder.svg"
-                  style={{
-                    aspectRatio: "32/32",
-                    objectFit: "cover",
-                  }}
-                  width="32"
-                />
-              </div>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
-              <Link
-                className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
-                to="#"
-              >
-                Home
-              </Link>
-              <Link
-                className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
-                to="#"
-              >
-                About
-              </Link>
-              <Link
-                className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
-                to="#"
-              >
-                Services
-              </Link>
-              <Link
-                className="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-50 focus:border-gray-300 transition duration-150 ease-in-out"
-                to="#"
-              >
-                Contact
-              </Link>
-            </div>
-            <div className="hidden sm:ml-6 sm:flex sm:items-center">
-              <Button className="text-gray-300 hover:text-gray-50" variant="ghost">
-                Join now
-              </Button>
-              <Button className="ml-4 text-gray-300 hover:text-gray-50" variant="outline">
-                Sign in
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
       <header className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl font-bold leading-tight text-gray-50">Welcome to our Startup Ecosystem Integrator</h1>
@@ -78,7 +12,7 @@ export default function Landing() {
             Connecting startups, investors, and resources for a thriving ecosystem.
           </p>
           <div className="mt-8 flex justify-center">
-            <Button className="mr-4" variant="primary">
+            <Button className="mr-4" variant="default">
               Get Started
             </Button>
             <Button className="text-gray-300 hover:text-gray-50" variant="outline">
@@ -103,7 +37,7 @@ export default function Landing() {
                   <p>Access a network of investors, venture capitalists, and funding opportunities.</p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" href="#">
+                  <Link className="text-primary-500 hover:text-primary-400" to="#">
                     Learn More
                   </Link>
                 </CardFooter>
@@ -116,7 +50,7 @@ export default function Landing() {
                   <p>Connect with experienced entrepreneurs and industry experts for guidance and support.</p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" href="#">
+                  <Link className="text-primary-500 hover:text-primary-400" to="#">
                     Learn More
                   </Link>
                 </CardFooter>
@@ -129,7 +63,7 @@ export default function Landing() {
                   <p>Attend events, workshops, and meetups to build relationships and expand your network.</p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" href="#">
+                  <Link className="text-primary-500 hover:text-primary-400" to="#">
                     Learn More
                   </Link>
                 </CardFooter>
@@ -150,7 +84,7 @@ export default function Landing() {
                   <p>Acme Inc. is a leading provider of innovative software solutions for businesses.</p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" href="#">
+                  <Link className="text-primary-500 hover:text-primary-400" to="#">
                     Learn More
                   </Link>
                 </CardFooter>
@@ -163,7 +97,7 @@ export default function Landing() {
                   <p>Startup X is disrupting the industry with its cutting-edge technology.</p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" href="#">
+                  <Link className="text-primary-500 hover:text-primary-400" to="#">
                     Learn More
                   </Link>
                 </CardFooter>
@@ -176,7 +110,7 @@ export default function Landing() {
                   <p>Innovate Labs is a hub for innovative startups and entrepreneurs.</p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" href="#">
+                  <Link className="text-primary-500 hover:text-primary-400" to="#">
                     Learn More
                   </Link>
                 </CardFooter>
@@ -191,7 +125,7 @@ export default function Landing() {
               Connect with other entrepreneurs, investors, and industry experts.
             </p>
             <div className="mt-8 flex justify-center">
-              <Button className="mr-4" variant="primary">
+              <Button className="mr-4" variant="default">
                 Join Now
               </Button>
               <Button className="text-gray-300 hover:text-gray-50" variant="outline">
@@ -208,22 +142,22 @@ export default function Landing() {
               <h4 className="text-lg font-bold">Company</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Our Team
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Careers
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     News
                   </Link>
                 </li>
@@ -233,22 +167,22 @@ export default function Landing() {
               <h4 className="text-lg font-bold">Services</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Funding
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Mentorship
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Networking
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Events
                   </Link>
                 </li>
@@ -258,22 +192,22 @@ export default function Landing() {
               <h4 className="text-lg font-bold">Resources</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Blog
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Documentation
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     FAQs
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Support
                   </Link>
                 </li>
@@ -283,17 +217,17 @@ export default function Landing() {
               <h4 className="text-lg font-bold">Legal</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Privacy Policy
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Terms of Service
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Cookie Policy
                   </Link>
                 </li>
@@ -303,22 +237,22 @@ export default function Landing() {
               <h4 className="text-lg font-bold">Contact</h4>
               <ul className="space-y-2">
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Support
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Sales
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Press
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-gray-400 hover:text-gray-50" href="#">
+                  <Link className="text-gray-400 hover:text-gray-50" to="#">
                     Partnerships
                   </Link>
                 </li>

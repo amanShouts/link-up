@@ -11,6 +11,7 @@ import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
+import { opeModal } from './store/slice/modalSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { addUserDetails } from "./store/slice/userSlice";
 import { BACKEND_URL } from "./config";
@@ -32,8 +33,16 @@ export default function App() {
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
     }
-    if ( isSignedIn ) {
+    if ( isSignedIn && user ) {
       console.log("user: ",user)
+
+      const currentUser = storedUsers.find((el) => el.username === user.username);
+
+      if ( currentUser && ( currentUser?.age === null || currentUser?.city === null || currentUser?.userType == null ) ) {
+        console.log("here")
+        dispatch(opeModal())
+      }
+
     }
     else {
       console.log("user not signied in")
@@ -44,9 +53,9 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(BACKEND_URL+ '/users');
+        const response = await fetch(BACKEND_URL + '/users');
         const responseData = await response.json();
-        
+
         dispatch(addUserDetails(responseData));
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -60,9 +69,7 @@ export default function App() {
     const usernameArray = storedUsers.map((el) => {
       return el.username;
     })
-
-
-
+    
     if ( user && user.username && !usernameArray.includes(user.username) ) {
      
       axios.post(BACKEND_URL+'/save-user',{
@@ -79,8 +86,6 @@ export default function App() {
       });
 
     }
-
-    console.log(usernameArray)
 
   }, [storedUsers, user])
   
