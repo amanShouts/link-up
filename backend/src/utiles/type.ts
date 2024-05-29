@@ -43,6 +43,7 @@ interface WorkExperienceDataType {
 
 export interface UpdateUserDataParams {
   id: number;
+  username: string;
   userType: UserType;
   isMentor: boolean;
   age: number;

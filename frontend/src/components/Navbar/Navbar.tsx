@@ -8,7 +8,7 @@ export default function Navbar() {
   return (
     <div
       className={
-        "border-b flex justify-between dark:text-white pl-6 dark:border-neutral-800 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur px-6 py-3"
+        "border-b flex justify-between dark:text-white pl-6 dark:border-neutral-800 px-2 py-5 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur"
       }
     >
       <h1 className={"font-semibold"}>Link-up.</h1>

@@ -30,8 +30,8 @@ export const saveUserModel = async (req: Request) => {
 };
 
 export const updateUserData = async ({
-  id,
   userType,
+  username,
   isMentor,
   age,
   bio,
@@ -40,7 +40,7 @@ export const updateUserData = async ({
 }: UpdateUserDataParams) => {
   try {
     const user = await prisma.user.update({
-      where: { id },
+      where: { username },
       data: { type: userType, isMentor, age, bio, city, country },
     });
     console.log("Updated User Data", user);
@@ -50,19 +50,3 @@ export const updateUserData = async ({
     throw error;
   }
 };
-
-updateUserData({
-  id: 1, // Replace with the ID of the user you want to update
-  userType: "ENTREPRENEUR", // Replace with the new user type
-  isMentor: false, // Replace with true or false depending on whether the user is a mentor
-  age: 30, // Replace with the new age
-  bio: "Updated bio", // Replace with the new bio
-  city: "New York", // Replace with the new city
-  country: "USA", // Replace with the new country
-})
-  .then((updatedUser) => {
-    console.log("User data updated successfully:", updatedUser);
-  })
-  .catch((error) => {
-    console.error("Error updating user data:", error);
-  });
