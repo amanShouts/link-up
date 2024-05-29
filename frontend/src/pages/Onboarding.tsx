@@ -1,17 +1,25 @@
-import { Button } from "@/components/ui/button";
-import {
-  SignInButton,
-  SignedIn,
-  SignedOut,
-  UserButton,
-} from "@clerk/clerk-react";
-import { useUser } from "@clerk/clerk-react";
 import { useState } from "react";
-import { Progress } from "@/components/ui/progress";
-import axios from "axios";
-import { Navigate, redirect, useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from "@/components/ui/select";
+import { Switch } from "@/components/ui/switch";
+import { Progress } from "@/components/ui/progress";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  UserButton,
+  useUser,
+} from "@clerk/clerk-react";
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -20,10 +28,10 @@ export default function Onboarding() {
   const [errors, setErrors] = useState({});
 
   const [userData, setUserData] = useState({
-    id: 1,
-    type: "ENTREPRENEUR",
-    isMentor: true,
-    age: null,
+    username: user?.username,
+    type: "",
+    isMentor: false,
+    age: "",
     bio: "",
     city: "",
     country: "",
@@ -31,7 +39,9 @@ export default function Onboarding() {
 
   const updateState = () => {
     if (validateFields()) {
-      setQuestion((prevState) => (prevState < 3 ? prevState + 1 : prevState));
+      setQuestion((prevState) =>
+        prevState < steps.length - 1 ? prevState + 1 : prevState,
+      );
     }
   };
 
@@ -40,7 +50,7 @@ export default function Onboarding() {
     const newErrors = {};
 
     currentFields.forEach((field) => {
-      if (!userData[field.name]) {
+      if (field.required && !userData[field.name]) {
         newErrors[field.name] = `${field.label} is required`;
       }
     });
@@ -54,6 +64,24 @@ export default function Onboarding() {
     const newValue = type === "number" ? parseInt(value, 10) : value;
     setUserData((prevState) => ({ ...prevState, [name]: newValue }));
     setErrors((prevState) => ({ ...prevState, [name]: "" }));
+  };
+
+  const handleSwitchChange = (checked) => {
+    setUserData((prevState) => ({ ...prevState, isMentor: checked }));
+  };
+
+  const handleButtonClick = () => {
+    if (validateFields()) {
+      axios
+        .put("http://localhost:3000/api/onboarding", { userData })
+        .then((response) => {
+          console.log(response.data);
+          navigate("/home", { replace: true });
+        })
+        .catch((error) => {
+          console.error("There was an error making the request!", error);
+        });
+    }
   };
 
   const steps = [
@@ -70,11 +98,30 @@ export default function Onboarding() {
       fields: [
         { name: "age", label: "Age", type: "number", required: true },
         { name: "bio", label: "Bio", type: "text", required: true },
+        {
+          name: "isMentor",
+          label: "Are you a mentor?",
+          type: "boolean",
+        },
+      ],
+    },
+    {
+      title: "Favorite Color",
+      state: 66,
+      description: "What defines you?",
+      fields: [
+        {
+          name: "type",
+          label: "You are an..",
+          type: "select",
+          required: true,
+          options: ["ENTREPRENEUR", "INVESTOR"],
+        },
       ],
     },
     {
       title: "Location Information",
-      state: 66,
+      state: 75,
       description: "Where are you located?",
       fields: [
         { name: "city", label: "City", type: "text", required: true },
@@ -89,24 +136,6 @@ export default function Onboarding() {
     },
   ];
 
-  const handleButtonClick = () => {
-    if (validateFields()) {
-      axios({
-        method: "put",
-        url: "http://localhost:3000/api/onboarding",
-        data: { userData },
-      })
-        .then((response) => {
-          console.log(response.data);
-
-          navigate("/home", { replace: true });
-        })
-        .catch((error) => {
-          console.error("There was an error making the request!", error);
-        });
-    }
-  };
-
   return (
     <div>
       <SignedOut>
@@ -119,7 +148,6 @@ export default function Onboarding() {
         <UserButton />
         <div className="w-full h-screen flex flex-col items-center justify-center gap-2">
           <div>Welcome {user?.fullName}!</div>
-
           <div className="w-full flex flex-col items-center gap-4 justify-center">
             <div>{steps[question].title}</div>
             <div className="flex flex-col gap-3">
@@ -128,14 +156,42 @@ export default function Onboarding() {
                   <div key={field.name} className="mb-4">
                     <Label className="block mb-2">
                       {field.label}
-                      <Input
-                        type={field.type}
-                        name={field.name}
-                        value={userData[field.name]}
-                        onChange={handleInputChange}
-                        className="w-full border border-gray-300 p-2"
-                        required={field.required}
-                      />
+                      {field.type === "select" ? (
+                        <Select
+                          value={userData[field.name]}
+                          onValueChange={(value) =>
+                            setUserData((prevState) => ({
+                              ...prevState,
+                              [field.name]: value,
+                            }))
+                          }
+                        >
+                          <SelectTrigger className="w-full">
+                            <SelectValue placeholder="Select an option" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {field.options.map((option) => (
+                              <SelectItem key={option} value={option}>
+                                {option}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      ) : field.type === "boolean" ? (
+                        <Switch
+                          checked={userData.isMentor}
+                          onCheckedChange={handleSwitchChange}
+                        />
+                      ) : (
+                        <Input
+                          type={field.type}
+                          name={field.name}
+                          value={userData[field.name]}
+                          onChange={handleInputChange}
+                          className="w-full border border-gray-300 p-2"
+                          required={field.required}
+                        />
+                      )}
                     </Label>
                     {errors[field.name] && (
                       <div className="text-red-500 text-sm">
@@ -149,7 +205,6 @@ export default function Onboarding() {
                 )}
                 <Progress className="mt-4" value={steps[question].state} />
               </div>
-
               {question === steps.length - 1 && (
                 <Button onClick={handleButtonClick}>Complete Onboarding</Button>
               )}
