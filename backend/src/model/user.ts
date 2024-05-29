@@ -13,16 +13,15 @@ export const getAllUsers = async () => {
 };
 
 export const saveUserModel = async (req: Request) => {
-  const { username, name, age, img, lastLogin, industryField } = req.body;
+  const { username, name, age, img, lastLogin, type } = req.body;
   try {
     return await prisma.user.create({
       data: {
         username,
         name,
-        age,
         img,
         lastLogin,
-        type: "ENTREPRENEUR", // fix this
+        type: "ENTREPRENEUR",
       },
     });
   } catch (error) {

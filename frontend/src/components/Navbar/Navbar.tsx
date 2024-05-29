@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ModeButton } from "@/components/mode-button.tsx";
 
 export default function Navbar() {
-  const { isSignedIn, user, isLoaded } = useUser();
+  const { isSignedIn } = useUser();
 
   return (
     <div
