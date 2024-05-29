@@ -11,6 +11,7 @@ import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
+import { Resources } from "./pages/Resrouces";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -19,7 +20,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ['/','/signup'];
+    const publicRoutes = ['/','/signup','/resources'];
     
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -59,6 +60,7 @@ export default function App() {
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route path="/mentor" element={isSignedIn ? <MentorList/> : null} />
         <Route path="/mentor/:mentorId" element={isSignedIn ? <MentorProfile/> : null} />
+        <Route path="/resources" element={<Resources />} />
       </Routes>
     </main>
   );
