@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import {
-  getAllUsersRoute,
+  getAllUsersRoute, getSingleUser,
   onboardingRoute,
   saveUserRoute,
 } from "./routes/userRoutes";
@@ -27,6 +27,9 @@ app.use("/api/onboarding", onboardingRoute);
 
 // /users
 app.use(getAllUsersRoute);
+
+// get single user
+app.use("/api/user",getSingleUser)
 
 // save-user
 app.use(saveUserRoute);

@@ -4,7 +4,7 @@ import {RecommendationCard} from "@/components/home/recommendation-card.tsx";
 
 export function Recommendation() {
     return (
-        <div className={"col-span-2 flex flex-col gap-4 sticky top-24 h-fit"}>
+        <div className={"col-span-2 flex flex-col gap-4 sticky top-32 h-fit"}>
             <RecommendationCard />
             <RecommendationCard />
             <RecommendationCard />
