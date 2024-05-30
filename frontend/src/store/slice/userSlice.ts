@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface User {
-  username: String;
+  userType?: string | null;
+  city?: string | null;
+  age?: string | null;
+  username: string;
 }
 
 interface UsersState {
   users: User[];
-  currentUser: {};
+  currentUser: object | null;
 }
 
 const initialState: UsersState = {

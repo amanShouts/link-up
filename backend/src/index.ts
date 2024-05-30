@@ -7,6 +7,7 @@ import {
 } from "./routes/userRoutes";
 const cors = require("cors");
 import mentorRoutes from "./routes/mentorRoutes";
+import { getUserProfile } from "./controllers/userController";
 
 dotenv.config();
 
@@ -25,11 +26,12 @@ app.get("/", (req, res) => {
 app.use("/api/mentor", mentorRoutes);
 app.use("/api/onboarding", onboardingRoute);
 
+app.use('/api/profile/:username', getUserProfile)
 // /users
 app.use(getAllUsersRoute);
 
 // get single user
-app.use("/api/user",getSingleUser)
+app.use("/api/user", getSingleUser)
 
 // save-user
 app.use(saveUserRoute);

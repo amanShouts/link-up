@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   getSingleUserController,
+  getUserProfile,
   getUsers,
   saveUserController,
   userOnboarding,
@@ -10,6 +11,7 @@ export const getAllUsersRoute = Router();
 export const saveUserRoute = Router();
 export const onboardingRoute = Router();
 export const getSingleUser = Router();
+export const getUserDetailsByUsername = Router();
 
 getAllUsersRoute.get("/users", getUsers);
 saveUserRoute.post("/save-user", saveUserController);

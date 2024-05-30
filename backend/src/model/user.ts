@@ -1,8 +1,7 @@
 import { PrismaClient, UserType } from "@prisma/client";
 import { Request } from "express";
 import { UpdateUserDataParams } from "../utiles/type";
-
-const prisma = new PrismaClient();
+import { prisma } from ".";
 
 export const getAllUsers = async () => {
   try {
@@ -57,9 +56,40 @@ export const getUser = async (id : string) => {
     return await prisma.user.findUnique({
       where: {
         id : user_id,
-      },
+      },  
     });
   } catch (error) {
     throw new Error("Error fetching user");
   }
 };
+
+export async function getUserDetailsByUsername(username: string) {
+  const result = await prisma.user.findFirst({
+    where: {
+      username: username
+    },
+    select: {
+      id: true,
+      name: true,
+      currDesignation: true,
+      img: true,
+      bgImg: true,
+      city: true,
+      country: true,
+      bio: true,
+      desc: true,
+      experience: {
+        select: {
+          role: true,
+          companyName: true,
+          companyLogo: true,
+          desc: true,
+          startYear: true,
+          endYear: true
+        }
+      }
+
+    }
+  })
+  return result;
+}

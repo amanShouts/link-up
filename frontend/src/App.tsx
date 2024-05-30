@@ -7,7 +7,6 @@ import Landing from "./pages/Landing";
 import Onboarding from "./pages/Onboarding";
 import { useEffect } from "react";
 import { Loader2 } from "lucide-react";
-import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
@@ -19,6 +18,7 @@ import { RootState } from "./store/store";
 import axios from "axios";
 import EditProfile from "./pages/EditProfile";
 import DetailsModal from "./components/modalStore/DetailsModal";
+import Profile from "./pages/Profile";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -26,7 +26,7 @@ export default function App() {
   const dispatch = useDispatch();
   const storedUsers = useSelector((state: RootState) => state.users.users);
 
-  const toggleModal = (type: String) => {
+  const toggleModal = (type: string) => {
     dispatch(modalDetails(type));
     dispatch(openModal());
   };
@@ -43,7 +43,7 @@ export default function App() {
       console.log("user: ", user);
 
       const currentUser = storedUsers.find(
-        (el) => el.username === user.username,
+        (el) => el.username === user.username
       );
 
       if (
@@ -132,7 +132,7 @@ export default function App() {
         />
         <Route path="/mentors" element={isSignedIn ? <MentorList /> : null} />
         <Route
-          path="/mentor/:mentorId"
+          path="/mentors/:mentorId"
           element={isSignedIn ? <MentorProfile /> : null}
         />
       </Routes>
