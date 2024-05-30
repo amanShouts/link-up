@@ -11,19 +11,25 @@ import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
-import { opeModal } from './store/slice/modalSlice';
+import { closeModal, modalDetails, openModal } from './store/slice/modalSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { addUserDetails } from "./store/slice/userSlice";
 import { BACKEND_URL } from "./config";
 import { RootState } from './store/store'
 import axios from "axios";
 import EditProfile from "./pages/EditProfile";
+import DetailsModal from "./components/modalStore/DetailsModal";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const storedUsers = useSelector(( state: RootState ) => state.users.users );
+
+  const toggleModal = ( type: String ) => {
+    dispatch(modalDetails(type))
+    dispatch(openModal())
+  }
 
   useEffect(() => {
     const currentRoute = window.location.pathname;
@@ -40,7 +46,7 @@ export default function App() {
 
       if ( currentUser && ( currentUser?.age === null || currentUser?.city === null || currentUser?.userType == null ) ) {
         console.log("here")
-        dispatch(opeModal())
+        toggleModal("edit-profile-modal")
       }
 
     }
@@ -107,6 +113,7 @@ export default function App() {
   return (
     <main className="dark:bg-black dark:text-white">
       <Navbar/>
+      <DetailsModal/>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<CustomSignIn />} />
@@ -116,7 +123,7 @@ export default function App() {
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
-        <Route path="/mentor" element={isSignedIn ? <MentorList/> : null} />
+        <Route path="/mentors" element={isSignedIn ? <MentorList/> : null} />
         <Route path="/mentor/:mentorId" element={isSignedIn ? <MentorProfile/> : null} />
       </Routes>
     </main>
