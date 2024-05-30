@@ -1,4 +1,4 @@
-import HomePage from "@/components/home-page.tsx";
+import HomePage from "@/components/home/home-page.tsx";
 
 export default function Home() {
   return (

@@ -96,7 +96,7 @@ export default function App() {
   }, [storedUsers, user])
   
 
-  if (!isLoaded) {
+  if (!isLoaded && window.location.pathname !== "/home") {
     return (
       <div
         className={
@@ -120,7 +120,7 @@ export default function App() {
         <Route path="/signup" element={<CustomSignUp />} />
         <Route path="/signup/continue" element={<CustomSignIn />} />
         <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
-        <Route path="/home" element={isSignedIn ? <Home /> : null} />
+        <Route path="/home" element={isSignedIn ? <Home/> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
         <Route path="/mentors" element={isSignedIn ? <MentorList/> : null} />
