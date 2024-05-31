@@ -1,13 +1,15 @@
 import express from "express";
 import dotenv from "dotenv";
 import {
-  getAllUsersRoute, getSingleUser,
+  getAllUsersRoute,
+  getSingleUser,
   onboardingRoute,
   saveUserRoute,
 } from "./routes/userRoutes";
 const cors = require("cors");
 import mentorRoutes from "./routes/mentorRoutes";
 import { getUserProfile } from "./controllers/userController";
+import { getAllPostRoute } from "./routes/postRoute";
 
 dotenv.config();
 
@@ -26,18 +28,21 @@ app.get("/", (req, res) => {
 app.use("/api/mentor", mentorRoutes);
 app.use("/api/onboarding", onboardingRoute);
 
-app.use('/api/profile/:username', getUserProfile)
+app.use("/api/profile/:username", getUserProfile);
 // /users
 app.use(getAllUsersRoute);
 
 // get single user
-app.use("/api/user", getSingleUser)
+app.use("/api/user", getSingleUser);
+
+// get all posts
+app.use("/api/posts", getAllPostRoute);
 
 // save-user
 app.use(saveUserRoute);
 
-//edit-user 
-app.use(onboardingRoute)
+//edit-user
+app.use(onboardingRoute);
 
 app.listen(PORT, () => {
   console.log("Server running on port ", PORT);
