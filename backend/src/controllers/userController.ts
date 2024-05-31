@@ -27,11 +27,11 @@ export const saveUserController = async (req: Request, res: Response) => {
 };
 
 export const userOnboarding = async (req: Request, res: Response) => {
-  const { userData } = req.body;
+  console.log("got here")
   try {
-    const updatedUser = await updateUserData(userData);
+    const updatedUser = await updateUserData(req);
     res.status(200).json({
-      message: "User onboarded successfully",
+      message: "User updated successfully",
       updatedUser: updatedUser,
     });
   } catch (error) {

@@ -31,6 +31,9 @@ app.use(getAllUsersRoute);
 // save-user
 app.use(saveUserRoute);
 
+//edit-user 
+app.use(onboardingRoute)
+
 app.listen(PORT, () => {
   console.log("Server running on port ", PORT);
 });

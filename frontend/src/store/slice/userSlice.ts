@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-interface User {
-  username: String;
+export interface User {
+  isMentor: boolean;
+  userType: string;
+  age: number;
+  city: string;
+  username: string;
+  name: string;
+  country: string;
 }
 
 interface UsersState {
@@ -35,6 +41,6 @@ export const userSlice = createSlice({
 });
 
 
-export const { addUserDetails, removeUserDetails } = userSlice.actions;
+export const { addUserDetails, removeUserDetails, addCurrentUser, removeCurrentUser } = userSlice.actions;
 
 export default userSlice.reducer;

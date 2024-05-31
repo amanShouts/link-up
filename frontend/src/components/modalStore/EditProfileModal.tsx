@@ -20,7 +20,7 @@ export function EditProfile() {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Link to='/edit-profile'>
+          <Link to='/onboarding'>
             <Button type="button" variant="secondary" onClick={() => {
               setTimeout(() => {
                 dispatch(closeModal())

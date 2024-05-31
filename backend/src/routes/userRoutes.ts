@@ -11,4 +11,4 @@ export const onboardingRoute = Router();
 
 getAllUsersRoute.get("/users", getUsers);
 saveUserRoute.post("/save-user", saveUserController);
-onboardingRoute.put("/", userOnboarding);
+onboardingRoute.put("/edit-user", userOnboarding);

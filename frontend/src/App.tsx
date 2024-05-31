@@ -11,9 +11,9 @@ import Profile from "./pages/MentorProfile";
 import MentorList from "./pages/MentorList";
 import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
-import { closeModal, modalDetails, openModal } from './store/slice/modalSlice';
+import { modalDetails, openModal } from './store/slice/modalSlice';
 import { useDispatch, useSelector } from "react-redux";
-import { addUserDetails } from "./store/slice/userSlice";
+import { addCurrentUser, addUserDetails } from "./store/slice/userSlice";
 import { BACKEND_URL } from "./config";
 import { RootState } from './store/store'
 import axios from "axios";
@@ -43,6 +43,8 @@ export default function App() {
       console.log("user: ",user)
 
       const currentUser = storedUsers.find((el) => el.username === user.username);
+      
+      dispatch(addCurrentUser(currentUser))
 
       if ( currentUser && ( currentUser?.age === null || currentUser?.city === null || currentUser?.userType == null ) ) {
         console.log("here")
@@ -77,7 +79,7 @@ export default function App() {
     })
     
     if ( user && user.username && !usernameArray.includes(user.username) ) {
-     
+
       axios.post(BACKEND_URL+'/save-user',{
         "username": user?.username,
         "name": user.firstName,
@@ -90,7 +92,6 @@ export default function App() {
       .catch((error) => {
         console.log(error);
       });
-
     }
 
   }, [storedUsers, user])
@@ -111,7 +112,7 @@ export default function App() {
   }
 
   return (
-    <main className="dark:bg-black dark:text-white">
+      <main className="dark:bg-black dark:text-white">
       <Navbar/>
       <DetailsModal/>
       <Routes>
