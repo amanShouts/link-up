@@ -12,7 +12,7 @@ export interface User {
 
 interface UsersState {
   users: User[];
-  currentUser: {};
+  currentUser: object | null;
 }
 
 const initialState: UsersState = {

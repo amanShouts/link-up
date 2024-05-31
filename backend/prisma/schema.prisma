@@ -16,7 +16,7 @@ model User {
   name             String
   age              Int?
   img              String?
-  bgImg            String?
+  bgImg            String        @default("https://t4.ftcdn.net/jpg/04/19/76/07/360_F_419760725_gjProGIuCWJjwfQ2ljv9KAUyqcEAahz6.jpg")
   city             String?
   country          String?
   lastLogin        DateTime?

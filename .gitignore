@@ -2,3 +2,6 @@ postgres-data
 bun.lockb
 .env
 .idea/
+*.cpp
+.cph
+.vscode
