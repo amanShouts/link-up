@@ -1,5 +1,5 @@
 import { Request, Response, response } from "express";
-import { getAllUsers, saveUserModel, updateUserData } from "../model/user";
+import {getAllUsers, getUser, saveUserModel, updateUserData} from "../model/user";
 
 export const getUsers = async (req: Request, res: Response) => {
   try {
@@ -44,3 +44,13 @@ export const userOnboarding = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const getSingleUserController = async (req: Request, res: Response) => {
+    try {
+        const user = await getUser(req.params.id);
+        res.json(user);
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+}

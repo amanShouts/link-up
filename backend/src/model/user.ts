@@ -45,3 +45,16 @@ export const updateUserData = async (req: Request) => {
     throw error;
   }
 };
+
+export const getUser = async (id : string) => {
+  const user_id = parseInt(id);
+  try {
+    return await prisma.user.findUnique({
+      where: {
+        id : user_id,
+      },
+    });
+  } catch (error) {
+    throw new Error("Error fetching user");
+  }
+};
