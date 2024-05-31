@@ -1,6 +1,4 @@
-import { PrismaClient, UserType } from "@prisma/client";
-import { Request, RequestHandler } from "express";
-import { UpdateUserDataParams } from "../utiles/type";
+import { Request } from "express";
 import { prisma } from ".";
 
 export const getAllUsers = async () => {
@@ -32,7 +30,7 @@ export const updateUserData = async (req: Request) => {
   try {
     const { userType, username, isMentor, age, bio, city, country } = req.body;
 
-    console.log('req.body: ',req.body)
+    console.log("req.body: ", req.body);
     const user = await prisma.user.update({
       where: { username },
       data: { type: userType, isMentor, age, bio, city, country },
@@ -45,13 +43,13 @@ export const updateUserData = async (req: Request) => {
   }
 };
 
-export const getUser = async (id : string) => {
+export const getUser = async (id: string) => {
   const user_id = parseInt(id);
   try {
     return await prisma.user.findUnique({
       where: {
-        id : user_id,
-      },  
+        id: user_id,
+      },
     });
   } catch (error) {
     throw new Error("Error fetching user");
@@ -61,7 +59,7 @@ export const getUser = async (id : string) => {
 export async function getUserDetailsByUsername(username: string) {
   const result = await prisma.user.findFirst({
     where: {
-      username: username
+      username: username,
     },
     select: {
       id: true,
@@ -80,11 +78,10 @@ export async function getUserDetailsByUsername(username: string) {
           companyLogo: true,
           desc: true,
           startYear: true,
-          endYear: true
-        }
-      }
-
-    }
-  })
+          endYear: true,
+        },
+      },
+    },
+  });
   return result;
 }

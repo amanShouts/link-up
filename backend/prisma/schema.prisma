@@ -16,7 +16,7 @@ model User {
   name             String
   age              Int?
   img              String?
-  bgImg            String        @default("https://t4.ftcdn.net/jpg/04/19/76/07/360_F_419760725_gjProGIuCWJjwfQ2ljv9KAUyqcEAahz6.jpg")
+  bgImg            String         @default("https://t4.ftcdn.net/jpg/04/19/76/07/360_F_419760725_gjProGIuCWJjwfQ2ljv9KAUyqcEAahz6.jpg")
   city             String?
   country          String?
   lastLogin        DateTime?
@@ -93,6 +93,9 @@ model Post {
   like      Int       @default(0)
   comment   Int       @default(0)
   view      Int       @default(0)
+  img       String?
+  video     String?
+  link      String?
 
   user     User      @relation(fields: [userId], references: [id])
   label    Label?    @relation(fields: [labelId], references: [id])
