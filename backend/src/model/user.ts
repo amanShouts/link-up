@@ -1,5 +1,5 @@
 import { PrismaClient, UserType } from "@prisma/client";
-import { Request } from "express";
+import { Request, RequestHandler } from "express";
 import { UpdateUserDataParams } from "../utiles/type";
 
 const prisma = new PrismaClient();
@@ -29,16 +29,11 @@ export const saveUserModel = async (req: Request) => {
   }
 };
 
-export const updateUserData = async ({
-  userType,
-  username,
-  isMentor,
-  age,
-  bio,
-  city,
-  country,
-}: UpdateUserDataParams) => {
+export const updateUserData = async (req: Request) => {
   try {
+    const { userType, username, isMentor, age, bio, city, country } = req.body;
+
+    console.log('req.body: ',req.body)
     const user = await prisma.user.update({
       where: { username },
       data: { type: userType, isMentor, age, bio, city, country },

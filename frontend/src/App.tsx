@@ -13,7 +13,7 @@ import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
 import { modalDetails, openModal } from "./store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { addUserDetails } from "./store/slice/userSlice";
+import { addCurrentUser, addUserDetails } from "./store/slice/userSlice";
 import { BACKEND_URL } from "./config";
 import { RootState } from "./store/store";
 import axios from "axios";
@@ -42,9 +42,9 @@ export default function App() {
     if (isSignedIn && user) {
       console.log("user: ", user);
 
-      const currentUser = storedUsers.find(
-        (el) => el.username === user.username,
-      );
+      const currentUser = storedUsers.find((el) => el.username === user.username);
+      
+      dispatch(addCurrentUser(currentUser))
 
       if (
         currentUser &&
