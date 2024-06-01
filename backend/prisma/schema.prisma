@@ -35,6 +35,7 @@ model User {
   receivedMessages Chat[]         @relation("Receiver")
   mentor           Mentor[]       @relation("Mentor")
   entrepreneur     Entrepreneur[] @relation("Entrepreneur")
+  UserLiked        UserLiked[]
 }
 
 model Industry {
@@ -97,8 +98,9 @@ model Post {
   video     String?
   link      String?
 
-  user     User      @relation(fields: [userId], references: [id])
-  label    Label?    @relation(fields: [labelId], references: [id])
+  likedBy  UserLiked[]
+  user     User        @relation(fields: [userId], references: [id])
+  label    Label?      @relation(fields: [labelId], references: [id])
   comments Comment[]
 }
 
@@ -106,6 +108,15 @@ model Label {
   id         Int    @id @default(autoincrement())
   labelTitle String
   posts      Post[]
+}
+
+model UserLiked {
+  userId Int
+  postId Int
+  User   User @relation(fields: [userId], references: [id])
+  Post   Post @relation(fields: [postId], references: [id])
+
+  @@id([userId, postId])
 }
 
 model Comment {

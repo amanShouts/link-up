@@ -9,7 +9,11 @@ import {
 const cors = require("cors");
 import mentorRoutes from "./routes/mentorRoutes";
 import { getUserProfile } from "./controllers/userController";
-import { getAllPostRoute } from "./routes/postRoute";
+import {
+  getAllPostRoute,
+  likePostRoute,
+  unlikePostRoute,
+} from "./routes/postRoute";
 
 dotenv.config();
 
@@ -37,6 +41,12 @@ app.use("/api/user", getSingleUser);
 
 // get all posts
 app.use("/api/posts", getAllPostRoute);
+
+// like a single post
+app.use("/api/post", likePostRoute);
+
+// unlike a single post
+app.use("/api/post", unlikePostRoute);
 
 // save-user
 app.use(saveUserRoute);

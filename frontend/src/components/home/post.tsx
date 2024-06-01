@@ -13,10 +13,14 @@ import {
 } from "@/components/ui/dialog.tsx";
 import { Comments } from "@/components/home/comments.tsx";
 import { timeAgo } from "@/utils/timeAgo.ts";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils.ts";
+import axios from "axios";
 
 export type PostType = {
   id: number;
   user: {
+    id: number;
     name: string;
     img: string;
     username: string;
@@ -31,6 +35,7 @@ export type PostType = {
   img?: string;
   video?: string;
   link?: string;
+  liked: boolean;
   comments: {
     id: number;
     user: {
@@ -43,6 +48,47 @@ export type PostType = {
 };
 
 export function Post({ post }: { post: PostType }) {
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(post.like);
+  useEffect(() => {
+    setLiked(post.liked);
+    setLikes(post.like);
+  }, [post.liked, post.like]);
+
+  const likeHandler = async () => {
+    if (!liked) {
+      setLiked(true);
+      setLikes((like) => like + 1);
+      try {
+        await axios.post("http://localhost:3000/api/post/like", {
+          postId: post.id,
+          userId: 1,
+        });
+      } catch (error) {
+        // Handle error, maybe revert the state
+        setLiked(false);
+        setLikes((like) => like - 1);
+        console.error("Error liking post", error);
+      }
+    } else {
+      setLiked(false);
+      setLikes((like) => like - 1);
+      try {
+        await axios.post("http://localhost:3000/api/post/unlike", {
+          postId: post.id,
+          userId: 1,
+        });
+      } catch (error) {
+        // Handle error, maybe revert the state
+        setLiked(true);
+        setLikes((like) => like + 1);
+        console.error("Error liking post", error);
+      }
+    }
+
+    // else like
+  };
+
   return (
     <div>
       <Card className="rounded-2xl  shadow-neutral-300 dark:border-neutral-700 dark:shadow-none shadow-[0px_0px_20px_1px] ">
@@ -91,10 +137,20 @@ export function Post({ post }: { post: PostType }) {
           <div>
             <div className="flex items-center justify-between pt-2 text-gray-500 dark:text-gray-400">
               <div className="flex items-center justify-between w-full">
-                <Button size="icon" variant="ghost" className={"flex gap-1"}>
-                  <HeartIcon className="h-4 w-4" />
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  className={"flex gap-1"}
+                  onClick={likeHandler}
+                >
+                  <HeartIcon
+                    className={cn(
+                      "h-4 w-4 transition-all duration-150 ease-linear",
+                      liked ? "fill-red-500 text-red-500" : "text-gray-500",
+                    )}
+                  />
                   <span className="sr-only">Like</span>
-                  <span className={"text-sm"}>{post.like}</span>
+                  <span className={"text-sm"}>{likes}</span>
                 </Button>
                 <Dialog>
                   <DialogTrigger>
