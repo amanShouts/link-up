@@ -1,4 +1,4 @@
-import { SignOutButton, useUser } from "@clerk/clerk-react";
+import { UserButton, useUser } from "@clerk/clerk-react";
 import { Link } from "react-router-dom";
 import { ModeButton } from "@/components/mode-button.tsx";
 
@@ -21,9 +21,9 @@ export default function Navbar() {
         <Link to={"/"}>Investors</Link>
         <Link to={"/"}>Entrepreneur</Link>
         <ModeButton />
-
+        
         {isSignedIn ? (
-          <SignOutButton />
+          <UserButton/>
         ) : (
           <>
             <Link to={"/login"}>Login</Link>

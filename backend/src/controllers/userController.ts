@@ -1,5 +1,5 @@
 import { Request, Response, response } from "express";
-import { getAllUsers, getUser, getUserDetailsByUsername, saveUserModel, updateUserData } from "../model/user";
+import { getAllUsers, getUser, getUserDetailsByUsername, saveUserModel, updateUserData, updateUserIndustries, updateUserSkills } from "../model/user";
 import { error } from "console";
 import { UserDataType } from "../utiles/type";
 
@@ -29,7 +29,6 @@ export const saveUserController = async (req: Request, res: Response) => {
 };
 
 export const userOnboarding = async (req: Request, res: Response) => {
-  console.log("got here")
   try {
     const updatedUser = await updateUserData(req);
     res.status(200).json({
@@ -46,6 +45,39 @@ export const userOnboarding = async (req: Request, res: Response) => {
     });
   }
 };
+
+export const updateUserSkillsController = async (req: Request, res: Response) => { 
+  try {
+    const updatetedSkills = await updateUserSkills(req,res);
+    res.status(200).json({
+      message: "skills updated successfully",
+      updatetedSkills: updatetedSkills,
+    });
+  } catch (error) {
+    console.error("Error during updating skills:", error);
+    res.status(500).json({
+      error: "Internal server error",
+      response: error,
+    });
+  }
+}
+
+export const updateUserIndustriesController = async (req: Request, res: Response) => { 
+  try {
+    const updateIndustry = await updateUserIndustries(req,res);
+    res.status(200).json({
+      message: "industry updated successfully",
+      updateIndustry: updateIndustry,
+    });
+  } catch (error) {
+    console.error("Error during updating industry:", error);
+
+    res.status(500).json({
+      error: "Internal server error",
+      response: error,
+    });
+  }
+}
 
 export const getSingleUserController = async (req: Request, res: Response) => {
   try {

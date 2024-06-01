@@ -5,6 +5,8 @@ import {
   getSingleUser,
   onboardingRoute,
   saveUserRoute,
+  updateUserIndustriesRoute,
+  updateUserSkillsRoute,
 } from "./routes/userRoutes";
 const cors = require("cors");
 import mentorRoutes from "./routes/mentorRoutes";
@@ -53,6 +55,12 @@ app.use(saveUserRoute);
 
 //edit-user
 app.use(onboardingRoute);
+
+// skills
+app.use(updateUserSkillsRoute);
+
+// industries
+app.use(updateUserIndustriesRoute);
 
 app.listen(PORT, () => {
   console.log("Server running on port ", PORT);
