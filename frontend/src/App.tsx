@@ -34,7 +34,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ["/", "/signup"];
+    const publicRoutes = ["/", "/signup", "/home"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -42,9 +42,11 @@ export default function App() {
     if (isSignedIn && user) {
       console.log("user: ", user);
 
-      const currentUser = storedUsers.find((el) => el.username === user.username);
-      
-      dispatch(addCurrentUser(currentUser))
+      const currentUser = storedUsers.find(
+        (el) => el.username === user.username,
+      );
+
+      dispatch(addCurrentUser(currentUser));
 
       if (
         currentUser &&
@@ -124,7 +126,7 @@ export default function App() {
           path="/onboarding"
           element={isSignedIn ? <Onboarding /> : null}
         />
-        <Route path="/home" element={isSignedIn ? <Home /> : null} />
+        <Route path="/home" element={isSignedIn ? <Home /> : <Home />} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route
           path="/edit-profile"

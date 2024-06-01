@@ -5,7 +5,7 @@ import { Skeleton } from "@/components/ui/skeleton.tsx";
 
 export function Posts() {
   const { data, isLoading, error } = useSWR(
-    "http://localhost:3000/api/posts",
+    `http://localhost:3000/api/posts/1`,
     getAllPostFetcher,
   );
 
