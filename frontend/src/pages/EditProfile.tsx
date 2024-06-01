@@ -15,7 +15,7 @@ export default function EditProfile() {
 
   const [username, setUsername] = useState<string | undefined>(currentUser?.username);
   const [name, setName] = useState<string | undefined>(currentUser?.name);
-  const [userType, setUserType] = useState<string | undefined>(currentUser?.userType);
+  const [type, settype] = useState<string | undefined>(currentUser?.type);
   const [isMentor, setIsMentor] = useState<boolean | undefined>(currentUser?.isMentor);
   const [age, setAge] = useState<number | undefined>(currentUser?.age);
   const [bio, setBio] = useState<string | undefined>(currentUser?.bio);
@@ -30,7 +30,7 @@ export default function EditProfile() {
     if (currentUser) {
       setUsername(currentUser.username);
       setName(currentUser.name);
-      setUserType(currentUser.userType);
+      settype(currentUser.type);
       setIsMentor(currentUser.isMentor);
       setAge(currentUser.age);
       setBio(currentUser.bio);
@@ -43,7 +43,7 @@ export default function EditProfile() {
     console.log({
       username,
       name,
-      userType,
+      type,
       isMentor,
       age,
       bio,
@@ -51,7 +51,7 @@ export default function EditProfile() {
       country,
     });
 
-    const payload = { username, userType, isMentor, age, bio, city, country }
+    const payload = { username, type, isMentor, age, bio, city, country }
 
 
     axios.put(BACKEND_URL+'/edit-user',payload)
@@ -98,12 +98,12 @@ export default function EditProfile() {
           <div className="space-y-2">
             <p>User Type*</p>
             <Input
-              id="userType"
+              id="type"
               className="border-color-white"
               placeholder="Enter your user type"
               type="text"
-              value={userType}
-              onChange={(e) => setUserType(e.target.value)}
+              value={type}
+              onChange={(e) => settype(e.target.value)}
             />
           </div>
           <div className="space-y-2">

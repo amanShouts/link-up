@@ -34,7 +34,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ["/", "/signup"];
+    const publicRoutes = ["/", "/signup","login"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -45,12 +45,13 @@ export default function App() {
       const currentUser = storedUsers.find((el) => el.username === user.username);
       
       dispatch(addCurrentUser(currentUser))
+      console.log("currentUser: ", currentUser);
 
       if (
         currentUser &&
         (currentUser?.age === null ||
           currentUser?.city === null ||
-          currentUser?.userType == null)
+          currentUser?.type == null)
       ) {
         console.log("here");
         toggleModal("edit-profile-modal");
