@@ -34,7 +34,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ["/", "/signup", "/home"];
+    const publicRoutes = ["/", "/signup","login"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -42,17 +42,16 @@ export default function App() {
     if (isSignedIn && user) {
       console.log("user: ", user);
 
-      const currentUser = storedUsers.find(
-        (el) => el.username === user.username,
-      );
-
-      dispatch(addCurrentUser(currentUser));
+      const currentUser = storedUsers.find((el) => el.username === user.username);
+      
+      dispatch(addCurrentUser(currentUser))
+      console.log("currentUser: ", currentUser);
 
       if (
         currentUser &&
         (currentUser?.age === null ||
           currentUser?.city === null ||
-          currentUser?.userType == null)
+          currentUser?.type == null)
       ) {
         console.log("here");
         toggleModal("edit-profile-modal");
@@ -126,7 +125,7 @@ export default function App() {
           path="/onboarding"
           element={isSignedIn ? <Onboarding /> : null}
         />
-        <Route path="/home" element={isSignedIn ? <Home /> : <Home />} />
+        <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route
           path="/edit-profile"

@@ -73,7 +73,7 @@ export default function Onboarding() {
   const handleButtonClick = () => {
     if (validateFields()) {
       axios
-        .put("http://localhost:3000/api/onboarding", { userData })
+        .put("http://localhost:3000/edit-user", { ...userData })
         .then((response) => {
           console.log(response.data);
           navigate("/home", { replace: true });

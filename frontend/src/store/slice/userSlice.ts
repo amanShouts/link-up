@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface User {
+  type: null;
   isMentor: boolean;
   userType: string;
   age: number;

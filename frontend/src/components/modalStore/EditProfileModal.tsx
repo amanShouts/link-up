@@ -26,7 +26,7 @@ export function EditProfile() {
                 dispatch(closeModal())
               }, 200);
             }}>
-              Edit Profile
+              Go to Onboarding
             </Button>
           </Link>
           <Button type="button" variant="secondary" onClick={() => {
