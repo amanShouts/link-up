@@ -10,15 +10,15 @@ import axios from "axios";
 import { BACKEND_URL } from "@/config";
 
 export default function EditProfile() {
-  const currentUser: User | undefined = useSelector((state: RootState) => state.users.currentUser);
+  const currentUser: User | undefined = useSelector((state: RootState) => state.users.currentUser as User);
   const dispatch = useDispatch();
 
   const [username, setUsername] = useState<string | undefined>(currentUser?.username);
   const [name, setName] = useState<string | undefined>(currentUser?.name);
-  const [type, settype] = useState<string | undefined>(currentUser?.type);
+  const [type, settype] = useState<string | undefined>(currentUser?.type || "");
   const [isMentor, setIsMentor] = useState<boolean | undefined>(currentUser?.isMentor);
   const [age, setAge] = useState<number | undefined>(currentUser?.age);
-  const [bio, setBio] = useState<string | undefined>(currentUser?.bio);
+  const [bio, setBio] = useState<string | undefined>(currentUser?.bio || "");
   const [city, setCity] = useState<string | undefined>(currentUser?.city);
   const [country, setCountry] = useState<string | undefined>(currentUser?.country);
 
@@ -30,7 +30,7 @@ export default function EditProfile() {
     if (currentUser) {
       setUsername(currentUser.username);
       setName(currentUser.name);
-      settype(currentUser.type);
+      settype(currentUser.type || "");
       setIsMentor(currentUser.isMentor);
       setAge(currentUser.age);
       setBio(currentUser.bio);

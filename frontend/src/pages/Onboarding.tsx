@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +19,7 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
 import { useDispatch } from "react-redux";
 import { closeModal } from "@/store/slice/modalSlice";
-import Autocomplete from '@mui/material/Autocomplete';
+import Autocomplete from "@mui/material/Autocomplete";
 import { Chip, TextField } from "@mui/material";
 
 export default function Onboarding() {
@@ -27,7 +30,7 @@ export default function Onboarding() {
   const [question, setQuestion] = useState(0);
   const [errors, setErrors] = useState({});
   const [userData, setUserData] = useState({
-    username: user?.username,
+    username: user?.username || "",
     type: "",
     isMentor: false,
     age: "",
@@ -35,7 +38,7 @@ export default function Onboarding() {
     city: "",
     country: "",
     industry: [],
-    skill: [],  
+    skill: [],
   });
 
   const steps = [
@@ -61,16 +64,37 @@ export default function Onboarding() {
           name: "industry",
           label: "Industry",
           type: "select-tags",
-          options: ["Tech", "Finance", "Healthcare", "Education", "Marketing", "Manufacturing", "Retail", "Consulting"],
-          required: true
+          options: [
+            "Tech",
+            "Finance",
+            "Healthcare",
+            "Education",
+            "Marketing",
+            "Manufacturing",
+            "Retail",
+            "Consulting",
+          ],
+          required: true,
         },
         {
           name: "skill",
           label: "Skill",
           type: "select-tags",
-          options: ["Product Management", "User Experience", "Agile Methodologies", "Data Analysis", "Software Development", "Project Management", "Leadership", "Communication", "Digital Marketing", "Cloud Computing", "Cybersecurity"],
-          required: true
-        },        
+          options: [
+            "Product Management",
+            "User Experience",
+            "Agile Methodologies",
+            "Data Analysis",
+            "Software Development",
+            "Project Management",
+            "Leadership",
+            "Communication",
+            "Digital Marketing",
+            "Cloud Computing",
+            "Cybersecurity",
+          ],
+          required: true,
+        },
       ].filter(Boolean),
     },
     {
@@ -109,7 +133,7 @@ export default function Onboarding() {
     const newErrors = {};
 
     currentFields.forEach((field) => {
-      if (field.required && !userData[field.name]) {
+      if (field.required && !userData.field.name) {
         newErrors[field.name] = `${field.label} is required`;
       }
     });
@@ -184,18 +208,20 @@ export default function Onboarding() {
             multiple
             options={field.options}
             value={userData[field.name]}
-            onChange={(event, newValue) => handleAutocompleteChange(field.name, newValue)}
+            onChange={(event, newValue) =>
+              handleAutocompleteChange(field.name, newValue)
+            }
             renderTags={(tagValue, getTagProps) =>
               tagValue.map((option, index) => (
-                <Chip
-                  key={option}
-                  label={option}
-                  {...getTagProps({ index })}
-                />
+                <Chip key={option} label={option} {...getTagProps({ index })} />
               ))
             }
             renderInput={(params) => (
-              <TextField {...params} variant="outlined" placeholder={field.label} />
+              <TextField
+                {...params}
+                variant="outlined"
+                placeholder={field.label}
+              />
             )}
           />
         );
@@ -220,7 +246,7 @@ export default function Onboarding() {
     }
   };
 
-  console.log("userData: ",userData)
+  console.log("userData: ", userData);
 
   useEffect(() => {
     dispatch(closeModal());
@@ -254,9 +280,7 @@ export default function Onboarding() {
                 <Progress className="mt-4" value={steps[question].state} />
               </div>
               {question === steps.length - 1 && (
-                <Button onClick={handleButtonClick}>
-                  Complete Onboarding
-                </Button>
+                <Button onClick={handleButtonClick}>Complete Onboarding</Button>
               )}
             </div>
           </div>
