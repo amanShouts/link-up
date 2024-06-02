@@ -1,35 +1,34 @@
 import React, { useRef } from "react";
-import { ImageIcon } from "lucide-react";
+import { VideoIcon } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import toast from "react-hot-toast";
 
-export const ImageUpload = ({
-  setSelectedImage,
-  selectedVideo,
+export const VideoUpload = ({
   setSelectedVideo,
+  selectedImage,
+  setSelectedImage,
 }: {
-  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>;
   setSelectedVideo: React.Dispatch<React.SetStateAction<string | null>>;
-  selectedVideo: string | null;
+  setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>;
+  selectedImage: string | null;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (selectedVideo) {
-      setSelectedVideo(null);
+  const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedImage) {
+      setSelectedImage(null);
     }
-
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
-      if (file.size > 5 * 1024 * 1024) {
-        toast.error("File size exceeds limit of 5 MB");
-        setSelectedImage(null);
+      if (file.size > 20 * 1024 * 1024) {
+        toast.error("File size exceeds limit of 0 MB");
+        setSelectedVideo(null);
         return;
       }
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        setSelectedImage(reader.result as string);
+        setSelectedVideo(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -38,15 +37,15 @@ export const ImageUpload = ({
   return (
     <div>
       <Button variant={"link"} onClick={() => inputRef.current?.click()}>
-        <ImageIcon className={"w-5 h-5 cursor-pointer dark:text-gray-50"} />
+        <VideoIcon className={"w-5 h-5 cursor-pointer dark:text-gray-50"} />
       </Button>
       <input
         ref={inputRef}
         type="file"
-        id="file-input"
-        accept="image/*"
+        id="video-input"
+        accept="video/*"
         className={"hidden"}
-        onChange={handleImageChange}
+        onChange={handleVideoChange}
       />
     </div>
   );

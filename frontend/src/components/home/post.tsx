@@ -128,6 +128,14 @@ export function Post({ post }: { post: PostType }) {
             />
           )}
 
+          {post.video && (
+            <video
+              className="h-auto w-full rounded-lg object-cover"
+              src={post.video}
+              controls
+            />
+          )}
+
           {/*<div*/}
           {/*  className={*/}
           {/*    "w-[full] aspect-video rounded-2xl bg-neutral-400 dark:bg-neutral-600"*/}
