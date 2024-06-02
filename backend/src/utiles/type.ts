@@ -1,4 +1,4 @@
-import { UserType } from "@prisma/client";
+import { UserType } from '@prisma/client';
 
 export interface MentorDataType {
   id: string;

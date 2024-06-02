@@ -8,6 +8,7 @@
     "watch": "tsc -b -w",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint --max-warnings 0 --config .eslintrc . --fix",
     "preview": "vite preview",
     "format:fix": "prettier --write \"**/*.{ts,tsx,json}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,json}\""

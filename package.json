@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "format:fix": "prettier --write \"**/*.{ts,tsx,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,json}\"",
+    "format:fix": "cd backend && npm run format:fix && cd ./../frontend && npm run format:fix && cd ./../",
     "prepare": "husky"
   },
   "dependencies": {

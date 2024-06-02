@@ -1,66 +1,66 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
 async function main() {
   // Upsert users
   const user1 = await prisma.user.upsert({
-    where: { username: "batman" },
+    where: { username: 'batman' },
     update: {},
     create: {
-      username: "batman",
-      name: "Bat man",
+      username: 'batman',
+      name: 'Bat man',
       age: 30,
-      img: "https://img.etimg.com/thumb/width-1200,height-900,imgsize-40242,resizemode-75,msid-106905805/news/international/us/the-batman-2-heres-what-we-know-so-far-about-release-date-cast-plot-and-more.jpg",
+      img: 'https://img.etimg.com/thumb/width-1200,height-900,imgsize-40242,resizemode-75,msid-106905805/news/international/us/the-batman-2-heres-what-we-know-so-far-about-release-date-cast-plot-and-more.jpg',
       bgImg:
-        "https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg",
+        'https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg',
       desc: `John has over 10 years of experience in the tech industry, with a strong background in product management
             and user experience design. He has worked on a variety of projects, from enterprise software to
             consumer-facing applications.`,
-      bio: "Alumni of XYZ University | Major in ABC",
-      city: "City",
-      country: "Country",
+      bio: 'Alumni of XYZ University | Major in ABC',
+      city: 'City',
+      country: 'Country',
       experience: {
         createMany: {
           data: [
             {
-              companyName: "Acme Inc.",
-              role: "Software Engineer",
-              startYear: "2019",
-              endYear: "Present",
-              desc: "Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software.",
+              companyName: 'Acme Inc.',
+              role: 'Software Engineer',
+              startYear: '2019',
+              endYear: 'Present',
+              desc: 'Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software.',
               companyLogo:
-                "https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png",
+                'https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png',
             },
             {
-              role: "Front-end Developer",
-              companyName: "Widgets Inc. • 2016 - 2019",
+              role: 'Front-end Developer',
+              companyName: 'Widgets Inc. • 2016 - 2019',
               companyLogo:
-                "https://logowik.com/content/uploads/images/amazon6707.jpg",
+                'https://logowik.com/content/uploads/images/amazon6707.jpg',
               desc: `Designed and implemented responsive user interfaces using HTML, CSS, and JavaScript. Collaborated with designers and back-end developers to deliver high-quality web applications.`,
-              startYear: "2016",
-              endYear: "2019",
+              startYear: '2016',
+              endYear: '2019',
             },
           ],
         },
       },
-      currDesignation: "Senior Product Manager",
-      type: "ENTREPRENEUR",
+      currDesignation: 'Senior Product Manager',
+      type: 'ENTREPRENEUR',
       isMentor: false,
       industry: {
         createMany: {
           data: [
             {
-              type: "Advertising",
+              type: 'Advertising',
             },
             {
-              type: "Aerospace",
+              type: 'Aerospace',
             },
             {
-              type: "Agriculture",
+              type: 'Agriculture',
             },
             {
-              type: "Ecommerce",
+              type: 'Ecommerce',
             },
           ],
         },
@@ -69,19 +69,19 @@ async function main() {
         createMany: {
           data: [
             {
-              type: "Product Management",
+              type: 'Product Management',
             },
             {
-              type: "User Experience",
+              type: 'User Experience',
             },
             {
-              type: "Agile Methodologies",
+              type: 'Agile Methodologies',
             },
             {
-              type: "Market Analysis",
+              type: 'Market Analysis',
             },
             {
-              type: "Customer Insights",
+              type: 'Customer Insights',
             },
           ],
         },
@@ -90,10 +90,10 @@ async function main() {
         createMany: {
           data: [
             {
-              company: "Acme Inc.",
+              company: 'Acme Inc.',
             },
             {
-              company: "Jugad Inc.",
+              company: 'Jugad Inc.',
             },
           ],
         },
@@ -102,62 +102,62 @@ async function main() {
   });
 
   const user2 = await prisma.user.upsert({
-    where: { username: "brucewayne" },
+    where: { username: 'brucewayne' },
     update: {},
     create: {
-      username: "brucewayne",
-      name: "Bruce Wayne",
+      username: 'brucewayne',
+      name: 'Bruce Wayne',
       age: 28,
-      img: "https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/02/robert-pattinson-the-batman.jpg",
+      img: 'https://static1.moviewebimages.com/wordpress/wp-content/uploads/2022/02/robert-pattinson-the-batman.jpg',
       bgImg:
-        "https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg",
+        'https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg',
       desc: `John has over 10 years of experience in the tech industry, with a strong background in product management
             and user experience design. He has worked on a variety of projects, from enterprise software to
             consumer-facing applications.`,
-      bio: "Alumni of XYZ University | Major in ABC",
-      city: "City",
-      country: "Country",
+      bio: 'Alumni of XYZ University | Major in ABC',
+      city: 'City',
+      country: 'Country',
       experience: {
         createMany: {
           data: [
             {
-              companyName: "Acme Inc.",
-              role: "Software Engineer",
-              startYear: "2019",
-              endYear: "Present",
-              desc: "Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software.",
+              companyName: 'Acme Inc.',
+              role: 'Software Engineer',
+              startYear: '2019',
+              endYear: 'Present',
+              desc: 'Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software.',
               companyLogo:
-                "https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png",
+                'https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png',
             },
             {
-              role: "Front-end Developer",
-              companyName: "Widgets Inc. • 2016 - 2019",
+              role: 'Front-end Developer',
+              companyName: 'Widgets Inc. • 2016 - 2019',
               companyLogo:
-                "https://logowik.com/content/uploads/images/amazon6707.jpg",
+                'https://logowik.com/content/uploads/images/amazon6707.jpg',
               desc: `Designed and implemented responsive user interfaces using HTML, CSS, and JavaScript. Collaborated with designers and back-end developers to deliver high-quality web applications.`,
-              startYear: "2016",
-              endYear: "2019",
+              startYear: '2016',
+              endYear: '2019',
             },
           ],
         },
       },
-      currDesignation: "Senior Product Manager",
-      type: "INVESTOR",
+      currDesignation: 'Senior Product Manager',
+      type: 'INVESTOR',
       isMentor: true,
       industry: {
         createMany: {
           data: [
             {
-              type: "Advertising",
+              type: 'Advertising',
             },
             {
-              type: "Aerospace",
+              type: 'Aerospace',
             },
             {
-              type: "Agriculture",
+              type: 'Agriculture',
             },
             {
-              type: "Ecommerce",
+              type: 'Ecommerce',
             },
           ],
         },
@@ -166,19 +166,19 @@ async function main() {
         createMany: {
           data: [
             {
-              type: "Product Management",
+              type: 'Product Management',
             },
             {
-              type: "User Experience",
+              type: 'User Experience',
             },
             {
-              type: "Agile Methodologies",
+              type: 'Agile Methodologies',
             },
             {
-              type: "Market Analysis",
+              type: 'Market Analysis',
             },
             {
-              type: "Customer Insights",
+              type: 'Customer Insights',
             },
           ],
         },
@@ -188,11 +188,11 @@ async function main() {
           data: [
             {
               entrepreneurId: user1.id,
-              company: "Acme Inc.",
+              company: 'Acme Inc.',
             },
             {
               entrepreneurId: user1.id,
-              company: "Jugad Inc.",
+              company: 'Jugad Inc.',
             },
           ],
         },
@@ -201,62 +201,62 @@ async function main() {
   });
 
   const user3 = await prisma.user.upsert({
-    where: { username: "testUser3" },
+    where: { username: 'testUser3' },
     update: {},
     create: {
-      username: "testUser3",
-      name: "John Show",
-      type: "ENTREPRENEUR",
+      username: 'testUser3',
+      name: 'John Show',
+      type: 'ENTREPRENEUR',
       age: 46,
-      img: "https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg",
+      img: 'https://pbs.twimg.com/media/FjU2lkcWYAgNG6d.jpg',
       bgImg:
-        "https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg",
+        'https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg',
       desc: `John has over 10 years of experience in the tech industry, with a strong background in product management
             and user experience design. He has worked on a variety of projects, from enterprise software to
             consumer-facing applications.`,
-      bio: "Alumni of XYZ University | Major in ABC",
-      city: "City",
-      country: "Country",
+      bio: 'Alumni of XYZ University | Major in ABC',
+      city: 'City',
+      country: 'Country',
       experience: {
         createMany: {
           data: [
             {
-              companyName: "Acme Inc.",
-              role: "Software Engineer",
-              startYear: "2019",
-              endYear: "Present",
-              desc: "Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software.",
+              companyName: 'Acme Inc.',
+              role: 'Software Engineer',
+              startYear: '2019',
+              endYear: 'Present',
+              desc: 'Developed and maintained web applications using React, Node.js, and MongoDB. Collaborated with cross-functional teams to deliver high-quality software.',
               companyLogo:
-                "https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png",
+                'https://w7.pngwing.com/pngs/326/85/png-transparent-google-logo-google-text-trademark-logo.png',
             },
             {
-              role: "Front-end Developer",
-              companyName: "Widgets Inc. • 2016 - 2019",
+              role: 'Front-end Developer',
+              companyName: 'Widgets Inc. • 2016 - 2019',
               companyLogo:
-                "https://logowik.com/content/uploads/images/amazon6707.jpg",
+                'https://logowik.com/content/uploads/images/amazon6707.jpg',
               desc: `Designed and implemented responsive user interfaces using HTML, CSS, and JavaScript. Collaborated with designers and back-end developers to deliver high-quality web applications.`,
-              startYear: "2016",
-              endYear: "2019",
+              startYear: '2016',
+              endYear: '2019',
             },
           ],
         },
       },
-      currDesignation: "Senior Product Manager",
+      currDesignation: 'Senior Product Manager',
       isMentor: true,
       industry: {
         createMany: {
           data: [
             {
-              type: "Advertising",
+              type: 'Advertising',
             },
             {
-              type: "Aerospace",
+              type: 'Aerospace',
             },
             {
-              type: "Agriculture",
+              type: 'Agriculture',
             },
             {
-              type: "Ecommerce",
+              type: 'Ecommerce',
             },
           ],
         },
@@ -265,19 +265,19 @@ async function main() {
         createMany: {
           data: [
             {
-              type: "Product Management",
+              type: 'Product Management',
             },
             {
-              type: "User Experience",
+              type: 'User Experience',
             },
             {
-              type: "Agile Methodologies",
+              type: 'Agile Methodologies',
             },
             {
-              type: "Market Analysis",
+              type: 'Market Analysis',
             },
             {
-              type: "Customer Insights",
+              type: 'Customer Insights',
             },
           ],
         },
@@ -287,11 +287,11 @@ async function main() {
           data: [
             {
               entrepreneurId: user1.id,
-              company: "Acme Inc.",
+              company: 'Acme Inc.',
             },
             {
               entrepreneurId: user2.id,
-              company: "Jugad Inc.",
+              company: 'Jugad Inc.',
             },
           ],
         },
@@ -305,9 +305,9 @@ async function main() {
     update: {},
     create: {
       userId: user1.id,
-      title: "My First Post",
-      desc: "This is a description of my first post.",
-      type: "TEXT",
+      title: 'My First Post',
+      desc: 'This is a description of my first post.',
+      type: 'TEXT',
     },
   });
 
@@ -316,10 +316,10 @@ async function main() {
     update: {},
     create: {
       userId: user2.id,
-      title: "Healthcare Innovations",
-      desc: "Discussion about innovations in healthcare.",
-      type: "IMAGE",
-      img: "https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg",
+      title: 'Healthcare Innovations',
+      desc: 'Discussion about innovations in healthcare.',
+      type: 'IMAGE',
+      img: 'https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg',
     },
   });
 
@@ -328,10 +328,10 @@ async function main() {
     update: {},
     create: {
       userId: user3.id,
-      title: "Healthcare Innovations",
-      desc: "Discussion about innovations in healthcare.",
-      type: "IMAGE",
-      img: "https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg",
+      title: 'Healthcare Innovations',
+      desc: 'Discussion about innovations in healthcare.',
+      type: 'IMAGE',
+      img: 'https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg',
     },
   });
 
@@ -340,10 +340,10 @@ async function main() {
     update: {},
     create: {
       userId: user3.id,
-      title: "Healthcare Innovations",
-      desc: "Discussion about innovations in healthcare.",
-      type: "IMAGE",
-      img: "https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg",
+      title: 'Healthcare Innovations',
+      desc: 'Discussion about innovations in healthcare.',
+      type: 'IMAGE',
+      img: 'https://hotpot.ai/images/site/ai/image_generator/background_maker/teaser_400.jpg',
     },
   });
 
@@ -352,7 +352,7 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      labelTitle: "Tech",
+      labelTitle: 'Tech',
     },
   });
 
@@ -360,7 +360,7 @@ async function main() {
     where: { id: 2 },
     update: {},
     create: {
-      labelTitle: "Health",
+      labelTitle: 'Health',
     },
   });
 
@@ -388,9 +388,9 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      type: "ARTICLE",
-      content: "This is a sample article content.",
-      title: "Sample Article",
+      type: 'ARTICLE',
+      content: 'This is a sample article content.',
+      title: 'Sample Article',
     },
   });
 
@@ -398,9 +398,9 @@ async function main() {
     where: { id: 2 },
     update: {},
     create: {
-      type: "VIDEO",
-      content: "https://example.com/video",
-      title: "Sample Video",
+      type: 'VIDEO',
+      content: 'https://example.com/video',
+      title: 'Sample Video',
     },
   });
 
@@ -409,10 +409,10 @@ async function main() {
     where: { id: 1 },
     update: {},
     create: {
-      content: "Hello, how are you?",
+      content: 'Hello, how are you?',
       receiverId: user2.id,
       senderId: user1.id,
-      chatType: "TEXT",
+      chatType: 'TEXT',
     },
   });
 
@@ -420,17 +420,17 @@ async function main() {
     where: { id: 2 },
     update: {},
     create: {
-      content: "I am fine, thank you!",
+      content: 'I am fine, thank you!',
       receiverId: user1.id,
       senderId: user2.id,
-      chatType: "TEXT",
+      chatType: 'TEXT',
     },
   });
 }
 
 main()
   .then(() => {
-    console.log("Data is seeded");
+    console.log('Data is seeded');
   })
   .catch((e) => {
     console.error(e);

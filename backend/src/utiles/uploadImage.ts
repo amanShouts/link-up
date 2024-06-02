@@ -1,4 +1,4 @@
-import { v2 as cloudinary } from "cloudinary";
+import { v2 as cloudinary } from 'cloudinary';
 
 export async function imageUploader({
   fileStr,
@@ -17,7 +17,7 @@ export async function imageUploader({
   // Upload an image
   const uploadResult = await cloudinary.uploader
     .upload(fileStr, {
-      public_id: "posts" + user_id,
+      public_id: 'posts' + user_id,
     })
     .catch((error) => {
       console.log(error);
