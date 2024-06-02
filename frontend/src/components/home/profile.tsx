@@ -21,7 +21,7 @@ export function Profile() {
 
   if (data) {
     return (
-      <div className="flex flex-col gap-6 col-span-3 sticky top-24 h-fit">
+      <div className="hidden lg:flex flex-col gap-6 col-span-3 sticky top-24 h-fit">
         <div className="flex flex-col items-center gap-6 rounded-lg bg-white border border-neutral-400 dark:bg-black dark:border-neutral-700 ">
           <div className="relative w-full">
             {data?.bgImg ? (

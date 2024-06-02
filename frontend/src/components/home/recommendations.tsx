@@ -26,7 +26,11 @@ export function Recommendation() {
 
   if (data) {
     return (
-      <div className={"col-span-2 flex flex-col gap-4 sticky top-24 h-fit"}>
+      <div
+        className={
+          "col-span-2 hidden xl:flex flex-col gap-4 sticky top-24 h-fit"
+        }
+      >
         {data.data.mentors.map((mentor: MentorDataType) => {
           return <RecommendationCard mentor={mentor} />;
         })}
