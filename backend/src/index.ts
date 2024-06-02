@@ -8,7 +8,7 @@ import {
   updateUserIndustriesRoute,
   updateUserSkillsRoute,
 } from "./routes/userRoutes";
-const cors = require("cors");
+import bodyParser from "body-parser";
 import mentorRoutes from "./routes/mentorRoutes";
 import { getUserProfile } from "./controllers/userController";
 import {
@@ -18,12 +18,14 @@ import {
   unlikePostRoute,
 } from "./routes/postRoute";
 
+const cors = require("cors");
 dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
-
+app.use(bodyParser.json({ limit: "100mb" }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(cors());
 
 app.get("/", (req, res) => {

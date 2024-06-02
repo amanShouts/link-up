@@ -21,7 +21,6 @@ export const getPosts = async (userId: string) => {
         comments: true,
       },
     });
-    console.log(posts);
     // check if user liked the post
     const postsWithLiked = posts.map((post) => ({
       ...post,
@@ -127,6 +126,7 @@ export const createPost = async ({
         title,
         desc,
         userId: parseInt(userId),
+        img: imageLink,
         type,
       },
     });
