@@ -19,6 +19,7 @@ import axios from "axios";
 import EditProfile from "./pages/EditProfile";
 import DetailsModal from "./components/modalStore/DetailsModal";
 import Profile from "./pages/Profile";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -34,7 +35,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ["/", "/signup","login"];
+    const publicRoutes = ["/", "/signup", "login"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -42,9 +43,11 @@ export default function App() {
     if (isSignedIn && user) {
       console.log("user: ", user);
 
-      const currentUser = storedUsers.find((el) => el.username === user.username);
-      
-      dispatch(addCurrentUser(currentUser))
+      const currentUser = storedUsers.find(
+        (el) => el.username === user.username,
+      );
+
+      dispatch(addCurrentUser(currentUser));
       console.log("currentUser: ", currentUser);
 
       if (
@@ -116,6 +119,7 @@ export default function App() {
     <main className="dark:bg-black dark:text-white">
       <Navbar />
       <DetailsModal />
+      <Toaster />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<CustomSignIn />} />

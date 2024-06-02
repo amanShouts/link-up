@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button.tsx";
-import { CloudMoonIcon, LucideMoon, MoonIcon, SunIcon } from "lucide-react";
+import { CloudMoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "@/components/theme-provider";
 
 export function ModeButton() {
