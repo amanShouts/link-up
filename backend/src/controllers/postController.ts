@@ -1,5 +1,6 @@
 import { createPost, getPosts, likePost, unlikePost } from "../model/post";
 import { Request, Response } from "express";
+import { imageUploader } from "../utiles/uploadImage";
 
 export const getPostsController = async (req: Request, res: Response) => {
   const userId = req.params.userId;
@@ -34,15 +35,21 @@ export const unlikePostController = async (req: Request, res: Response) => {
 export const createPostController = async (req: Request, res: Response) => {
   const { title, desc, userId, imageLink, videoLink, resourceLink } = req.body;
   try {
-    // Create post
-    await createPost({
-      userId,
-      title,
-      desc,
-      imageLink,
-      videoLink,
-      resourceLink,
-    });
+    // upload Image
+    if (imageLink) {
+      const image_url = await imageUploader({
+        fileStr: imageLink,
+        user_id: userId,
+      });
+      // Create post
+      await createPost({
+        userId,
+        title,
+        desc,
+        imageLink: image_url,
+      });
+    }
+
     return res.json({ message: "Post created" });
   } catch (error) {
     res.status(500).json({ error: "Error creating post" });
