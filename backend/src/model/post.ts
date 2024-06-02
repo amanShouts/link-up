@@ -1,11 +1,11 @@
-import { prisma } from "./index";
-import { PostType } from "@prisma/client";
+import { prisma } from './index';
+import { PostType } from '@prisma/client';
 
 export const getPosts = async (userId: string) => {
   try {
     const posts = await prisma.post.findMany({
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
       include: {
         user: {
@@ -29,7 +29,7 @@ export const getPosts = async (userId: string) => {
 
     return postsWithLiked;
   } catch (error) {
-    throw new Error("Error fetching posts");
+    throw new Error('Error fetching posts');
   }
 };
 
@@ -58,7 +58,7 @@ export const likePost = async ({
     return post;
   } catch (error) {
     console.log(error);
-    throw new Error("Error liking post");
+    throw new Error('Error liking post');
   }
 };
 
@@ -89,7 +89,7 @@ export const unlikePost = async ({
     return post;
   } catch (error) {
     console.log(error);
-    throw new Error("Error unliking post");
+    throw new Error('Error unliking post');
   }
 };
 
@@ -161,7 +161,7 @@ export const createPost = async ({
     return post;
   } catch (error) {
     console.log(error);
-    throw new Error("Error creating post");
+    throw new Error('Error creating post');
   }
 };
 

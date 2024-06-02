@@ -1,6 +1,8 @@
+node_modules
 postgres-data
 node_modules
 bun.lockb
+package-lock.json
 .env
 .idea/
 *.cpp

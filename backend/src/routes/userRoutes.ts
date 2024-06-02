@@ -1,4 +1,4 @@
-import { Router } from "express";
+import { Router } from 'express';
 import {
   getSingleUserController,
   getUserProfile,
@@ -7,7 +7,7 @@ import {
   updateUserIndustriesController,
   updateUserSkillsController,
   userOnboarding,
-} from "../controllers/userController";
+} from '../controllers/userController';
 
 export const getAllUsersRoute = Router();
 export const saveUserRoute = Router();

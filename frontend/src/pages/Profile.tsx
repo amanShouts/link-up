@@ -17,7 +17,7 @@ export default function Profile() {
   useEffect(() => {
     async function getProfileDetail() {
       const response = await axios.get(
-        `${BACKEND_URL}/api/profile/${username}`
+        `${BACKEND_URL}/api/profile/${username}`,
       );
       const data = await response.data;
       console.log(data);

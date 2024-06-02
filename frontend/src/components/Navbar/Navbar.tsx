@@ -21,9 +21,9 @@ export default function Navbar() {
         <Link to={"/"}>Investors</Link>
         <Link to={"/"}>Entrepreneur</Link>
         <ModeButton />
-        
+
         {isSignedIn ? (
-          <UserButton/>
+          <UserButton />
         ) : (
           <>
             <Link to={"/login"}>Login</Link>

@@ -1,14 +1,8 @@
+import * as React from "react";
 import { useUser } from "@clerk/clerk-react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import CustomSignIn from "./pages/CustomSignIn";
-import Home from "./pages/Home";
-import CustomSignUp from "./pages/CustomSignUp";
-import Landing from "./pages/Landing";
-import Onboarding from "./pages/Onboarding";
 import { useEffect } from "react";
 import { Loader2 } from "lucide-react";
-import MentorList from "./pages/MentorList";
-import MentorProfile from "./pages/MentorProfile";
 import Navbar from "./components/Navbar/Navbar";
 import { modalDetails, openModal } from "./store/slice/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +10,18 @@ import { addCurrentUser, addUserDetails } from "./store/slice/userSlice";
 import { BACKEND_URL } from "./config";
 import { RootState } from "./store/store";
 import axios from "axios";
-import EditProfile from "./pages/EditProfile";
 import DetailsModal from "./components/modalStore/DetailsModal";
-import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
+
+const CustomSignIn = React.lazy(() => import("./pages/CustomSignIn"));
+const Home = React.lazy(() => import("./pages/Home"));
+const CustomSignUp = React.lazy(() => import("./pages/CustomSignUp"));
+const Landing = React.lazy(() => import("./pages/Landing"));
+const Onboarding = React.lazy(() => import("./pages/Onboarding"));
+const MentorList = React.lazy(() => import("./pages/MentorList"));
+const MentorProfile = React.lazy(() => import("./pages/MentorProfile"));
+const EditProfile = React.lazy(() => import("./pages/EditProfile"));
+const Profile = React.lazy(() => import("./pages/Profile"));
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();

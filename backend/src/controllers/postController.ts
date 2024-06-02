@@ -14,7 +14,7 @@ export const getPostsController = async (req: Request, res: Response) => {
     const posts = await getPosts(userId);
     return res.json(posts);
   } catch (error) {
-    res.status(500).json({ error: "Error fetching posts" });
+    res.status(500).json({ error: 'Error fetching posts' });
   }
 };
 
@@ -24,7 +24,7 @@ export const likePostController = async (req: Request, res: Response) => {
     const post = await likePost({ postId, userId });
     return res.json(post);
   } catch (error) {
-    res.status(500).json({ error: "Error liking post" });
+    res.status(500).json({ error: 'Error liking post' });
   }
 };
 
@@ -34,7 +34,7 @@ export const unlikePostController = async (req: Request, res: Response) => {
     const post = await unlikePost({ postId, userId });
     return res.json(post);
   } catch (error) {
-    res.status(500).json({ error: "Error unliking post" });
+    res.status(500).json({ error: 'Error unliking post' });
   }
 };
 
