@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button.tsx";
-import { CircleMinus, Link2Icon, SendIcon } from "lucide-react";
+import { CircleMinus, LinkIcon, SendIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input.tsx";
 import { useState } from "react";
@@ -16,6 +16,9 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { ImageUpload } from "@/components/home/image-upload.tsx";
 import { VideoUpload } from "@/components/home/video-uplaod.tsx";
+import { AttachingLink } from "@/components/home/attaching-link.tsx";
+import { Card } from "@/components/ui/card.tsx";
+import { Link } from "react-router-dom";
 
 export const Createpost = ({ userId }: { userId: string }) => {
   const [title, setTitle] = useState("");
@@ -23,9 +26,12 @@ export const Createpost = ({ userId }: { userId: string }) => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [showLink, setShowLink] = useState(false);
+  const [link, setLink] = useState<string>("");
 
   async function postHandler() {
     const id = toast.loading("Uploading post....");
+
     try {
       if (selectedImage) {
         await axios.post("http://localhost:3000/api/post/create", {
@@ -41,6 +47,15 @@ export const Createpost = ({ userId }: { userId: string }) => {
           desc,
           userId,
           videoLink: selectedVideo,
+        });
+      }
+
+      if (showLink) {
+        await axios.post("http://localhost:3000/api/post/create/link", {
+          title,
+          desc,
+          userId,
+          link: link,
         });
       }
 
@@ -89,11 +104,31 @@ export const Createpost = ({ userId }: { userId: string }) => {
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
               />
+
+              {link && (
+                <Card
+                  className={"p-4 border-neutral-700 flex items-center gap-3"}
+                >
+                  <LinkIcon className={"h-5 w-5"} />
+                  <Link className={"hover:underline"} to={link}>
+                    {link}
+                  </Link>
+                </Card>
+              )}
+
+              {showLink && (
+                <Input
+                  value={link}
+                  onChange={(e) => setLink(e.target.value)}
+                  placeholder={"Attachment Link"}
+                />
+              )}
+
               {selectedImage && (
                 <div className={"relative"}>
                   <Button
                     onClick={() => setSelectedImage(null)}
-                    className={"absolute right-2 top-2 h-fit p-0"}
+                    className={"absolute right-2 top-2 h-fit p-0 z-50"}
                     variant={"link"}
                   >
                     <CircleMinus className={"w-5 h-4"} />
@@ -110,7 +145,7 @@ export const Createpost = ({ userId }: { userId: string }) => {
                 <div className={"relative"}>
                   <Button
                     onClick={() => setSelectedVideo(null)}
-                    className={"absolute right-2 top-2 h-fit p-0"}
+                    className={"absolute right-2 top-2 h-fit p-0 z-50"}
                     variant={"link"}
                   >
                     <CircleMinus className={"w-5 h-4"} />
@@ -131,15 +166,23 @@ export const Createpost = ({ userId }: { userId: string }) => {
               setSelectedImage={setSelectedImage}
               setSelectedVideo={setSelectedVideo}
               selectedVideo={selectedVideo}
+              showLink={showLink}
+              setShowLink={setShowLink}
             />
             <VideoUpload
               setSelectedVideo={setSelectedVideo}
               selectedImage={selectedImage}
+              setShowLink={setShowLink}
+              showLink={showLink}
               setSelectedImage={setSelectedImage}
             />
-            <Button variant={"link"}>
-              <Link2Icon className={" h-6 w-6"} />
-            </Button>
+            <AttachingLink
+              selectedImage={selectedImage}
+              selectedVideo={selectedVideo}
+              setShowLink={setShowLink}
+              setSelectedImage={setSelectedImage}
+              setSelectedVideo={setSelectedVideo}
+            />
           </div>
 
           <Button className={"w-[100px]"} onClick={postHandler}>

@@ -111,26 +111,53 @@ export const createPost = async ({
 }) => {
   try {
     let type;
+    let post;
     if (imageLink) {
       type = PostType.IMAGE;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+          img: imageLink,
+          type,
+        },
+      });
     } else if (videoLink) {
       type = PostType.VIDEO;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+          video: videoLink,
+          type,
+        },
+      });
     } else if (resourceLink) {
       type = PostType.LINK;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+          link: resourceLink,
+          type,
+        },
+      });
     } else {
       type = PostType.TEXT;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+
+          type,
+        },
+      });
     }
 
-    const post = await prisma.post.create({
-      data: {
-        title,
-        desc,
-        userId: parseInt(userId),
-        img: imageLink,
-        video: videoLink,
-        type,
-      },
-    });
     return post;
   } catch (error) {
     console.log(error);

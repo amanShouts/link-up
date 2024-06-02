@@ -71,3 +71,18 @@ export const createPostController = async (req: Request, res: Response) => {
     res.status(500).json({ error: "Error creating post" });
   }
 };
+
+export const createLinkPostController = async (req: Request, res: Response) => {
+  const { title, desc, userId, link } = req.body;
+  try {
+    await createPost({
+      userId,
+      title,
+      desc,
+      resourceLink: link,
+    });
+    return res.json({ message: "Post created" });
+  } catch (error) {
+    res.status(500).json({ error: "Error creating post" });
+  }
+};

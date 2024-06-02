@@ -7,15 +7,22 @@ export const ImageUpload = ({
   setSelectedImage,
   selectedVideo,
   setSelectedVideo,
+  setShowLink,
+  showLink,
 }: {
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>;
   setSelectedVideo: React.Dispatch<React.SetStateAction<string | null>>;
+  setShowLink: React.Dispatch<React.SetStateAction<boolean>>;
+  showLink: boolean;
   selectedVideo: string | null;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (selectedVideo) {
       setSelectedVideo(null);
+    }
+    if (showLink) {
+      setShowLink(false);
     }
 
     if (event.target.files && event.target.files[0]) {

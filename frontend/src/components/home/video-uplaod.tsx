@@ -7,16 +7,24 @@ export const VideoUpload = ({
   setSelectedVideo,
   selectedImage,
   setSelectedImage,
+  setShowLink,
+  showLink,
 }: {
   setSelectedVideo: React.Dispatch<React.SetStateAction<string | null>>;
   setSelectedImage: React.Dispatch<React.SetStateAction<string | null>>;
   selectedImage: string | null;
+  setShowLink: React.Dispatch<React.SetStateAction<boolean>>;
+  showLink: boolean;
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const handleVideoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (selectedImage) {
       setSelectedImage(null);
     }
+    if (showLink) {
+      setShowLink(false);
+    }
+
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
@@ -36,7 +44,12 @@ export const VideoUpload = ({
 
   return (
     <div>
-      <Button variant={"link"} onClick={() => inputRef.current?.click()}>
+      <Button
+        variant={"link"}
+        onClick={() => {
+          inputRef.current?.click();
+        }}
+      >
         <VideoIcon className={"w-5 h-5 cursor-pointer dark:text-gray-50"} />
       </Button>
       <input
