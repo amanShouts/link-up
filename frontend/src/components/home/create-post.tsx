@@ -8,33 +8,40 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button.tsx";
-import { ImageIcon, Link2Icon, SendIcon, VideoIcon } from "lucide-react";
+import { CircleMinus, Link2Icon, SendIcon, VideoIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input.tsx";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { ImageUpload } from "@/components/home/image-upload.tsx";
 
 export const Createpost = ({ userId }: { userId: string }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
   async function postHandler() {
-    console.log(title, desc, userId);
+    const id = toast.loading("Uploading post....");
     try {
       await axios.post("http://localhost:3000/api/post/create", {
         title,
         desc,
         userId,
+        imageLink: selectedImage,
       });
-      toast.success("Post created successfully");
+      toast.success("Post created successfully", {
+        id,
+      });
+      setOpen(false);
     } catch (error) {
       console.log(error);
       toast.error("Error creating post");
     }
   }
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild={true}>
         <Button
           className={
@@ -44,15 +51,17 @@ export const Createpost = ({ userId }: { userId: string }) => {
         >
           <SendIcon
             className={
-              "mr-2 h-4 w-4 group-hover:rotate-45 transition-all duration-200 ease-linear"
+              " mr-2 h-4 w-4 group-hover:rotate-45 transition-all duration-200 ease-linear"
             }
           />{" "}
           Create Post
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className={"max-h-[500px] overflow-y-auto"}>
         <DialogHeader>
-          <DialogTitle>Create post</DialogTitle>
+          <DialogTitle className={"dark:text-neutral-200"}>
+            Create post
+          </DialogTitle>
           <DialogDescription className={"pt-4"}>
             <div className={"space-y-4"}>
               <Input
@@ -67,14 +76,28 @@ export const Createpost = ({ userId }: { userId: string }) => {
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
               />
+              {selectedImage && (
+                <div className={"relative"}>
+                  <Button
+                    onClick={() => setSelectedImage(null)}
+                    className={"absolute right-2 top-2 h-fit p-0"}
+                    variant={"link"}
+                  >
+                    <CircleMinus className={"w-5 h-4"} />
+                  </Button>
+                  <img
+                    alt={"Selected Image"}
+                    src={selectedImage}
+                    className="h-auto w-full rounded-lg object-cover border border-neutral-800"
+                  />
+                </div>
+              )}
             </div>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className={"sm:justify-between"}>
-          <div className={"float-left"}>
-            <Button variant={"link"}>
-              <ImageIcon className={" h-6 w-6"} />
-            </Button>
+          <div className={"float-left flex items-center"}>
+            <ImageUpload setSelectedImage={setSelectedImage} />
             <Button variant={"link"}>
               <Link2Icon className={" h-6 w-6"} />
             </Button>
