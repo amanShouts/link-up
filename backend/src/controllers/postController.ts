@@ -1,4 +1,10 @@
-import { createPost, getPosts, likePost, unlikePost } from "../model/post";
+import {
+  countViewPost,
+  createPost,
+  getPosts,
+  likePost,
+  unlikePost,
+} from "../model/post";
 import { Request, Response } from "express";
 import { imageUploader } from "../utiles/uploader";
 
@@ -84,5 +90,16 @@ export const createLinkPostController = async (req: Request, res: Response) => {
     return res.json({ message: "Post created" });
   } catch (error) {
     res.status(500).json({ error: "Error creating post" });
+  }
+};
+
+export const countViewPostController = async (req: Request, res: Response) => {
+  const { postId, userId } = req.body;
+  try {
+    const post = await countViewPost({ postId, userId });
+    console.log("getting views");
+    return res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: "Error counting view" });
   }
 };

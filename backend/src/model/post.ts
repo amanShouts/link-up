@@ -164,3 +164,47 @@ export const createPost = async ({
     throw new Error("Error creating post");
   }
 };
+
+// counting views on post
+export const countViewPost = async ({
+  postId,
+  userId,
+}: {
+  postId: string;
+  userId: string;
+}) => {
+  try {
+    // Checking if the user has already viewed the post
+    const existingView = await prisma.view.findFirst({
+      where: {
+        userId: parseInt(userId),
+        postId: parseInt(postId),
+      },
+    });
+
+    if (existingView) {
+      return;
+    }
+
+    await prisma.view.create({
+      data: {
+        userId: parseInt(userId),
+        postId: parseInt(postId),
+      },
+    });
+
+    await prisma.post.update({
+      where: { id: parseInt(postId) },
+      data: {
+        view: {
+          increment: 1,
+        },
+      },
+    });
+
+    return { message: "View counted" };
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error counting views");
+  }
+};
