@@ -13,10 +13,11 @@ import {
 } from "@/components/ui/dialog.tsx";
 import { Comments } from "@/components/home/comments.tsx";
 import { timeAgo } from "@/utils/timeAgo.ts";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils.ts";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { BACKEND_URL } from "@/config.ts";
 
 export type PostType = {
   id: number;
@@ -51,10 +52,42 @@ export type PostType = {
 export function Post({ post }: { post: PostType }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.like);
+  const postRef = useRef(null);
+
   useEffect(() => {
     setLiked(post.liked);
     setLikes(post.like);
   }, [post.liked, post.like]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      async (entries) => {
+        if (entries[0].isIntersecting) {
+          try {
+            await axios.post(`${BACKEND_URL}/api/post/view`, {
+              userId: post.user.id,
+              postId: post.id,
+            });
+          } catch (error) {
+            console.error("Error updating view count:", error);
+          }
+        }
+      },
+      {
+        threshold: 0.5, // Adjust the threshold as needed
+      },
+    );
+
+    if (postRef.current) {
+      observer.observe(postRef.current);
+    }
+
+    return () => {
+      if (postRef.current) {
+        observer.unobserve(postRef.current);
+      }
+    };
+  }, [post.id, post.user.id]);
 
   const likeHandler = async () => {
     if (!liked) {
@@ -86,12 +119,10 @@ export function Post({ post }: { post: PostType }) {
         console.error("Error liking post", error);
       }
     }
-
-    // else like
   };
 
   return (
-    <div>
+    <div ref={postRef}>
       <Card className="rounded-2xl  shadow-neutral-300 dark:border-neutral-700 dark:shadow-none shadow-[0px_0px_20px_1px] ">
         <div className="flex pl-4 mt-4 gap-4 justify-between">
           <div className={"flex gap-4 items-center"}>

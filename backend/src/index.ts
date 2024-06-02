@@ -12,6 +12,7 @@ import bodyParser from "body-parser";
 import mentorRoutes from "./routes/mentorRoutes";
 import { getUserProfile } from "./controllers/userController";
 import {
+  countViewRoute,
   createPostRoute,
   getAllPostRoute,
   likePostRoute,
@@ -57,6 +58,9 @@ app.use("/api/post", unlikePostRoute);
 
 // create a single post
 app.use("/api/post", createPostRoute);
+
+// counting views on a post
+app.use("/api/post", countViewRoute);
 
 // save-user
 app.use(saveUserRoute);
