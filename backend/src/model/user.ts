@@ -1,8 +1,5 @@
-import { PrismaClient, UserType } from "@prisma/client";
-import { Request } from "express";
-import { UpdateUserDataParams } from "../utiles/type";
-
-const prisma = new PrismaClient();
+import { Request, Response } from "express";
+import { prisma } from ".";
 
 export const getAllUsers = async () => {
   try {
@@ -29,19 +26,14 @@ export const saveUserModel = async (req: Request) => {
   }
 };
 
-export const updateUserData = async ({
-  userType,
-  username,
-  isMentor,
-  age,
-  bio,
-  city,
-  country,
-}: UpdateUserDataParams) => {
+export const updateUserData = async (req: Request) => {
   try {
+    const { type, username, isMentor, age, bio, city, country} = req.body;
+
+    console.log("req.body: ", req.body);
     const user = await prisma.user.update({
       where: { username },
-      data: { type: userType, isMentor, age, bio, city, country },
+      data: { type, isMentor, age, bio, city, country},
     });
     console.log("Updated User Data", user);
     return user;
@@ -50,3 +42,82 @@ export const updateUserData = async ({
     throw error;
   }
 };
+
+export const updateUserSkills = async (req: Request, res: Response) => {
+  const { type, userId } = req.body;
+
+  try {
+    const newSkill = await prisma.skill.create({
+      data: {
+        type,
+        userId,
+      },
+    });
+
+    return newSkill;
+  } catch (error) {
+    console.error("Error creating skill:", error);
+  }
+};
+
+export const updateUserIndustries = async (req: Request, res: Response) => {
+  const { type, userId } = req.body;
+
+  try {
+    const newSkill = await prisma.industry.create({
+      data: {
+        type,
+        userId: {
+          connect: { id: userId },
+        },
+      },
+    });
+  } catch (error) {
+    console.error("Error creating skill:", error);
+  }
+};
+
+
+
+export const getUser = async (id: string) => {
+  const user_id = parseInt(id);
+  try {
+    return await prisma.user.findUnique({
+      where: {
+        id: user_id,
+      },
+    });
+  } catch (error) {
+    throw new Error("Error fetching user");
+  }
+};
+
+export async function getUserDetailsByUsername(username: string) {
+  const result = await prisma.user.findFirst({
+    where: {
+      username: username,
+    },
+    select: {
+      id: true,
+      name: true,
+      currDesignation: true,
+      img: true,
+      bgImg: true,
+      city: true,
+      country: true,
+      bio: true,
+      desc: true,
+      experience: {
+        select: {
+          role: true,
+          companyName: true,
+          companyLogo: true,
+          desc: true,
+          startYear: true,
+          endYear: true,
+        },
+      },
+    },
+  });
+  return result;
+}

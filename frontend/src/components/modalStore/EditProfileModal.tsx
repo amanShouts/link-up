@@ -1,53 +1,39 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "../ui/button"
+import { useDispatch, useSelector } from "react-redux"
+import { closeModal } from "@/store/slice/modalSlice"
+import { RootState } from "@/store/store"
+import { Link } from "react-router-dom"
 
 export function EditProfile() {
+
+  const isOpen = useSelector((state: RootState) => state.modal.isOpen)
+  const dispatch = useDispatch();
+
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button variant="outline">Edit Profile</Button>
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+    <Dialog open={isOpen}>
+      <DialogContent className="text-white">
         <DialogHeader>
-          <DialogTitle>Edit profile</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
+          <DialogTitle>Profile is not complete.</DialogTitle>
+          <DialogDescription className="text-white">
+            To access all features please finish your profile. It will take just 5 minutes.
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label id="name" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="name"
-              defaultValue="Pedro Duarte"
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label id="username" className="text-right">
-              Username
-            </Label>
-            <Input
-              id="username"
-              defaultValue="@peduarte"
-              className="col-span-3"
-            />
-          </div>
-        </div>
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+          <Link to='/onboarding'>
+            <Button type="button" variant="secondary" onClick={() => {
+              setTimeout(() => {
+                dispatch(closeModal())
+              }, 200);
+            }}>
+              Go to Onboarding
+            </Button>
+          </Link>
+          <Button type="button" variant="secondary" onClick={() => {
+            dispatch(closeModal());
+          }}>
+            Close
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>

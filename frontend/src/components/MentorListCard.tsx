@@ -43,7 +43,7 @@ export default function MentorListCard({ data }: { data: MentorDataType }) {
             );
           })}
         </div>
-        <div className="flex flex-wrap gap-2">
+        {/* <div className="flex flex-wrap gap-2">
           <div className="font-bold">Mentors Of</div>
           {data.currMentor.map((company, index) => {
             return (
@@ -56,7 +56,7 @@ export default function MentorListCard({ data }: { data: MentorDataType }) {
               </Badge>
             );
           })}
-        </div>
+        </div> */}
         <div className="flex flex-wrap gap-2">
           <div className="font-bold">Skills :</div>
           {data.skills.map((skill, index) => {
