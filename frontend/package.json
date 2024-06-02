@@ -7,6 +7,7 @@
     "dev": "vite --host",
     "watch": "tsc -b -w",
     "build": "tsc && vite build",
+    "start": "npx serve -l 5173 dist",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint --max-warnings 0 --config .eslintrc . --fix",
     "preview": "vite preview",
@@ -56,6 +57,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
     "postcss": "^8.4.38",
+    "serve": "^14.2.3",
     "tailwindcss": "^3.4.3",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"

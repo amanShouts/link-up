@@ -14,7 +14,8 @@
     "prisma:docker": "npm run prisma:migrate && npm run studio",
     "prisma:migrate": "prisma migrate deploy",
     "db:seed": "npx prisma db seed",
-    "studio": "npx prisma studio"
+    "studio": "npx prisma studio",
+    "db:start": "npm run db:generate && npm run prisma:migrate && npm run build"
   },
   "prisma": {
     "seed": "ts-node src/seed.ts"
