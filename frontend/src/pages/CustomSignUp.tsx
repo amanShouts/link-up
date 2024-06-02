@@ -6,8 +6,8 @@ export default function CustomSignUp() {
     <div className="signup-container">
       <div className="sign-up-box">
         <SignUp />
-        <Link to={'/login'}>Login</Link>
+        <Link to={"/login"}>Login</Link>
       </div>
     </div>
-  )
+  );
 }

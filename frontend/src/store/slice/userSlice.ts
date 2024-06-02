@@ -19,12 +19,11 @@ interface UsersState {
 
 const initialState: UsersState = {
   users: [],
-  currentUser: {}
+  currentUser: {},
 };
 
-
 export const userSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState,
   reducers: {
     addUserDetails: (state, action) => {
@@ -39,10 +38,14 @@ export const userSlice = createSlice({
     removeCurrentUser: (state) => {
       state.currentUser = {};
     },
-  }
+  },
 });
 
-
-export const { addUserDetails, removeUserDetails, addCurrentUser, removeCurrentUser } = userSlice.actions;
+export const {
+  addUserDetails,
+  removeUserDetails,
+  addCurrentUser,
+  removeCurrentUser,
+} = userSlice.actions;
 
 export default userSlice.reducer;

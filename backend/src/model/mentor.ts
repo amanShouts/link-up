@@ -1,10 +1,10 @@
-import { prisma } from ".";
+import { prisma } from '.';
 
 export async function getAllMentors() {
   try {
     const result = await prisma.user.findMany({
       where: {
-        isMentor: true
+        isMentor: true,
       },
       select: {
         id: true,
@@ -14,21 +14,21 @@ export async function getAllMentors() {
         img: true,
         industry: {
           select: {
-            type: true
-          }
+            type: true,
+          },
         },
         skill: {
           select: {
-            type: true
-          }
+            type: true,
+          },
         },
         mentor: {
           select: {
-            company: true
-          }
-        }
-      }
-    })
+            company: true,
+          },
+        },
+      },
+    });
     return result;
   } catch (error) {
     throw new Error('Error fetching mentors');
@@ -38,7 +38,7 @@ export async function getAllMentors() {
 export async function getMentor(id: number) {
   const result = await prisma.user.findFirst({
     where: {
-      id: id
+      id: id,
     },
     select: {
       id: true,
@@ -57,11 +57,10 @@ export async function getMentor(id: number) {
           companyLogo: true,
           desc: true,
           startYear: true,
-          endYear: true
-        }
-      }
-
-    }
-  })
+          endYear: true,
+        },
+      },
+    },
+  });
   return result;
 }
