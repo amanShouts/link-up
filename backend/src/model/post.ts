@@ -1,4 +1,5 @@
 import { prisma } from "./index";
+import { PostType } from "@prisma/client";
 
 export const getPosts = async (userId: string) => {
   try {
@@ -90,5 +91,48 @@ export const unlikePost = async ({
   } catch (error) {
     console.log(error);
     throw new Error("Error unliking post");
+  }
+};
+
+// creating a post
+export const createPost = async ({
+  userId,
+  title,
+  desc,
+  imageLink,
+  videoLink,
+  resourceLink,
+}: {
+  userId: string;
+  title: string;
+  desc: string;
+  imageLink?: string;
+  videoLink?: string;
+  resourceLink?: string;
+}) => {
+  try {
+    let type;
+    if (imageLink) {
+      type = PostType.IMAGE;
+    } else if (videoLink) {
+      type = PostType.VIDEO;
+    } else if (resourceLink) {
+      type = PostType.LINK;
+    } else {
+      type = PostType.TEXT;
+    }
+
+    const post = await prisma.post.create({
+      data: {
+        title,
+        desc,
+        userId: parseInt(userId),
+        type,
+      },
+    });
+    return post;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error creating post");
   }
 };

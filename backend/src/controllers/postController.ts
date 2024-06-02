@@ -1,4 +1,4 @@
-import { getPosts, likePost, unlikePost } from "../model/post";
+import { createPost, getPosts, likePost, unlikePost } from "../model/post";
 import { Request, Response } from "express";
 
 export const getPostsController = async (req: Request, res: Response) => {
@@ -28,5 +28,23 @@ export const unlikePostController = async (req: Request, res: Response) => {
     return res.json(post);
   } catch (error) {
     res.status(500).json({ error: "Error unliking post" });
+  }
+};
+
+export const createPostController = async (req: Request, res: Response) => {
+  const { title, desc, userId, imageLink, videoLink, resourceLink } = req.body;
+  try {
+    // Create post
+    await createPost({
+      userId,
+      title,
+      desc,
+      imageLink,
+      videoLink,
+      resourceLink,
+    });
+    return res.json({ message: "Post created" });
+  } catch (error) {
+    res.status(500).json({ error: "Error creating post" });
   }
 };

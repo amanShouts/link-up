@@ -12,6 +12,7 @@ const cors = require("cors");
 import mentorRoutes from "./routes/mentorRoutes";
 import { getUserProfile } from "./controllers/userController";
 import {
+  createPostRoute,
   getAllPostRoute,
   likePostRoute,
   unlikePostRoute,
@@ -49,6 +50,9 @@ app.use("/api/post", likePostRoute);
 
 // unlike a single post
 app.use("/api/post", unlikePostRoute);
+
+// create a single post
+app.use("/api/post", createPostRoute);
 
 // save-user
 app.use(saveUserRoute);

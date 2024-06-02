@@ -3,11 +3,12 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar.tsx";
-import { CalendarIcon, EditIcon, LocateIcon, SendIcon } from "lucide-react";
+import { CalendarIcon, EditIcon, LocateIcon } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import useSWR from "swr";
 import { getSingleUserDetail } from "@/lib/fetchers/getSingleUserDetail.ts";
 import { Skeleton } from "@/components/ui/skeleton";
+import { Createpost } from "@/components/home/create-post.tsx";
 
 export function Profile() {
   const { data, error, isLoading } = useSWR(
@@ -96,19 +97,8 @@ export function Profile() {
             <p className="text-sm text-center text-neutral-500 dark:text-neutral-300">
               {data?.desc}
             </p>
-            <Button
-              className={
-                "w-full group border border-neutral-400 dark:bg-black dark:border-neutral-700"
-              }
-              variant={"secondary"}
-            >
-              <SendIcon
-                className={
-                  "mr-2 h-4 w-4 group-hover:rotate-45 transition-all duration-200 ease-linear"
-                }
-              />{" "}
-              Create Post
-            </Button>
+            {data.username && <Createpost userId={data.id} />}
+
             <Button className={"w-full"}>
               <EditIcon className={"mr-2 h-4 w-4"} />
               Edit Profile
