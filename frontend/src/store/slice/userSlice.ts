@@ -9,6 +9,7 @@ export interface User {
   username: string;
   name: string;
   country: string;
+  bio: string;
 }
 
 interface UsersState {
@@ -26,17 +27,17 @@ export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    addUserDetails: ( state, action ) => {
+    addUserDetails: (state, action) => {
       state.users = action.payload;
     },
-    removeUserDetails: ( state ) => {
-      state.users  = [];
+    removeUserDetails: (state) => {
+      state.users = [];
     },
-    addCurrentUser: ( state, action ) => {
+    addCurrentUser: (state, action) => {
       state.currentUser = action.payload;
     },
-    removeCurrentUser: ( state ) => {
-      state.currentUser  = {};
+    removeCurrentUser: (state) => {
+      state.currentUser = {};
     },
   }
 });
