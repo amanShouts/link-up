@@ -202,9 +202,9 @@ export const countViewPost = async ({
       },
     });
 
-    return { message: "View counted" };
+    return { message: 'View counted' };
   } catch (error) {
     console.log(error);
-    throw new Error("Error counting views");
+    throw new Error('Error counting views');
   }
 };

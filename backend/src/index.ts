@@ -25,8 +25,8 @@ dotenv.config();
 const PORT = process.env.PORT;
 const app = express();
 
-app.use(bodyParser.json({ limit: "150mb" }));
-app.use(bodyParser.urlencoded({ limit: "150mb", extended: true }));
+app.use(bodyParser.json({ limit: '150mb' }));
+app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
 app.use(express.json());
 
 app.use(cors());
@@ -57,10 +57,10 @@ app.use('/api/post', likePostRoute);
 app.use('/api/post', unlikePostRoute);
 
 // create a single post
-app.use("/api/post", createPostRoute);
+app.use('/api/post', createPostRoute);
 
 // counting views on a post
-app.use("/api/post", countViewRoute);
+app.use('/api/post', countViewRoute);
 
 // save-user
 app.use(saveUserRoute);

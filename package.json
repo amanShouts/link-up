@@ -1,4 +1,5 @@
 {
+  "name": "link-up",
   "scripts": {
     "format:fix": "cd backend && npm run format:fix && cd ./../frontend && npm run format:fix && cd ./../",
     "prepare": "husky"

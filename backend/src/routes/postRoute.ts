@@ -18,5 +18,5 @@ getAllPostRoute.get('/:userId', getPostsController);
 likePostRoute.post('/like', likePostController);
 unlikePostRoute.post('/unlike', unlikePostController);
 createPostRoute.post('/create', createPostController);
-createPostRoute.post("/create/link", createLinkPostController);
-countViewRoute.post("/view", countViewPostController);
+createPostRoute.post('/create/link', createLinkPostController);
+countViewRoute.post('/view', countViewPostController);

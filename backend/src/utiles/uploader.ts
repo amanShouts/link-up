@@ -7,9 +7,9 @@ export async function imageUploader({
 }: {
   fileStr: string;
   user_id: string;
-  resource_type: "image" | "video" | "raw" | "auto" | undefined;
+  resource_type: 'image' | 'video' | 'raw' | 'auto' | undefined;
 }) {
-  console.log("uploading");
+  console.log('uploading');
   // Configuration
   cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -20,7 +20,7 @@ export async function imageUploader({
   // Upload an image
   const uploadResult = await cloudinary.uploader
     .upload(fileStr, {
-      public_id: "posts" + user_id,
+      public_id: 'posts' + user_id,
       resource_type: resource_type,
     })
     .catch((error) => {
