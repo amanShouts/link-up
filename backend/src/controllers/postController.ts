@@ -1,5 +1,6 @@
 import {
   countViewPost,
+  createComment,
   createPost,
   getPosts,
   likePost,
@@ -101,5 +102,15 @@ export const countViewPostController = async (req: Request, res: Response) => {
     return res.json(post);
   } catch (error) {
     res.status(500).json({ error: 'Error counting view' });
+  }
+};
+
+export const createCommentController = async (req: Request, res: Response) => {
+  const { postId, userId, commentContent } = req.body;
+  try {
+    const post = await createComment({ postId, userId, commentContent });
+    return res.json(post);
+  } catch (error) {
+    res.status(500).json({ error: 'Error commenting' });
   }
 };

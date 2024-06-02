@@ -128,11 +128,12 @@ model UserLiked {
 }
 
 model Comment {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  postId    Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  postId         Int
+  commentContent String    @default("")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
 
   user User @relation(fields: [userId], references: [id])
   post Post @relation(fields: [postId], references: [id])

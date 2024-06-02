@@ -45,7 +45,8 @@ export type PostType = {
       img: string;
       username: string;
     };
-    comment: string;
+    createdAt: Date;
+    commentContent: string;
   }[];
 };
 
@@ -217,7 +218,11 @@ export function Post({ post }: { post: PostType }) {
                   <DialogContent
                     className={"border-none bg-transparent max-w-[600px]"}
                   >
-                    <Comments />
+                    <Comments
+                      comments={post.comments}
+                      userId={post.user.id}
+                      postId={post.id}
+                    />
                   </DialogContent>
                 </Dialog>
                 <Button size="icon" variant="ghost" className={"flex gap-1"}>
