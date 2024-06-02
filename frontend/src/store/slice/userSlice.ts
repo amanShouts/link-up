@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 export interface User {
   type: null;
@@ -23,7 +23,7 @@ const initialState: UsersState = {
 };
 
 export const userSlice = createSlice({
-  name: 'users',
+  name: "users",
   initialState,
   reducers: {
     addUserDetails: (state, action) => {

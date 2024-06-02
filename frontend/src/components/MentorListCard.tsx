@@ -1,8 +1,8 @@
-import { AvatarImage, AvatarFallback, Avatar } from '@/components/ui/avatar';
-import { CardHeader, CardContent, Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Link } from 'react-router-dom';
-import { Button } from './ui/button';
+import { AvatarImage, AvatarFallback, Avatar } from "@/components/ui/avatar";
+import { CardHeader, CardContent, Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Link } from "react-router-dom";
+import { Button } from "./ui/button";
 
 export default function MentorListCard({ data }: { data: MentorDataType }) {
   return (

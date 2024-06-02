@@ -1,25 +1,25 @@
-import { useUser } from '@clerk/clerk-react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
-import CustomSignIn from './pages/CustomSignIn';
-import Home from './pages/Home';
-import CustomSignUp from './pages/CustomSignUp';
-import Landing from './pages/Landing';
-import Onboarding from './pages/Onboarding';
-import { useEffect } from 'react';
-import { Loader2 } from 'lucide-react';
-import MentorList from './pages/MentorList';
-import MentorProfile from './pages/MentorProfile';
-import Navbar from './components/Navbar/Navbar';
-import { modalDetails, openModal } from './store/slice/modalSlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { addCurrentUser, addUserDetails } from './store/slice/userSlice';
-import { BACKEND_URL } from './config';
-import { RootState } from './store/store';
-import axios from 'axios';
-import EditProfile from './pages/EditProfile';
-import DetailsModal from './components/modalStore/DetailsModal';
-import Profile from './pages/Profile';
-import { Toaster } from 'react-hot-toast';
+import { useUser } from "@clerk/clerk-react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import CustomSignIn from "./pages/CustomSignIn";
+import Home from "./pages/Home";
+import CustomSignUp from "./pages/CustomSignUp";
+import Landing from "./pages/Landing";
+import Onboarding from "./pages/Onboarding";
+import { useEffect } from "react";
+import { Loader2 } from "lucide-react";
+import MentorList from "./pages/MentorList";
+import MentorProfile from "./pages/MentorProfile";
+import Navbar from "./components/Navbar/Navbar";
+import { modalDetails, openModal } from "./store/slice/modalSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addCurrentUser, addUserDetails } from "./store/slice/userSlice";
+import { BACKEND_URL } from "./config";
+import { RootState } from "./store/store";
+import axios from "axios";
+import EditProfile from "./pages/EditProfile";
+import DetailsModal from "./components/modalStore/DetailsModal";
+import Profile from "./pages/Profile";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -35,20 +35,20 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ['/', '/signup', '/login'];
+    const publicRoutes = ["/", "/signup", "/login"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
-      navigate('/login');
+      navigate("/login");
     }
     if (isSignedIn && user) {
-      console.log('user: ', user);
+      console.log("user: ", user);
 
       const currentUser = storedUsers.find(
         (el) => el.username === user.username,
       );
 
       dispatch(addCurrentUser(currentUser));
-      console.log('currentUser: ', currentUser);
+      console.log("currentUser: ", currentUser);
 
       if (
         currentUser &&
@@ -56,23 +56,23 @@ export default function App() {
           currentUser?.city === null ||
           currentUser?.type == null)
       ) {
-        console.log('here');
-        toggleModal('edit-profile-modal');
+        console.log("here");
+        toggleModal("edit-profile-modal");
       }
     } else {
-      console.log('user not signied in');
+      console.log("user not signied in");
     }
   }, [isLoaded, isSignedIn, navigate, window.location]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(BACKEND_URL + '/users');
+        const response = await fetch(BACKEND_URL + "/users");
         const responseData = await response.json();
 
         dispatch(addUserDetails(responseData));
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -86,7 +86,7 @@ export default function App() {
 
     if (user && user.username && !usernameArray.includes(user.username)) {
       axios
-        .post(BACKEND_URL + '/save-user', {
+        .post(BACKEND_URL + "/save-user", {
           username: user?.username,
           name: user.firstName,
           img: user.imageUrl,
@@ -101,15 +101,15 @@ export default function App() {
     }
   }, [storedUsers, user]);
 
-  if (!isLoaded && window.location.pathname !== '/home') {
+  if (!isLoaded && window.location.pathname !== "/home") {
     return (
       <div
         className={
-          'w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center'
+          "w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center"
         }
       >
         <Loader2
-          className={'animate-spin text-black dark:text-neutral-200 w-20 h-20'}
+          className={"animate-spin text-black dark:text-neutral-200 w-20 h-20"}
         />
       </div>
     );

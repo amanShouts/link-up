@@ -1,6 +1,6 @@
-import { AvatarImage, Avatar } from '@/components/ui/avatar';
-import { Card } from '@/components/ui/card';
-import { Button } from './ui/button';
+import { AvatarImage, Avatar } from "@/components/ui/avatar";
+import { Card } from "@/components/ui/card";
+import { Button } from "./ui/button";
 
 export default function MentorProfileCard({
   data,
@@ -19,8 +19,8 @@ export default function MentorProfileCard({
           height="200"
           src={data.bgImg}
           style={{
-            aspectRatio: '1063/200',
-            objectFit: 'cover',
+            aspectRatio: "1063/200",
+            objectFit: "cover",
           }}
           width="1063"
         />

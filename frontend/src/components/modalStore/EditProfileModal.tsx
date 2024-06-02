@@ -5,12 +5,12 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '../ui/button';
-import { useDispatch, useSelector } from 'react-redux';
-import { closeModal } from '@/store/slice/modalSlice';
-import { RootState } from '@/store/store';
-import { Link } from 'react-router-dom';
+} from "@/components/ui/dialog";
+import { Button } from "../ui/button";
+import { useDispatch, useSelector } from "react-redux";
+import { closeModal } from "@/store/slice/modalSlice";
+import { RootState } from "@/store/store";
+import { Link } from "react-router-dom";
 
 export function EditProfile() {
   const isOpen = useSelector((state: RootState) => state.modal.isOpen);

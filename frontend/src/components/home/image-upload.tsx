@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { ImageIcon } from 'lucide-react';
-import { Button } from '@/components/ui/button.tsx';
-import toast from 'react-hot-toast';
+import React, { useRef } from "react";
+import { ImageIcon } from "lucide-react";
+import { Button } from "@/components/ui/button.tsx";
+import toast from "react-hot-toast";
 
 export const ImageUpload = ({
   setSelectedImage,
@@ -14,7 +14,7 @@ export const ImageUpload = ({
       const file = event.target.files[0];
 
       if (file.size > 5 * 1024 * 1024) {
-        toast.error('File size exceeds limit of 5 MB');
+        toast.error("File size exceeds limit of 5 MB");
         setSelectedImage(null);
         return;
       }
@@ -29,15 +29,15 @@ export const ImageUpload = ({
 
   return (
     <div>
-      <Button variant={'link'} onClick={() => inputRef.current?.click()}>
-        <ImageIcon className={'w-5 h-5 cursor-pointer dark:text-gray-50'} />
+      <Button variant={"link"} onClick={() => inputRef.current?.click()}>
+        <ImageIcon className={"w-5 h-5 cursor-pointer dark:text-gray-50"} />
       </Button>
       <input
         ref={inputRef}
         type="file"
         id="file-input"
         accept="image/*"
-        className={'hidden'}
+        className={"hidden"}
         onChange={handleImageChange}
       />
     </div>

@@ -1,6 +1,6 @@
-import { Profile } from '@/components/home/profile.tsx';
-import { Posts } from '@/components/home/posts.tsx';
-import { Recommendation } from '@/components/home/recommendations.tsx';
+import { Profile } from "@/components/home/profile.tsx";
+import { Posts } from "@/components/home/posts.tsx";
+import { Recommendation } from "@/components/home/recommendations.tsx";
 
 export default function HomePage() {
   return (

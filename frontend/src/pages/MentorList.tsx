@@ -1,7 +1,7 @@
-import MentorListCard, { MentorDataType } from '@/components/MentorListCard';
-import { BACKEND_URL } from '@/config';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import MentorListCard, { MentorDataType } from "@/components/MentorListCard";
+import { BACKEND_URL } from "@/config";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function MentorList() {
   const [mentors, setMentors] = useState<MentorDataType[] | null>(null);
