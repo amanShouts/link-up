@@ -13,6 +13,7 @@ import mentorRoutes from './routes/mentorRoutes';
 import { getUserProfile } from './controllers/userController';
 import {
   countViewRoute,
+  createCommentRoute,
   createPostRoute,
   getAllPostRoute,
   likePostRoute,
@@ -61,6 +62,9 @@ app.use('/api/post', createPostRoute);
 
 // counting views on a post
 app.use('/api/post', countViewRoute);
+
+// create a comment
+app.use('/api/comment', createCommentRoute);
 
 // save-user
 app.use(saveUserRoute);

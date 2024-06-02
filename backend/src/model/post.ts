@@ -18,7 +18,17 @@ export const getPosts = async (userId: string) => {
         },
         likedBy: true,
         label: true,
-        comments: true,
+        comments: {
+          include: {
+            user: {
+              select: {
+                name: true,
+                img: true,
+                username: true,
+              },
+            },
+          },
+        },
       },
     });
     // check if user liked the post
@@ -26,6 +36,8 @@ export const getPosts = async (userId: string) => {
       ...post,
       liked: post.likedBy.some((user) => user.userId === parseInt(userId)),
     }));
+
+    console.log(postsWithLiked[0].comments);
 
     return postsWithLiked;
   } catch (error) {
@@ -206,5 +218,40 @@ export const countViewPost = async ({
   } catch (error) {
     console.log(error);
     throw new Error('Error counting views');
+  }
+};
+
+export const createComment = async ({
+  postId,
+  userId,
+  commentContent,
+}: {
+  postId: string;
+  userId: string;
+  commentContent: string;
+}) => {
+  try {
+    // increase comment count
+    await prisma.post.update({
+      where: { id: parseInt(postId) },
+      data: {
+        comment: {
+          increment: 1,
+        },
+      },
+    });
+
+    const comment = await prisma.comment.create({
+      data: {
+        userId: parseInt(userId),
+        postId: parseInt(postId),
+        commentContent,
+      },
+    });
+
+    return comment;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error commenting');
   }
 };

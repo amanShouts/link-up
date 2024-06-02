@@ -40,22 +40,25 @@ export const Createpost = ({ userId }: { userId: string }) => {
           userId,
           imageLink: selectedImage,
         });
-      }
-      if (selectedVideo) {
+      } else if (selectedVideo) {
         await axios.post("http://localhost:3000/api/post/create", {
           title,
           desc,
           userId,
           videoLink: selectedVideo,
         });
-      }
-
-      if (showLink) {
+      } else if (showLink) {
         await axios.post("http://localhost:3000/api/post/create/link", {
           title,
           desc,
           userId,
           link: link,
+        });
+      } else {
+        await axios.post("http://localhost:3000/api/post/create/link", {
+          title,
+          desc,
+          userId,
         });
       }
 
