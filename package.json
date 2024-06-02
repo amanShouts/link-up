@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "format:fix": "cd backend && npm run format:fix && cd ./../frontend && npm run format:fix && cd ./../",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "prettier": "^3.3.0"
+  },
+  "devDependencies": {
+    "husky": "^9.0.11"
+  }
+}

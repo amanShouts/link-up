@@ -1,7 +1,9 @@
 postgres-data
+node_modules
 bun.lockb
 .env
 .idea/
 *.cpp
 .cph
 .vscode
+dist
