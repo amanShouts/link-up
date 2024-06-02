@@ -35,7 +35,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ["/", "/signup", "/login"];
+    const publicRoutes = ["/", "/signup", "/home"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -129,7 +129,7 @@ export default function App() {
           path="/onboarding"
           element={isSignedIn ? <Onboarding /> : null}
         />
-        <Route path="/home" element={isSignedIn ? <Home /> : null} />
+        <Route path="/home" element={isSignedIn ? <Home /> : <Home />} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route
           path="/edit-profile"
