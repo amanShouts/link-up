@@ -8,7 +8,9 @@
     "watch": "tsc -b -w",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "format:fix": "prettier --write \"**/*.{ts,tsx,json}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,json}\""
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.1",
@@ -30,6 +32,7 @@
     "date-fns": "^3.6.0",
     "lucide-react": "^0.379.0",
     "mui": "^0.0.1",
+    "prettier": "^3.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",

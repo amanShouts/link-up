@@ -1,4 +1,4 @@
-import { Card, CardContent, CardDescription, CardTitle } from "./ui/card";
+import { Card, CardContent, CardDescription, CardTitle } from './ui/card';
 
 export default function AboutCard({ data }: { data?: AboutDataType }) {
   if (!data) {

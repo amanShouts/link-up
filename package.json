@@ -1,7 +1,8 @@
 {
   "scripts": {
     "format:fix": "prettier --write \"**/*.{ts,tsx,json}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,json}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,json}\"",
+    "prepare": "husky"
   },
   "dependencies": {
     "prettier": "^3.3.0"

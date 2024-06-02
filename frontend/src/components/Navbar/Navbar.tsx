@@ -1,6 +1,6 @@
-import { UserButton, useUser } from "@clerk/clerk-react";
-import { Link } from "react-router-dom";
-import { ModeButton } from "@/components/mode-button.tsx";
+import { UserButton, useUser } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
+import { ModeButton } from '@/components/mode-button.tsx';
 
 export default function Navbar() {
   const { isSignedIn } = useUser();
@@ -8,30 +8,30 @@ export default function Navbar() {
   return (
     <div
       className={
-        "border-b flex justify-between dark:text-white pl-6 dark:border-neutral-800 px-2 py-2 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur"
+        'border-b flex justify-between dark:text-white pl-6 dark:border-neutral-800 px-2 py-2 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur'
       }
     >
-      <Link to={"/"}>
-        <h1 className={"font-semibold"}>Link-up.</h1>
+      <Link to={'/'}>
+        <h1 className={'font-semibold'}>Link-up.</h1>
       </Link>
 
-      <div className={"flex gap-8 items-center text-sm"}>
-        <Link to={"/"}>Resources</Link>
-        <Link to={"/mentors"}>Mentors</Link>
-        <Link to={"/"}>Investors</Link>
-        <Link to={"/"}>Entrepreneur</Link>
+      <div className={'flex gap-8 items-center text-sm'}>
+        <Link to={'/'}>Resources</Link>
+        <Link to={'/mentors'}>Mentors</Link>
+        <Link to={'/'}>Investors</Link>
+        <Link to={'/'}>Entrepreneur</Link>
         <ModeButton />
-        
+
         {isSignedIn ? (
-          <UserButton/>
+          <UserButton />
         ) : (
           <>
-            <Link to={"/login"}>Login</Link>
+            <Link to={'/login'}>Login</Link>
             <Link
               className={
-                "bg-primary dark:text-black text-neutral-200 px-4 py-2 rounded-lg mr-8 my-3"
+                'bg-primary dark:text-black text-neutral-200 px-4 py-2 rounded-lg mr-8 my-3'
               }
-              to={"/signup"}
+              to={'/signup'}
             >
               Signup
             </Link>

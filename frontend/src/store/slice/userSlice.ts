@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface User {
   type: null;
@@ -19,9 +19,8 @@ interface UsersState {
 
 const initialState: UsersState = {
   users: [],
-  currentUser: {}
+  currentUser: {},
 };
-
 
 export const userSlice = createSlice({
   name: 'users',
@@ -39,10 +38,14 @@ export const userSlice = createSlice({
     removeCurrentUser: (state) => {
       state.currentUser = {};
     },
-  }
+  },
 });
 
-
-export const { addUserDetails, removeUserDetails, addCurrentUser, removeCurrentUser } = userSlice.actions;
+export const {
+  addUserDetails,
+  removeUserDetails,
+  addCurrentUser,
+  removeCurrentUser,
+} = userSlice.actions;
 
 export default userSlice.reducer;
