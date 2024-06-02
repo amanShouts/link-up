@@ -1,7 +1,7 @@
 export interface UpdateUserDataParams {
   id: number;
   username: string;
-  userType: UserType;
+  userType: string;
   isMentor: boolean;
   age: number;
   bio: string;
