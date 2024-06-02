@@ -131,7 +131,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
         about: result.desc || '',
       },
       workExperienceData: {
-        company: result.experience.map((experience) => {
+        company: result.experience.map((experience: any) => {
           const company = {
             companyName: experience.companyName,
             companyLogo: experience.companyLogo || '',
