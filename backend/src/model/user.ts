@@ -43,42 +43,6 @@ export const updateUserData = async (req: Request) => {
   }
 };
 
-export const updateUserSkills = async (req: Request, res: Response) => {
-  const { type, userId } = req.body;
-
-  try {
-    const newSkill = await prisma.skill.create({
-      data: {
-        type,
-        userId,
-      },
-    });
-
-    return newSkill;
-  } catch (error) {
-    console.error("Error creating skill:", error);
-  }
-};
-
-export const updateUserIndustries = async (req: Request, res: Response) => {
-  const { type, userId } = req.body;
-
-  try {
-    const newSkill = await prisma.industry.create({
-      data: {
-        type,
-        userId: {
-          connect: { id: userId },
-        },
-      },
-    });
-  } catch (error) {
-    console.error("Error creating skill:", error);
-  }
-};
-
-
-
 export const getUser = async (id: string) => {
   const user_id = parseInt(id);
   try {

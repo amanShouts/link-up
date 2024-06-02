@@ -2,13 +2,7 @@ import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "@/components/ui/select";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import { Switch } from "@/components/ui/switch";
 import { Progress } from "@/components/ui/progress";
 import axios from "axios";
@@ -229,7 +223,7 @@ export default function Onboarding() {
   return (
     <div>
       {isSignedIn ? (
-        <div className="w-full h-screen flex flex-col items-center justify-center gap-2">
+        <div className="w-full min-h-screen flex py-20 flex-col items-center justify-center gap-2">
           <div>Welcome {user?.fullName}!</div>
           <div className="w-full flex flex-col items-center gap-4 justify-center">
             <div>{steps[question].title}</div>
