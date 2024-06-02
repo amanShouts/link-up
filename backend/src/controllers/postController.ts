@@ -1,6 +1,6 @@
 import { createPost, getPosts, likePost, unlikePost } from "../model/post";
 import { Request, Response } from "express";
-import { imageUploader } from "../utiles/uploadImage";
+import { imageUploader } from "../utiles/uploader";
 
 export const getPostsController = async (req: Request, res: Response) => {
   const userId = req.params.userId;
@@ -40,6 +40,7 @@ export const createPostController = async (req: Request, res: Response) => {
       const image_url = await imageUploader({
         fileStr: imageLink,
         user_id: userId,
+        resource_type: "image",
       });
       // Create post
       await createPost({
@@ -47,6 +48,21 @@ export const createPostController = async (req: Request, res: Response) => {
         title,
         desc,
         imageLink: image_url,
+      });
+    }
+
+    if (videoLink) {
+      const video_url = await imageUploader({
+        fileStr: videoLink,
+        user_id: userId,
+        resource_type: "video",
+      });
+      // Create post
+      await createPost({
+        userId,
+        title,
+        desc,
+        videoLink: video_url,
       });
     }
 

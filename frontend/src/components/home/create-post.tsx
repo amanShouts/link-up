@@ -8,29 +8,42 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button.tsx";
-import { CircleMinus, Link2Icon, SendIcon, VideoIcon } from "lucide-react";
+import { CircleMinus, Link2Icon, SendIcon } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input.tsx";
 import { useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { ImageUpload } from "@/components/home/image-upload.tsx";
+import { VideoUpload } from "@/components/home/video-uplaod.tsx";
 
 export const Createpost = ({ userId }: { userId: string }) => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   async function postHandler() {
     const id = toast.loading("Uploading post....");
     try {
-      await axios.post("http://localhost:3000/api/post/create", {
-        title,
-        desc,
-        userId,
-        imageLink: selectedImage,
-      });
+      if (selectedImage) {
+        await axios.post("http://localhost:3000/api/post/create", {
+          title,
+          desc,
+          userId,
+          imageLink: selectedImage,
+        });
+      }
+      if (selectedVideo) {
+        await axios.post("http://localhost:3000/api/post/create", {
+          title,
+          desc,
+          userId,
+          videoLink: selectedVideo,
+        });
+      }
+
       toast.success("Post created successfully", {
         id,
       });
@@ -92,17 +105,40 @@ export const Createpost = ({ userId }: { userId: string }) => {
                   />
                 </div>
               )}
+
+              {selectedVideo && (
+                <div className={"relative"}>
+                  <Button
+                    onClick={() => setSelectedVideo(null)}
+                    className={"absolute right-2 top-2 h-fit p-0"}
+                    variant={"link"}
+                  >
+                    <CircleMinus className={"w-5 h-4"} />
+                  </Button>
+                  <video
+                    src={selectedVideo}
+                    controls
+                    className="h-auto w-full rounded-lg object-cover border border-neutral-800"
+                  />
+                </div>
+              )}
             </div>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className={"sm:justify-between"}>
           <div className={"float-left flex items-center"}>
-            <ImageUpload setSelectedImage={setSelectedImage} />
+            <ImageUpload
+              setSelectedImage={setSelectedImage}
+              setSelectedVideo={setSelectedVideo}
+              selectedVideo={selectedVideo}
+            />
+            <VideoUpload
+              setSelectedVideo={setSelectedVideo}
+              selectedImage={selectedImage}
+              setSelectedImage={setSelectedImage}
+            />
             <Button variant={"link"}>
               <Link2Icon className={" h-6 w-6"} />
-            </Button>
-            <Button variant={"link"}>
-              <VideoIcon className={" h-6 w-6"} />
             </Button>
           </div>
 

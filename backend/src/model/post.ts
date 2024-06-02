@@ -127,6 +127,7 @@ export const createPost = async ({
         desc,
         userId: parseInt(userId),
         img: imageLink,
+        video: videoLink,
         type,
       },
     });
