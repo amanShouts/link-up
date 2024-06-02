@@ -4,7 +4,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar.tsx";
-import { HeartIcon, MessageCircleIcon, ViewIcon } from "lucide-react";
+import { HeartIcon, LinkIcon, MessageCircleIcon, ViewIcon } from "lucide-react";
 import { Button } from "@/components/ui/button.tsx";
 import {
   Dialog,
@@ -16,6 +16,7 @@ import { timeAgo } from "@/utils/timeAgo.ts";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils.ts";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 export type PostType = {
   id: number;
@@ -134,6 +135,15 @@ export function Post({ post }: { post: PostType }) {
               src={post.video}
               controls
             />
+          )}
+
+          {post.link && (
+            <Card className={"p-4 border-neutral-700 flex items-center gap-3"}>
+              <LinkIcon className={"h-5 w-5"} />
+              <Link className={"hover:underline"} to={post.link}>
+                {post.link}
+              </Link>
+            </Card>
           )}
 
           {/*<div*/}
