@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   getSingleUserController,
+  getUserIdController,
   getUserProfile,
   getUsers,
   saveUserController,
@@ -16,6 +17,7 @@ export const getSingleUser = Router();
 export const getUserDetailsByUsername = Router();
 export const updateUserSkillsRoute = Router();
 export const updateUserIndustriesRoute = Router();
+export const getUserId = Router();
 
 getAllUsersRoute.get('/users', getUsers);
 saveUserRoute.post('/save-user', saveUserController);
@@ -23,3 +25,4 @@ onboardingRoute.put('/edit-user', userOnboarding);
 updateUserSkillsRoute.post('/skills', updateUserSkillsController);
 updateUserIndustriesRoute.put('/industries', updateUserIndustriesController);
 getSingleUser.get('/:id', getSingleUserController);
+getUserId.get('/', getUserIdController);

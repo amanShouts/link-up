@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import {
   getAllUsersRoute,
   getSingleUser,
+  getUserId,
   onboardingRoute,
   saveUserRoute,
   updateUserIndustriesRoute,
@@ -65,6 +66,9 @@ app.use('/api/post', countViewRoute);
 
 // create a comment
 app.use('/api/comment', createCommentRoute);
+
+// getting user id from username
+app.use('/api/username/:username', getUserId);
 
 // save-user
 app.use(saveUserRoute);

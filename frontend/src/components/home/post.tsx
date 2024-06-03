@@ -50,7 +50,19 @@ export type PostType = {
   }[];
 };
 
-export function Post({ post, userId }: { post: PostType; userId: number }) {
+export function Post({
+  post,
+  userId,
+  name,
+  img,
+  username,
+}: {
+  post: PostType;
+  userId: number;
+  name: string;
+  img: string;
+  username: string;
+}) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.like);
   const postRef = useRef(null);
@@ -216,6 +228,9 @@ export function Post({ post, userId }: { post: PostType; userId: number }) {
                       comments={post.comments}
                       userId={userId}
                       postId={post.id}
+                      name={name}
+                      username={username}
+                      img={img}
                     />
                   </DialogContent>
                 </Dialog>
