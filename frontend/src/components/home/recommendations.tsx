@@ -1,7 +1,7 @@
 import { User2Icon } from "lucide-react";
 import { RecommendationCard } from "@/components/home/recommendation-card.tsx";
 import useSWR from "swr";
-import { BACKEND_URL } from "@/config.ts";
+import { GETTING_MENTOR_LIST } from "@/config.ts";
 import axios from "axios";
 import { Skeleton } from "@/components/ui/skeleton.tsx";
 import { Button } from "@/components/ui/button.tsx";
@@ -10,7 +10,7 @@ import { MentorDataType } from "@/components/MentorListCard";
 
 export function Recommendation() {
   const { data, isLoading, error } = useSWR(
-    `${BACKEND_URL}/api/mentor/all`,
+    `${GETTING_MENTOR_LIST}`,
     async (url) => {
       return await axios.get(url);
     },

@@ -19,6 +19,8 @@ import { VideoUpload } from "@/components/home/video-uplaod.tsx";
 import { AttachingLink } from "@/components/home/attaching-link.tsx";
 import { Card } from "@/components/ui/card.tsx";
 import { Link } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { postState } from "@/store/store/posts.ts";
 
 export const Createpost = ({ userId }: { userId: string }) => {
   const [title, setTitle] = useState("");
@@ -28,6 +30,7 @@ export const Createpost = ({ userId }: { userId: string }) => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [showLink, setShowLink] = useState(false);
   const [link, setLink] = useState<string>("");
+  const setPosts = useSetRecoilState(postState);
 
   async function postHandler() {
     const id = toast.loading("Uploading post....");

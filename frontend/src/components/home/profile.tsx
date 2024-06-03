@@ -9,10 +9,11 @@ import useSWR from "swr";
 import { getSingleUserDetail } from "@/lib/fetchers/getSingleUserDetail.ts";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Createpost } from "@/components/home/create-post.tsx";
+import { GETTING_SINGLE_USER } from "@/config.ts";
 
-export function Profile() {
+export function Profile({ userId }: { userId: number }) {
   const { data, error, isLoading } = useSWR(
-    "http://localhost:3000/api/user/2",
+    `${GETTING_SINGLE_USER}/${userId}`,
     getSingleUserDetail,
   );
 
@@ -21,8 +22,8 @@ export function Profile() {
 
   if (data) {
     return (
-      <div className="hidden lg:flex flex-col gap-6 col-span-3 sticky top-24 h-fit">
-        <div className="flex flex-col items-center gap-6 rounded-lg bg-white border border-neutral-400 dark:bg-black dark:border-neutral-700 ">
+      <div className=" flex flex-col gap-6 col-span-1 w-full  lg:col-span-3 lg:sticky  top-24 h-fit">
+        <div className="flex flex-col items-center  gap-6 rounded-lg bg-white border border-neutral-400 dark:bg-black dark:border-neutral-700 ">
           <div className="relative w-full">
             {data?.bgImg ? (
               <img

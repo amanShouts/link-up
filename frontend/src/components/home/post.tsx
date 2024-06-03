@@ -50,7 +50,7 @@ export type PostType = {
   }[];
 };
 
-export function Post({ post }: { post: PostType }) {
+export function Post({ post, userId }: { post: PostType; userId: number }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.like);
   const postRef = useRef(null);
@@ -97,7 +97,7 @@ export function Post({ post }: { post: PostType }) {
       try {
         await axios.post("http://localhost:3000/api/post/like", {
           postId: post.id,
-          userId: 1,
+          userId: userId,
         });
       } catch (error) {
         // Handle error, maybe revert the state
@@ -111,7 +111,7 @@ export function Post({ post }: { post: PostType }) {
       try {
         await axios.post("http://localhost:3000/api/post/unlike", {
           postId: post.id,
-          userId: 1,
+          userId: userId,
         });
       } catch (error) {
         // Handle error, maybe revert the state
@@ -178,12 +178,6 @@ export function Post({ post }: { post: PostType }) {
             </Card>
           )}
 
-          {/*<div*/}
-          {/*  className={*/}
-          {/*    "w-[full] aspect-video rounded-2xl bg-neutral-400 dark:bg-neutral-600"*/}
-          {/*  }*/}
-          {/*/>*/}
-
           <div>
             <div className="flex items-center justify-between pt-2 text-gray-500 dark:text-gray-400">
               <div className="flex items-center justify-between w-full">
@@ -220,7 +214,7 @@ export function Post({ post }: { post: PostType }) {
                   >
                     <Comments
                       comments={post.comments}
-                      userId={post.user.id}
+                      userId={userId}
                       postId={post.id}
                     />
                   </DialogContent>
