@@ -5,7 +5,13 @@ import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
 import axios from 'axios';
@@ -15,6 +21,7 @@ import { useDispatch } from 'react-redux';
 import { closeModal } from '@/store/slice/modalSlice';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Chip, TextField } from '@mui/material';
+import { BACKEND_URL } from '@/config';
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -160,7 +167,7 @@ export default function Onboarding() {
   const handleButtonClick = () => {
     if (validateFields()) {
       axios
-        .put('http://localhost:3000/edit-user', { ...userData })
+        .put(`${BACKEND_URL}/edit-user`, { ...userData })
         .then((response) => {
           console.log(response.data);
           navigate('/home', { replace: true });

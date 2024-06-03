@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { prisma } from ".";
+import { Request, Response } from 'express';
+import { prisma } from '.';
 
 export const updateUserSkills = async (req: Request, res: Response) => {
   const { type, userId } = req.body;
@@ -14,6 +14,6 @@ export const updateUserSkills = async (req: Request, res: Response) => {
 
     return newSkill;
   } catch (error) {
-    console.error("Error creating skill:", error);
+    console.error('Error creating skill:', error);
   }
 };

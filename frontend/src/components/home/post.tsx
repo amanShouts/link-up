@@ -107,7 +107,7 @@ export function Post({
       setLiked(true);
       setLikes((like) => like + 1);
       try {
-        await axios.post('http://localhost:3000/api/post/like', {
+        await axios.post(`${BACKEND_URL}/api/post/like`, {
           postId: post.id,
           userId: userId,
         });
@@ -121,7 +121,7 @@ export function Post({
       setLiked(false);
       setLikes((like) => like - 1);
       try {
-        await axios.post('http://localhost:3000/api/post/unlike', {
+        await axios.post(`${BACKEND_URL}/api/post/unlike`, {
           postId: post.id,
           userId: userId,
         });

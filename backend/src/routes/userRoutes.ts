@@ -16,8 +16,8 @@ export const getUserDetailsByUsername = Router();
 export const updateUserIndustriesRoute = Router();
 export const getUserId = Router();
 
-getAllUsersRoute.get("/users", getUsers);
-saveUserRoute.post("/save-user", saveUserController);
-onboardingRoute.put("/edit-user", userOnboarding);
-getSingleUser.get("/:id", getSingleUserController);
+getAllUsersRoute.get('/users', getUsers);
+saveUserRoute.post('/save-user', saveUserController);
+onboardingRoute.put('/edit-user', userOnboarding);
+getSingleUser.get('/:id', getSingleUserController);
 getUserId.get('/', getUserIdController);
