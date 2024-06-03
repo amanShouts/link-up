@@ -1,21 +1,33 @@
-import { Button } from "@/components/ui/button"
-import { CardTitle, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card"
-import { Link } from "react-router-dom"
+import { Button } from '@/components/ui/button';
+import {
+  CardTitle,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  Card,
+} from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 dark:bg-gray-950 dark:text-gray-50">
       <header className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-4xl font-bold leading-tight text-gray-50">Welcome to our Startup Ecosystem Integrator</h1>
+          <h1 className="text-4xl font-bold leading-tight text-gray-50">
+            Welcome to our Startup Ecosystem Integrator
+          </h1>
           <p className="mt-4 text-xl text-gray-400">
-            Connecting Startups, Mentors, and resources for a thriving ecosystem.
+            Connecting Startups, Mentors, and resources for a thriving
+            ecosystem.
           </p>
           <div className="mt-8 flex justify-center">
             <Button className="mr-4" variant="default">
               Get Started
             </Button>
-            <Button className="text-gray-300 hover:text-gray-50" variant="outline">
+            <Button
+              className="text-gray-300 hover:text-gray-50"
+              variant="outline"
+            >
               Learn More
             </Button>
           </div>
@@ -24,9 +36,12 @@ export default function Landing() {
       <main>
         <section className="py-16 bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-50">Explore Our Startup Ecosystem</h2>
+            <h2 className="text-2xl font-bold text-gray-50">
+              Explore Our Startup Ecosystem
+            </h2>
             <p className="mt-4 text-lg text-gray-400">
-              Discover the resources, tools, and connections you need to grow your startup.
+              Discover the resources, tools, and connections you need to grow
+              your startup.
             </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card>
@@ -34,10 +49,16 @@ export default function Landing() {
                   <CardTitle>Funding</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Access a network of investors, venture capitalists, and funding opportunities.</p>
+                  <p>
+                    Access a network of investors, venture capitalists, and
+                    funding opportunities.
+                  </p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" to="#">
+                  <Link
+                    className="text-primary-500 hover:text-primary-400"
+                    to="#"
+                  >
                     Learn More
                   </Link>
                 </CardFooter>
@@ -47,10 +68,16 @@ export default function Landing() {
                   <CardTitle>Mentorship</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Connect with experienced entrepreneurs and industry experts for guidance and support.</p>
+                  <p>
+                    Connect with experienced entrepreneurs and industry experts
+                    for guidance and support.
+                  </p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" to="#">
+                  <Link
+                    className="text-primary-500 hover:text-primary-400"
+                    to="#"
+                  >
                     Learn More
                   </Link>
                 </CardFooter>
@@ -60,10 +87,16 @@ export default function Landing() {
                   <CardTitle>Networking</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Attend events, workshops, and meetups to build relationships and expand your network.</p>
+                  <p>
+                    Attend events, workshops, and meetups to build relationships
+                    and expand your network.
+                  </p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" to="#">
+                  <Link
+                    className="text-primary-500 hover:text-primary-400"
+                    to="#"
+                  >
                     Learn More
                   </Link>
                 </CardFooter>
@@ -73,18 +106,28 @@ export default function Landing() {
         </section>
         <section className="py-16 bg-gray-950">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-50">Featured Startups</h2>
-            <p className="mt-4 text-lg text-gray-400">Check out some of the innovative startups in our ecosystem.</p>
+            <h2 className="text-2xl font-bold text-gray-50">
+              Featured Startups
+            </h2>
+            <p className="mt-4 text-lg text-gray-400">
+              Check out some of the innovative startups in our ecosystem.
+            </p>
             <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               <Card>
                 <CardHeader>
                   <CardTitle>Acme Inc.</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Acme Inc. is a leading provider of innovative software solutions for businesses.</p>
+                  <p>
+                    Acme Inc. is a leading provider of innovative software
+                    solutions for businesses.
+                  </p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" to="#">
+                  <Link
+                    className="text-primary-500 hover:text-primary-400"
+                    to="#"
+                  >
                     Learn More
                   </Link>
                 </CardFooter>
@@ -94,10 +137,16 @@ export default function Landing() {
                   <CardTitle>Startup X</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Startup X is disrupting the industry with its cutting-edge technology.</p>
+                  <p>
+                    Startup X is disrupting the industry with its cutting-edge
+                    technology.
+                  </p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" to="#">
+                  <Link
+                    className="text-primary-500 hover:text-primary-400"
+                    to="#"
+                  >
                     Learn More
                   </Link>
                 </CardFooter>
@@ -107,10 +156,16 @@ export default function Landing() {
                   <CardTitle>Innovate Labs</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p>Innovate Labs is a hub for innovative startups and entrepreneurs.</p>
+                  <p>
+                    Innovate Labs is a hub for innovative startups and
+                    entrepreneurs.
+                  </p>
                 </CardContent>
                 <CardFooter>
-                  <Link className="text-primary-500 hover:text-primary-400" to="#">
+                  <Link
+                    className="text-primary-500 hover:text-primary-400"
+                    to="#"
+                  >
                     Learn More
                   </Link>
                 </CardFooter>
@@ -120,7 +175,9 @@ export default function Landing() {
         </section>
         <section className="py-16 bg-gray-800">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-2xl font-bold text-gray-50">Join Our Startup Community</h2>
+            <h2 className="text-2xl font-bold text-gray-50">
+              Join Our Startup Community
+            </h2>
             <p className="mt-4 text-lg text-gray-400">
               Connect with other entrepreneurs, investors, and industry experts.
             </p>
@@ -128,7 +185,10 @@ export default function Landing() {
               <Button className="mr-4" variant="default">
                 Join Now
               </Button>
-              <Button className="text-gray-300 hover:text-gray-50" variant="outline">
+              <Button
+                className="text-gray-300 hover:text-gray-50"
+                variant="outline"
+              >
                 Learn More
               </Button>
             </div>
@@ -265,5 +325,5 @@ export default function Landing() {
         </div>
       </footer>
     </div>
-  )
+  );
 }

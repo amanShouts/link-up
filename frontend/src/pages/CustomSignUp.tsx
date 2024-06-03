@@ -1,5 +1,5 @@
-import { SignUp } from "@clerk/clerk-react";
-import { Link } from "react-router-dom";
+import { SignUp } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
 export default function CustomSignUp() {
   return (
@@ -9,5 +9,5 @@ export default function CustomSignUp() {
         <Link to={'/login'}>Login</Link>
       </div>
     </div>
-  )
+  );
 }

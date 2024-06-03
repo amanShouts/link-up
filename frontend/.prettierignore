@@ -1,0 +1,6 @@
+node_modules
+.github
+.vscode
+.cph
+postgres-data
+dist

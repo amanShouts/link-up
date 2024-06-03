@@ -1,26 +1,41 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { CardTitle, CardDescription, CardHeader, CardContent, CardFooter, Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { RootState } from "@/store/store";
-import { closeModal } from "@/store/slice/modalSlice";
-import { User } from "@/store/slice/userSlice";
-import axios from "axios";
-import { BACKEND_URL } from "@/config";
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  CardTitle,
+  CardDescription,
+  CardHeader,
+  CardContent,
+  CardFooter,
+  Card,
+} from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { RootState } from '@/store/store';
+import { closeModal } from '@/store/slice/modalSlice';
+import { User } from '@/store/slice/userSlice';
+import axios from 'axios';
+import { BACKEND_URL } from '@/config';
 
 export default function EditProfile() {
-  const currentUser: User | undefined = useSelector((state: RootState) => state.users.currentUser);
+  const currentUser: User | undefined = useSelector(
+    (state: RootState) => state.users.currentUser as User,
+  );
   const dispatch = useDispatch();
 
-  const [username, setUsername] = useState<string | undefined>(currentUser?.username);
+  const [username, setUsername] = useState<string | undefined>(
+    currentUser?.username,
+  );
   const [name, setName] = useState<string | undefined>(currentUser?.name);
-  const [type, settype] = useState<string | undefined>(currentUser?.type);
-  const [isMentor, setIsMentor] = useState<boolean | undefined>(currentUser?.isMentor);
+  const [type, settype] = useState<string | undefined>(currentUser?.type || '');
+  const [isMentor, setIsMentor] = useState<boolean | undefined>(
+    currentUser?.isMentor,
+  );
   const [age, setAge] = useState<number | undefined>(currentUser?.age);
-  const [bio, setBio] = useState<string | undefined>(currentUser?.bio);
+  const [bio, setBio] = useState<string | undefined>(currentUser?.bio || '');
   const [city, setCity] = useState<string | undefined>(currentUser?.city);
-  const [country, setCountry] = useState<string | undefined>(currentUser?.country);
+  const [country, setCountry] = useState<string | undefined>(
+    currentUser?.country,
+  );
 
   useEffect(() => {
     dispatch(closeModal());
@@ -30,7 +45,7 @@ export default function EditProfile() {
     if (currentUser) {
       setUsername(currentUser.username);
       setName(currentUser.name);
-      settype(currentUser.type);
+      settype(currentUser.type || '');
       setIsMentor(currentUser.isMentor);
       setAge(currentUser.age);
       setBio(currentUser.bio);
@@ -51,17 +66,16 @@ export default function EditProfile() {
       country,
     });
 
-    const payload = { username, type, isMentor, age, bio, city, country }
+    const payload = { username, type, isMentor, age, bio, city, country };
 
-
-    axios.put(BACKEND_URL+'/edit-user',payload)
-    .then((response) => {
-      console.log(response);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-
+    axios
+      .put(BACKEND_URL + '/edit-user', payload)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -165,7 +179,9 @@ export default function EditProfile() {
         </div>
       </CardContent>
       <CardFooter>
-        <Button className="ml-auto" onClick={handleSave}>Save Changes</Button>
+        <Button className="ml-auto" onClick={handleSave}>
+          Save Changes
+        </Button>
       </CardFooter>
     </Card>
   );

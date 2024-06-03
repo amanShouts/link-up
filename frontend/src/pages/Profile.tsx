@@ -1,14 +1,14 @@
-import AboutCard, { AboutDataType } from "@/components/AboutCard";
+import AboutCard, { AboutDataType } from '@/components/AboutCard';
 import MentorProfileCard, {
   ProfileDataType,
-} from "@/components/MentorProfileCard";
+} from '@/components/MentorProfileCard';
 import WorkExperienceCard, {
   WorkExperienceDataType,
-} from "@/components/WorkExperienceCard";
-import { BACKEND_URL } from "@/config";
-import { useUser } from "@clerk/clerk-react";
-import axios from "axios";
-import { useEffect, useState } from "react";
+} from '@/components/WorkExperienceCard';
+import { BACKEND_URL } from '@/config';
+import { useUser } from '@clerk/clerk-react';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 export default function Profile() {
   const { user } = useUser();
@@ -17,7 +17,7 @@ export default function Profile() {
   useEffect(() => {
     async function getProfileDetail() {
       const response = await axios.get(
-        `${BACKEND_URL}/api/profile/${username}`
+        `${BACKEND_URL}/api/profile/${username}`,
       );
       const data = await response.data;
       console.log(data);
