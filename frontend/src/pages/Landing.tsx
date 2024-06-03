@@ -1,12 +1,12 @@
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   CardTitle,
   CardHeader,
   CardContent,
   CardFooter,
   Card,
-} from "@/components/ui/card";
-import { Link } from "react-router-dom";
+} from '@/components/ui/card';
+import { Link } from 'react-router-dom';
 
 export default function Landing() {
   return (

@@ -8,4 +8,6 @@ package-lock.json
 *.cpp
 .cph
 .vscode
+temp
+ecosystem.config.js
 dist

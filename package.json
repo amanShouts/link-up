@@ -5,7 +5,8 @@
     "prepare": "husky",
     "build:backend": "cd backend && npm run db:start && cd ./../",
     "build:frontend": "cd frontend && npm run build && cd ./../",
-    "serve": "npx pm2 start backend/dist/index.js && npx pm2 serve frontend/dist/ 5173",
+    "stop": "npx pm2 delete all",
+    "serve": "npx pm2 start deploy.config.js && npx pm2 serve frontend/dist/ 5173",
     "deploy": "npm run build:backend && npm run build:frontend && npm run serve"
   },
   "dependencies": {
@@ -14,9 +15,5 @@
   "devDependencies": {
     "husky": "^9.0.11",
     "pm2": "^5.4.0"
-  },
-  "workspaces": [
-    "backend/",
-    "frontend/"
-  ]
+  }
 }
