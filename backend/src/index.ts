@@ -1,5 +1,5 @@
-import express from "express";
-import dotenv from "dotenv";
+import express from 'express';
+import dotenv from 'dotenv';
 import {
   getAllUsersRoute,
   getSingleUser,
@@ -13,6 +13,8 @@ import bodyParser from 'body-parser';
 import mentorRoutes from './routes/mentorRoutes';
 import { getUserProfile } from './controllers/userController';
 import {
+  countViewRoute,
+  createCommentRoute,
   createPostRoute,
   getAllPostRoute,
   likePostRoute,
@@ -20,43 +22,54 @@ import {
 } from './routes/postRoute';
 import { resourceRouter } from "./routes/resourceRoutes";
 
-const cors = require("cors");
+const cors = require('cors');
 dotenv.config();
 
 const PORT = process.env.PORT;
 const app = express();
+
+app.use(bodyParser.json({ limit: '150mb' }));
+app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
 app.use(express.json());
-app.use(bodyParser.json({ limit: "100mb" }));
-app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+
 app.use(cors());
 
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
   res.json({
-    msg: "Server is fine",
+    msg: 'Server is fine',
   });
 });
 
-app.use("/api/mentor", mentorRoutes);
-app.use("/api/onboarding", onboardingRoute);
+app.use('/api/mentor', mentorRoutes);
+app.use('/api/onboarding', onboardingRoute);
 
-app.use("/api/profile/:username", getUserProfile);
+app.use('/api/profile/:username', getUserProfile);
 // /users
 app.use(getAllUsersRoute);
 
 // get single user
-app.use("/api/user", getSingleUser);
+app.use('/api/user', getSingleUser);
 
 // get all posts
-app.use("/api/posts", getAllPostRoute);
+app.use('/api/posts', getAllPostRoute);
 
 // like a single post
-app.use("/api/post", likePostRoute);
+app.use('/api/post', likePostRoute);
 
 // unlike a single post
-app.use("/api/post", unlikePostRoute);
+app.use('/api/post', unlikePostRoute);
 
 // create a single post
-app.use("/api/post", createPostRoute);
+app.use('/api/post', createPostRoute);
+
+// counting views on a post
+app.use('/api/post', countViewRoute);
+
+// create a comment
+app.use('/api/comment', createCommentRoute);
+
+// getting user id from username
+app.use('/api/username/:username', getUserId);
 
 // save-user
 app.use(saveUserRoute);
@@ -73,5 +86,5 @@ app.use(updateUserIndustriesRoute);
 app.use("/resource", resourceRouter);
 
 app.listen(PORT, () => {
-  console.log("Server running on port ", PORT);
+  console.log('Server running on port ', PORT);
 });
