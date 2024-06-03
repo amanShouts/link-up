@@ -3,20 +3,21 @@ import dotenv from "dotenv";
 import {
   getAllUsersRoute,
   getSingleUser,
+  getUserId,
   onboardingRoute,
   saveUserRoute,
   updateUserIndustriesRoute,
   updateUserSkillsRoute,
-} from "./routes/userRoutes";
-import bodyParser from "body-parser";
-import mentorRoutes from "./routes/mentorRoutes";
-import { getUserProfile } from "./controllers/userController";
+} from './routes/userRoutes';
+import bodyParser from 'body-parser';
+import mentorRoutes from './routes/mentorRoutes';
+import { getUserProfile } from './controllers/userController';
 import {
   createPostRoute,
   getAllPostRoute,
   likePostRoute,
   unlikePostRoute,
-} from "./routes/postRoute";
+} from './routes/postRoute';
 import { resourceRouter } from "./routes/resourceRoutes";
 
 const cors = require("cors");

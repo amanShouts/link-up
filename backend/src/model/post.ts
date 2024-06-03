@@ -1,11 +1,11 @@
-import { prisma } from "./index";
-import { PostType } from "@prisma/client";
+import { prisma } from './index';
+import { PostType } from '@prisma/client';
 
 export const getPosts = async (userId: string) => {
   try {
     const posts = await prisma.post.findMany({
       orderBy: {
-        createdAt: "desc",
+        createdAt: 'desc',
       },
       include: {
         user: {
@@ -18,7 +18,17 @@ export const getPosts = async (userId: string) => {
         },
         likedBy: true,
         label: true,
-        comments: true,
+        comments: {
+          include: {
+            user: {
+              select: {
+                name: true,
+                img: true,
+                username: true,
+              },
+            },
+          },
+        },
       },
     });
     // check if user liked the post
@@ -27,9 +37,11 @@ export const getPosts = async (userId: string) => {
       liked: post.likedBy.some((user) => user.userId === parseInt(userId)),
     }));
 
+    console.log(postsWithLiked[0].comments);
+
     return postsWithLiked;
   } catch (error) {
-    throw new Error("Error fetching posts");
+    throw new Error('Error fetching posts');
   }
 };
 
@@ -58,7 +70,7 @@ export const likePost = async ({
     return post;
   } catch (error) {
     console.log(error);
-    throw new Error("Error liking post");
+    throw new Error('Error liking post');
   }
 };
 
@@ -89,7 +101,7 @@ export const unlikePost = async ({
     return post;
   } catch (error) {
     console.log(error);
-    throw new Error("Error unliking post");
+    throw new Error('Error unliking post');
   }
 };
 
@@ -111,28 +123,135 @@ export const createPost = async ({
 }) => {
   try {
     let type;
+    let post;
     if (imageLink) {
       type = PostType.IMAGE;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+          img: imageLink,
+          type,
+        },
+      });
     } else if (videoLink) {
       type = PostType.VIDEO;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+          video: videoLink,
+          type,
+        },
+      });
     } else if (resourceLink) {
       type = PostType.LINK;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+          link: resourceLink,
+          type,
+        },
+      });
     } else {
       type = PostType.TEXT;
+      post = await prisma.post.create({
+        data: {
+          title,
+          desc,
+          userId: parseInt(userId),
+
+          type,
+        },
+      });
     }
 
-    const post = await prisma.post.create({
-      data: {
-        title,
-        desc,
-        userId: parseInt(userId),
-        img: imageLink,
-        type,
-      },
-    });
     return post;
   } catch (error) {
     console.log(error);
-    throw new Error("Error creating post");
+    throw new Error('Error creating post');
+  }
+};
+
+// counting views on post
+export const countViewPost = async ({
+  postId,
+  userId,
+}: {
+  postId: string;
+  userId: string;
+}) => {
+  try {
+    // Checking if the user has already viewed the post
+    const existingView = await prisma.view.findFirst({
+      where: {
+        userId: parseInt(userId),
+        postId: parseInt(postId),
+      },
+    });
+
+    if (existingView) {
+      return;
+    }
+
+    await prisma.view.create({
+      data: {
+        userId: parseInt(userId),
+        postId: parseInt(postId),
+      },
+    });
+
+    await prisma.post.update({
+      where: { id: parseInt(postId) },
+      data: {
+        view: {
+          increment: 1,
+        },
+      },
+    });
+
+    return { message: 'View counted' };
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error counting views');
+  }
+};
+
+export const createComment = async ({
+  postId,
+  userId,
+  commentContent,
+}: {
+  postId: string;
+  userId: string;
+  commentContent: string;
+}) => {
+  try {
+    // increase comment count
+    await prisma.post.update({
+      where: { id: parseInt(postId) },
+      data: {
+        comment: {
+          increment: 1,
+        },
+      },
+    });
+
+    const comment = await prisma.comment.create({
+      data: {
+        userId: parseInt(userId),
+        postId: parseInt(postId),
+        commentContent,
+      },
+    });
+
+    return comment;
+  } catch (error) {
+    console.log(error);
+    throw new Error('Error commenting');
   }
 };

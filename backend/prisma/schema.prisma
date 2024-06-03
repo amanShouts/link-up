@@ -103,6 +103,14 @@ model Post {
   user     User        @relation(fields: [userId], references: [id])
   label    Label?      @relation(fields: [labelId], references: [id])
   comments Comment[]
+  View     View[]
+}
+
+model View {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  postId Int
+  post   Post @relation(fields: [postId], references: [id])
 }
 
 model Label {
@@ -121,11 +129,12 @@ model UserLiked {
 }
 
 model Comment {
-  id        Int       @id @default(autoincrement())
-  userId    Int
-  postId    Int
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  id             Int       @id @default(autoincrement())
+  userId         Int
+  postId         Int
+  commentContent String    @default("")
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime? @updatedAt
 
   user User @relation(fields: [userId], references: [id])
   post Post @relation(fields: [postId], references: [id])

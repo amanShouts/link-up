@@ -1,14 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 export interface User {
   type: null;
+  id: number;
   isMentor: boolean;
   userType: string;
   age: number;
+  img: string;
   city: string;
   username: string;
   name: string;
   country: string;
+  bio: string;
 }
 
 interface UsersState {
@@ -18,30 +21,33 @@ interface UsersState {
 
 const initialState: UsersState = {
   users: [],
-  currentUser: {}
+  currentUser: {},
 };
-
 
 export const userSlice = createSlice({
   name: 'users',
   initialState,
   reducers: {
-    addUserDetails: ( state, action ) => {
+    addUserDetails: (state, action) => {
       state.users = action.payload;
     },
-    removeUserDetails: ( state ) => {
-      state.users  = [];
+    removeUserDetails: (state) => {
+      state.users = [];
     },
-    addCurrentUser: ( state, action ) => {
+    addCurrentUser: (state, action) => {
       state.currentUser = action.payload;
     },
-    removeCurrentUser: ( state ) => {
-      state.currentUser  = {};
+    removeCurrentUser: (state) => {
+      state.currentUser = {};
     },
-  }
+  },
 });
 
-
-export const { addUserDetails, removeUserDetails, addCurrentUser, removeCurrentUser } = userSlice.actions;
+export const {
+  addUserDetails,
+  removeUserDetails,
+  addCurrentUser,
+  removeCurrentUser,
+} = userSlice.actions;
 
 export default userSlice.reducer;
