@@ -1,6 +1,6 @@
-import { Button } from "@/components/ui/button.tsx";
-import { Link2Icon } from "lucide-react";
-import React from "react";
+import { Button } from '@/components/ui/button.tsx';
+import { Link2Icon } from 'lucide-react';
+import React from 'react';
 
 export function AttachingLink({
   setShowLink,
@@ -17,7 +17,7 @@ export function AttachingLink({
 }) {
   return (
     <Button
-      variant={"link"}
+      variant={'link'}
       onClick={() => {
         if (selectedImage) {
           setSelectedImage(null);
@@ -28,7 +28,7 @@ export function AttachingLink({
         setShowLink(true);
       }}
     >
-      <Link2Icon className={" h-6 w-6"} />
+      <Link2Icon className={' h-6 w-6'} />
     </Button>
   );
 }

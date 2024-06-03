@@ -1,14 +1,14 @@
-import AboutCard, { AboutDataType } from "@/components/AboutCard";
+import AboutCard, { AboutDataType } from '@/components/AboutCard';
 import MentorProfileCard, {
   ProfileDataType,
-} from "@/components/MentorProfileCard";
+} from '@/components/MentorProfileCard';
 import WorkExperienceCard, {
   WorkExperienceDataType,
-} from "@/components/WorkExperienceCard";
-import { BACKEND_URL } from "@/config";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+} from '@/components/WorkExperienceCard';
+import { BACKEND_URL } from '@/config';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 export default function MentorProfile() {
   const [profile, setProfile] = useState<UserDataType | null>(null);
