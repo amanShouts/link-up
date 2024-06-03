@@ -43,14 +43,11 @@ export default function App() {
       navigate('/login');
     }
     if (isSignedIn && user) {
-      console.log('user: ', user);
-
       const currentUser = storedUsers.find(
         (el) => el.username === user.username,
       );
 
       dispatch(addCurrentUser(currentUser));
-      console.log('currentUser: ', currentUser);
 
       if (
         currentUser &&
@@ -58,11 +55,8 @@ export default function App() {
           currentUser?.city === null ||
           currentUser?.type == null)
       ) {
-        // console.log('here');
         toggleModal('edit-profile-modal');
       }
-    } else {
-      // console.log('user not signied in');
     }
   }, [isLoaded, isSignedIn, navigate, window.location]);
 
@@ -94,11 +88,8 @@ export default function App() {
           img: user.imageUrl,
           lastLogin: user.lastSignInAt,
         })
-        .then((response) => {
-          console.log(response);
-        })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   }, [storedUsers, user]);

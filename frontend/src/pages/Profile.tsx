@@ -20,7 +20,6 @@ export default function Profile() {
         `${BACKEND_URL}/api/profile/${username}`,
       );
       const data = await response.data;
-      console.log(data);
       setProfile(data);
     }
     getProfileDetail();

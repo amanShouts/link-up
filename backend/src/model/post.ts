@@ -37,10 +37,11 @@ export const getPosts = async (userId: string) => {
       liked: post.likedBy.some((user) => user.userId === parseInt(userId)),
     }));
 
-    console.log(postsWithLiked[0].comments);
-
-    return postsWithLiked;
+    // if no like post show all post
+    if (!postsWithLiked.length) return posts;
+    return postsWithLiked; // Else show liked post only
   } catch (error) {
+    console.log('inside get post ', error);
     throw new Error('Error fetching posts');
   }
 };

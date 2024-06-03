@@ -6,7 +6,6 @@ import {
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log('Mentor route working');
   res.json({
     msg: 'On Mentor route',
   });
