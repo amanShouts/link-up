@@ -6,9 +6,7 @@ import {
   getUserId,
   onboardingRoute,
   saveUserRoute,
-  updateUserIndustriesRoute,
-  updateUserSkillsRoute,
-} from './routes/userRoutes';
+  updateUserIndustriesRoute} from './routes/userRoutes';
 import bodyParser from 'body-parser';
 import mentorRoutes from './routes/mentorRoutes';
 import { getUserProfile } from './controllers/userController';
@@ -21,6 +19,7 @@ import {
   unlikePostRoute,
 } from './routes/postRoute';
 import { resourceRouter } from "./routes/resourceRoutes";
+import { updateUserSkillsRoute } from "./routes/skillsRoutes";
 
 const cors = require('cors');
 dotenv.config();

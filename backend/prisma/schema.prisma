@@ -99,9 +99,8 @@ model Post {
   video     String?
   link      String?
 
-  likedBy  UserLiked[]
-  user     User        @relation(fields: [userId], references: [id])
-  label    Label?      @relation(fields: [labelId], references: [id])
+  user     User      @relation(fields: [userId], references: [id])
+  label    Label?    @relation(fields: [labelId], references: [id])
   comments Comment[]
   View     View[]
 }
@@ -117,15 +116,6 @@ model Label {
   id         Int    @id @default(autoincrement())
   labelTitle String
   posts      Post[]
-}
-
-model UserLiked {
-  userId Int
-  postId Int
-  User   User @relation(fields: [userId], references: [id])
-  Post   Post @relation(fields: [postId], references: [id])
-
-  @@id([userId, postId])
 }
 
 model Comment {
