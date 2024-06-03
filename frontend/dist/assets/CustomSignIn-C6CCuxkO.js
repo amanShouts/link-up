@@ -1,0 +1,1 @@
+import{j as n,S as s,L as i}from"./index-DtmGh-ef.js";function e(){return n.jsx("div",{className:"signin-container",children:n.jsxs("div",{className:"signin-box",children:[n.jsx(s,{}),n.jsx(i,{to:"/signup",children:"Signup"})]})})}export{e as default};

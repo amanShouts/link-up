@@ -1,7 +1,7 @@
-import React, { useRef } from "react";
-import { VideoIcon } from "lucide-react";
-import { Button } from "@/components/ui/button.tsx";
-import toast from "react-hot-toast";
+import React, { useRef } from 'react';
+import { VideoIcon } from 'lucide-react';
+import { Button } from '@/components/ui/button.tsx';
+import toast from 'react-hot-toast';
 
 export const VideoUpload = ({
   setSelectedVideo,
@@ -29,7 +29,7 @@ export const VideoUpload = ({
       const file = event.target.files[0];
 
       if (file.size > 20 * 1024 * 1024) {
-        toast.error("File size exceeds limit of 0 MB");
+        toast.error('File size exceeds limit of 0 MB');
         setSelectedVideo(null);
         return;
       }
@@ -45,19 +45,19 @@ export const VideoUpload = ({
   return (
     <div>
       <Button
-        variant={"link"}
+        variant={'link'}
         onClick={() => {
           inputRef.current?.click();
         }}
       >
-        <VideoIcon className={"w-5 h-5 cursor-pointer dark:text-gray-50"} />
+        <VideoIcon className={'w-5 h-5 cursor-pointer dark:text-gray-50'} />
       </Button>
       <input
         ref={inputRef}
         type="file"
         id="video-input"
         accept="video/*"
-        className={"hidden"}
+        className={'hidden'}
         onChange={handleVideoChange}
       />
     </div>

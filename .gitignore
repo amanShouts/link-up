@@ -8,4 +8,4 @@ package-lock.json
 *.cpp
 .cph
 .vscode
-dist
+temp
