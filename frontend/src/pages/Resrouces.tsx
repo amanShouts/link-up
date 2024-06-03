@@ -30,7 +30,6 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { User } from '@/store/slice/userSlice';
 import { Textarea } from '@/components/ui/textarea';
-import { title } from 'process';
 
 // resources type
 // ARTICLE
