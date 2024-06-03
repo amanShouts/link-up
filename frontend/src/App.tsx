@@ -20,13 +20,15 @@ import EditProfile from "./pages/EditProfile";
 import DetailsModal from "./components/modalStore/DetailsModal";
 import Profile from "./pages/Profile";
 import { Toaster } from "react-hot-toast";
+import { Resources } from "./pages/Resrouces";
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const storedUsers = useSelector((state: RootState) => state.users.users);
-
+  console.log(user, " this is user -------", storedUsers)
   const toggleModal = (type: string) => {
     dispatch(modalDetails(type));
     dispatch(openModal());
@@ -35,7 +37,7 @@ export default function App() {
   useEffect(() => {
     const currentRoute = window.location.pathname;
 
-    const publicRoutes = ["/", "/signup", "/login"];
+    const publicRoutes = ["/", "/signup", "/login","/resources"];
 
     if (isLoaded && !isSignedIn && !publicRoutes.includes(currentRoute)) {
       navigate("/login");
@@ -140,6 +142,7 @@ export default function App() {
           path="/mentors/:mentorId"
           element={isSignedIn ? <MentorProfile /> : null}
         />
+        <Route path="/resources" element={ <Resources /> } />
       </Routes>
     </main>
   );

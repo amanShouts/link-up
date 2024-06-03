@@ -36,6 +36,7 @@ model User {
   mentor           Mentor[]       @relation("Mentor")
   entrepreneur     Entrepreneur[] @relation("Entrepreneur")
   UserLiked        UserLiked[]
+  resources        Resource[]     @relation("Resource")
 }
 
 model Industry {
@@ -136,6 +137,10 @@ model Resource {
   content   String
   title     String
   createdAt DateTime     @default(now())
+  link      String?
+  category  String
+  author    User    @relation("Resource", fields: [authorId], references: [id])
+  authorId  Int     // Define the foreign key field
 }
 
 model Chat {
@@ -166,8 +171,8 @@ enum PostType {
 enum ResourceType {
   ARTICLE
   VIDEO
-  PODCAST
-  BOOK
+  FILE
+  IMAGE
 }
 
 enum ChatType {

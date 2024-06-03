@@ -17,6 +17,7 @@ import {
   likePostRoute,
   unlikePostRoute,
 } from "./routes/postRoute";
+import { resourceRouter } from "./routes/resourceRoutes";
 
 const cors = require("cors");
 dotenv.config();
@@ -67,6 +68,8 @@ app.use(updateUserSkillsRoute);
 
 // industries
 app.use(updateUserIndustriesRoute);
+
+app.use("/resource", resourceRouter);
 
 app.listen(PORT, () => {
   console.log("Server running on port ", PORT);
