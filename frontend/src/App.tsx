@@ -52,13 +52,8 @@ export default function App() {
       dispatch(addCurrentUser(currentUser));
       console.log('currentUser: ', currentUser);
 
-      if (
-        currentUser &&
-        (currentUser?.age === null ||
-          currentUser?.city === null ||
-          currentUser?.type == null)
-      ) {
-        // console.log('here');
+      if ( currentUser && (currentUser?.age === null || currentUser?.city === null || currentUser?.type == null) ) {
+        console.log('here');
         toggleModal('edit-profile-modal');
       }
     } else {
