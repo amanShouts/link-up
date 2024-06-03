@@ -63,7 +63,7 @@ export default function Onboarding() {
         {
           name: 'industry',
           label: 'Industry',
-          type: 'select-tags',
+          type: 'select',
           options: [
             'Tech',
             'Finance',
@@ -79,7 +79,7 @@ export default function Onboarding() {
         {
           name: 'skill',
           label: 'Skill',
-          type: 'select-tags',
+          type: 'select',
           options: [
             'Product Management',
             'User Experience',
@@ -133,7 +133,7 @@ export default function Onboarding() {
     const newErrors = {};
 
     currentFields.forEach((field) => {
-      if (field.required && !userData.field.name) {
+      if (field.required && !userData[field.name]) {
         newErrors[field.name] = `${field.label} is required`;
       }
     });
@@ -213,14 +213,15 @@ export default function Onboarding() {
             }
             renderTags={(tagValue, getTagProps) =>
               tagValue.map((option, index) => (
-                <Chip key={option} label={option} {...getTagProps({ index })} />
+                <Chip {...getTagProps({ index })} key={option} label={option} />
               ))
             }
             renderInput={(params) => (
               <TextField
                 {...params}
                 variant="outlined"
-                placeholder={field.label}
+                placeholder={`Select ${field.label}`}
+                label={field.label} // Set label for the dropdown
               />
             )}
           />
@@ -241,6 +242,7 @@ export default function Onboarding() {
             onChange={handleInputChange}
             className="w-full border border-gray-300 p-2"
             required={field.required}
+            placeholder={field.label}
           />
         );
     }
@@ -263,10 +265,8 @@ export default function Onboarding() {
               <div className="w-[400px]">
                 {steps[question].fields.map((field) => (
                   <div key={field.name} className="mb-4">
-                    <Label className="block mb-2">
-                      {field.label}
-                      {renderField(field)}
-                    </Label>
+                    <p className="block mb-2">{field.label}</p>
+                    <div>{renderField(field)}</div>
                     {errors[field.name] && (
                       <div className="text-red-500 text-sm">
                         {errors[field.name]}
