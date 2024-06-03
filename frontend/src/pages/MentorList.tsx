@@ -16,9 +16,9 @@ export default function MentorList() {
   return (
     <section
       id="mentorList"
-      className="w-full flex flex-col items-center justify-center"
+      className="w-full h-screen flex flex-col items-center justify-center"
     >
-      <div className="text-3xl m-3">Connect to mentors</div>
+      <div className="text-3xl mb-10">Connect to mentors</div>
       <div className="max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {mentors?.map((mentor) => {
