@@ -311,18 +311,18 @@ function HeroPage() {
   return (
     <section
       className={
-        'w-full h-[70vh] bg-white dark:bg-black flex items-center mt-60 flex-col gap-6 relative'
+        'w-full h-[70vh] bg-white dark:bg-black flex items-center mt-40 md:mt-60 flex-col gap-6 relative'
       }
     >
-      <div className="dark:text-neutral-200 text-black bg-white dark:bg-black z-10 border border-neutral-700 rounded-full text-sm p-2 px-8">
+      <div className="dark:text-neutral-200 text-black bg-white dark:bg-black z-10 border border-neutral-700 rounded-full text-sm p-2 px-8 m-5 md:m-3 ">
         <p className={'z-10'}>
           Come and join
           <span className={'underline px-2'}>millions</span>
-          of enthusiasts like you{' '}
+          of enthusiasts like you.{' '}
         </p>
       </div>
 
-      <h1 className="text-6xl font-bold  z-10 w-[60%] dark:text-neutral-200 text-black text-center">
+      <h1 className="text-4xl md:text-6xl font-bold  z-10 w-[60%] dark:text-neutral-200 text-black text-center m-2">
         Welcome to Linkup.
       </h1>
       <p
@@ -335,7 +335,7 @@ function HeroPage() {
         Build meaningful connections to drive your business forward. Join us
         today and transform your entrepreneurial journey.
       </p>
-      <div className={'w-[60%] mt-10 z-10'}>
+      <div className={' flex items-center w-[60%] mt-10 z-10'}>
         <Button className="mr-4 w-[48%] z-10" variant="default">
           Get Started
         </Button>

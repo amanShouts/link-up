@@ -25,7 +25,7 @@ export default function HomePage() {
   }, [storedUsers, username]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-10 relative  gap-4 p-6 ">
+    <div className="grid grid-cols-1 lg:grid-cols-10 relative  h-screen gap-4 p-6 ">
       <RecoilRoot>
         {userId && username && name && img && (
           <>
