@@ -2,11 +2,6 @@ import { Request, Response } from "express";
 import { prisma } from "../model";
 import { BlobServiceClient } from "@azure/storage-blob";
 
-// const AZURE_STORAGE_CONNECTION_STRING = 'DefaultEndpointsProtocol=https;AccountName=linkup;AccountKey=w+Vq50s4J70GYfHMI3qwqS68016IndSS+QTEdmsWadhfkJjsPk7Mzp2jS2xwWsOcmXBFdkykjI0c+AStnHXDpw==;EndpointSuffix=core.windows.net';
-// const containerName = 'linkup-container';
-// const blobServiceClient = BlobServiceClient.fromConnectionString(AZURE_STORAGE_CONNECTION_STRING);
-// const containerClient = blobServiceClient.getContainerClient(containerName);
-
 export const addResource = async(req : Request, res : Response) => {
     const resourceObj = req.body;
     const file : any = req.file;
@@ -15,14 +10,6 @@ export const addResource = async(req : Request, res : Response) => {
     }
     try{
 
-      // if(resourceObj.type == 'FILE'){
-      //   console.log("processing file");
-      //   const blobName = file.originalname;
-      //   const blockBlobClient = containerClient.getBlockBlobClient(blobName);
-      //   const uploadResponse = await blockBlobClient.uploadData(file.buffer, {
-      //     blobHTTPHeaders: { blobContentType: file.mimetype }
-      //   });
-      // }
       const result = await prisma.resource.create({
         data : {
           type : resourceObj.type,
