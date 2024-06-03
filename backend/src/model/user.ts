@@ -29,13 +29,10 @@ export const saveUserModel = async (req: Request) => {
 export const updateUserData = async (req: Request) => {
   try {
     const { type, username, isMentor, age, bio, city, country } = req.body;
-
-    console.log('req.body: ', req.body);
     const user = await prisma.user.update({
       where: { username },
       data: { type, isMentor, age, bio, city, country },
     });
-    console.log('Updated User Data', user);
     return user;
   } catch (error) {
     console.error('Error updating user type:', error);

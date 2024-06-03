@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectTrigger,
@@ -168,8 +167,7 @@ export default function Onboarding() {
     if (validateFields()) {
       axios
         .put(`${BACKEND_URL}/edit-user`, { ...userData })
-        .then((response) => {
-          console.log(response.data);
+        .then(() => {
           navigate('/home', { replace: true });
         })
         .catch((error) => {
@@ -248,8 +246,6 @@ export default function Onboarding() {
         );
     }
   };
-
-  console.log('userData: ', userData);
 
   useEffect(() => {
     dispatch(closeModal());

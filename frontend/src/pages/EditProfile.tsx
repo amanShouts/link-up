@@ -55,27 +55,11 @@ export default function EditProfile() {
   }, [currentUser]);
 
   const handleSave = () => {
-    console.log({
-      username,
-      name,
-      type,
-      isMentor,
-      age,
-      bio,
-      city,
-      country,
-    });
-
     const payload = { username, type, isMentor, age, bio, city, country };
 
-    axios
-      .put(BACKEND_URL + '/edit-user', payload)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    axios.put(BACKEND_URL + '/edit-user', payload).catch((error) => {
+      console.log(error);
+    });
   };
 
   return (

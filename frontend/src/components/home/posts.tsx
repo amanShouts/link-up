@@ -23,7 +23,7 @@ export function Posts({
 
   useEffect(() => {
     setRefresh(false);
-  }, []);
+  }, [setRefresh]);
 
   const { isLoading, error } = useSWR(
     `${GETTING_ALL_POSTS}/${userId}`,
@@ -41,6 +41,7 @@ export function Posts({
   if (error) return <div>Error loading posts</div>;
   return (
     <div className="grid gap-6 col-span-10 lg:col-span-7 xl:col-span-5">
+      {!posts.length && <span className="text-center">No post present</span>}
       {posts.map((post: PostType) => (
         <Post
           key={post.id}
