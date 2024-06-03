@@ -2,9 +2,10 @@ import { Card } from '@/components/ui/card.tsx';
 import { Input } from '@/components/ui/input.tsx';
 import { Button } from '@/components/ui/button.tsx';
 import { Comment } from '@/components/home/comment.tsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { BACKEND_URL } from '@/config.ts';
 
 export type commentType = {
   id: number;
@@ -21,22 +22,46 @@ export function Comments({
   comments,
   userId,
   postId,
+  name,
+  img,
+  username,
 }: {
   comments: commentType[];
   userId: number;
   postId: number;
+  name: string;
+  img: string;
+  username: string;
 }) {
   const [comment, setComment] = useState<string>('');
+  const [commentList, setCommentList] = useState<commentType[]>([]);
+
+  useEffect(() => {
+    setCommentList(comments);
+  }, []);
+
+  const generateRandomInteger = () => {
+    return Math.floor(Math.random() * 10000000000) + 1;
+  };
 
   async function commentHandler() {
     const id = toast.loading('Posting comment....');
     try {
-      await axios.post('http://localhost:3000/api/comment/create', {
+      await axios.post(`${BACKEND_URL}/api/comment/create`, {
         commentContent: comment,
         userId: userId,
         postId: postId,
       });
       toast.success('Comment posted', { id });
+      setCommentList((prevComment) => [
+        {
+          id: generateRandomInteger(),
+          user: { name: name, username: username, img: img },
+          createdAt: new Date(),
+          commentContent: comment,
+        },
+        ...prevComment,
+      ]);
     } catch (error) {
       toast.error('Error posting comment', { id });
       console.log(error);
@@ -68,10 +93,10 @@ export function Comments({
         </p>
         <hr className={'dark:border-neutral-700'} />
 
-        {comments.length == 0 ? (
+        {commentList.length == 0 ? (
           <p className={'text-sm px-3 text-neutral-500'}>No comments yet</p>
         ) : (
-          comments.map((comment) => {
+          commentList.map((comment) => {
             return <Comment comment={comment} />;
           })
         )}

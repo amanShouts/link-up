@@ -19,6 +19,9 @@ import { VideoUpload } from '@/components/home/video-uplaod.tsx';
 import { AttachingLink } from '@/components/home/attaching-link.tsx';
 import { Card } from '@/components/ui/card.tsx';
 import { Link } from 'react-router-dom';
+import { BACKEND_URL } from '@/config.ts';
+import { useSetRecoilState } from 'recoil';
+import { refreshPost } from '@/store/recoil/posts.ts';
 
 export const Createpost = ({ userId }: { userId: string }) => {
   const [title, setTitle] = useState('');
@@ -28,49 +31,52 @@ export const Createpost = ({ userId }: { userId: string }) => {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [showLink, setShowLink] = useState(false);
   const [link, setLink] = useState<string>('');
+  const setRefreshPost = useSetRecoilState(refreshPost);
 
   async function postHandler() {
     const id = toast.loading('Uploading post....');
 
     try {
       if (selectedImage) {
-        await axios.post('http://localhost:3000/api/post/create', {
+        await axios.post(`${BACKEND_URL}/api/post/create`, {
           title,
           desc,
           userId,
           imageLink: selectedImage,
         });
       } else if (selectedVideo) {
-        await axios.post('http://localhost:3000/api/post/create', {
+        await axios.post(`${BACKEND_URL}/api/post/create`, {
           title,
           desc,
           userId,
           videoLink: selectedVideo,
         });
       } else if (showLink) {
-        await axios.post('http://localhost:3000/api/post/create/link', {
+        await axios.post(`${BACKEND_URL}/api/post/create/link`, {
           title,
           desc,
           userId,
           link: link,
         });
       } else {
-        await axios.post('http://localhost:3000/api/post/create/link', {
+        await axios.post(`${BACKEND_URL}/api/post/create/link`, {
           title,
           desc,
           userId,
         });
       }
 
-      toast.success('Post created successfully', {
+      toast.success('Please refresh the page', {
         id,
       });
+      setRefreshPost(true);
       setOpen(false);
     } catch (error) {
       console.log(error);
       toast.error('Error creating post');
     }
   }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild={true}>

@@ -3,6 +3,7 @@ import {
   getAllUsers,
   getUser,
   getUserDetailsByUsername,
+  getUserIdModal,
   saveUserModel,
   updateUserData,
   updateUserIndustries,
@@ -145,6 +146,16 @@ export const getUserProfile = async (req: Request, res: Response) => {
       },
     };
     return res.json(userData);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+};
+
+export const getUserIdController = async (req: Request, res: Response) => {
+  try {
+    const user = await getUserIdModal(req.params.username);
+    res.json(user);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal server error' });

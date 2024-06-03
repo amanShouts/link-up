@@ -58,11 +58,11 @@ export default function App() {
           currentUser?.city === null ||
           currentUser?.type == null)
       ) {
-        console.log('here');
+        // console.log('here');
         toggleModal('edit-profile-modal');
       }
     } else {
-      console.log('user not signied in');
+      // console.log('user not signied in');
     }
   }, [isLoaded, isSignedIn, navigate, window.location]);
 

@@ -119,3 +119,16 @@ export async function getUserDetailsByUsername(username: string) {
   });
   return result;
 }
+
+export const getUserIdModal = async (username: string) => {
+  try {
+    const user = await prisma.user.findFirst({
+      where: {
+        username,
+      },
+    });
+    return user;
+  } catch (error) {
+    console.error('Error fetching user:', error);
+  }
+};
