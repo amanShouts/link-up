@@ -1,20 +1,24 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '@/store/slice/modalSlice';
 import { RootState } from '@/store/store';
 import { Link } from 'react-router-dom';
+import { useEffect } from 'react';
 
 export function EditProfile() {
-  const isOpen = useSelector((state: RootState) => state.modal.isOpen);
+  const { isOpen } = useSelector((state: RootState) => state.modal);
   const dispatch = useDispatch();
+  const { currentUser } = useSelector((state: RootState) => state.users)
+
+  useEffect(() => {
+      console.log('currentUser: ',currentUser)
+      if (currentUser?.age && currentUser?.city && currentUser?.type) {
+      console.log('here')
+      dispatch(closeModal())
+    }
+  }, [currentUser])
+
 
   return (
     <Dialog open={isOpen}>

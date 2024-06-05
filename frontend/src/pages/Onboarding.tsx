@@ -17,10 +17,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '@/store/slice/modalSlice';
+import { closeModal, refreshCalls } from '@/store/slice/modalSlice';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Chip, TextField } from '@mui/material';
 import { BACKEND_URL } from '@/config';
+import { addCurrentUser } from '@/store/slice/userSlice';
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -143,6 +144,7 @@ export default function Onboarding() {
   };
 
   const updateState = () => {
+    dispatch(refreshCalls());
     if (validateFields()) {
       setQuestion((prevState) => prevState + 1);
     }
@@ -164,6 +166,7 @@ export default function Onboarding() {
   };
 
   const handleButtonClick = () => {
+    addCurrentUser({...userData})
     if (validateFields()) {
       axios
         .put(`${BACKEND_URL}/edit-user`, { ...userData })
@@ -246,10 +249,6 @@ export default function Onboarding() {
         );
     }
   };
-
-  useEffect(() => {
-    dispatch(closeModal());
-  }, [user, dispatch]);
 
   return (
     <div>

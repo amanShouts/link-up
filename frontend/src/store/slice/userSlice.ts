@@ -16,12 +16,12 @@ export interface User {
 
 interface UsersState {
   users: User[];
-  currentUser: object | null;
+  currentUser: User | null;
 }
 
 const initialState: UsersState = {
   users: [],
-  currentUser: {},
+  currentUser: null,
 };
 
 export const userSlice = createSlice({
@@ -38,7 +38,7 @@ export const userSlice = createSlice({
       state.currentUser = action.payload;
     },
     removeCurrentUser: (state) => {
-      state.currentUser = {};
+      state.currentUser = null;
     },
   },
 });

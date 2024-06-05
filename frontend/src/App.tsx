@@ -28,6 +28,7 @@ export default function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const storedUsers = useSelector((state: RootState) => state.users.users);
+  const { isOpen, refresh } = useSelector((state: RootState) => state.modal);
 
   const toggleModal = (type: string) => {
     dispatch(modalDetails(type));
@@ -59,6 +60,7 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log('refresh',refresh)
         const response = await fetch(BACKEND_URL + '/users');
         const responseData = await response.json();
 
@@ -69,7 +71,7 @@ export default function App() {
     };
 
     fetchData();
-  }, []);
+  }, [isOpen, window.location, refresh]);
 
   useEffect(() => {
     const usernameArray = storedUsers.map((el) => {
