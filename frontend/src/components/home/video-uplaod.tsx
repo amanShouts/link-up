@@ -52,14 +52,7 @@ export const VideoUpload = ({
       >
         <VideoIcon className={'w-5 h-5 cursor-pointer dark:text-gray-50'} />
       </Button>
-      <input
-        ref={inputRef}
-        type="file"
-        id="video-input"
-        accept="video/*"
-        className={'hidden'}
-        onChange={handleVideoChange}
-      />
+      <input ref={inputRef} type="file" id="video-input" accept="video/*" className={'hidden'} onChange={handleVideoChange} />
     </div>
   );
 };

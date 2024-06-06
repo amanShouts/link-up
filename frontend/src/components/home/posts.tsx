@@ -7,17 +7,7 @@ import { useRecoilState } from 'recoil';
 import { postState, refreshPost } from '@/store/recoil/posts.ts';
 import { useEffect } from 'react';
 
-export function Posts({
-  userId,
-  name,
-  username,
-  img,
-}: {
-  userId: number;
-  name: string;
-  username: string;
-  img: string;
-}) {
+export function Posts({ userId, name, username, img }: { userId: number; name: string; username: string; img: string }) {
   const [posts, setPosts] = useRecoilState(postState);
   const [refresh, setRefresh] = useRecoilState(refreshPost);
 
@@ -43,14 +33,7 @@ export function Posts({
     <div className="grid gap-6 col-span-10 lg:col-span-7 xl:col-span-5">
       {!posts.length && <span className="text-center">No post present</span>}
       {posts.map((post: PostType) => (
-        <Post
-          key={post.id}
-          post={post}
-          userId={userId}
-          name={name}
-          username={username}
-          img={img}
-        />
+        <Post key={post.id} post={post} userId={userId} name={name} username={username} img={img} />
       ))}
     </div>
   );

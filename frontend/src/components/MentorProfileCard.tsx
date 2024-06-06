@@ -2,11 +2,7 @@ import { AvatarImage, Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Button } from './ui/button';
 
-export default function MentorProfileCard({
-  data,
-}: {
-  data?: ProfileDataType;
-}) {
+export default function MentorProfileCard({ data }: { data?: ProfileDataType }) {
   if (!data) {
     return null;
   }
@@ -25,12 +21,7 @@ export default function MentorProfileCard({
           width="1063"
         />
         <Avatar className="absolute -bottom-12 left-4 w-24 h-24 border-4 border-white rounded-full">
-          <AvatarImage
-            alt="Profile picture"
-            height="96"
-            width="96"
-            src={data.profileImg}
-          />
+          <AvatarImage alt="Profile picture" height="96" width="96" src={data.profileImg} />
         </Avatar>
       </div>
       <div className="pt-16 pb-4 px-4">
