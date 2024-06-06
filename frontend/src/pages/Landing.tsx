@@ -6,10 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Landing() {
   const { user } = useUser();
-  const navigate = useNavigate();
+  const router = useNavigate();
   useEffect(() => {
-    if (user) navigate('/home');
-  }, [navigate, user]);
+    if (user) router('/home');
+  }, [router, user]);
   return (
     <div className="min-h-screen bg-gray-950 text-gray-50 dark:bg-gray-950 dark:text-gray-50">
       <HeroPage />
@@ -256,30 +256,31 @@ export default function Landing() {
 
 function HeroPage() {
   return (
-    <section className={'w-full h-[70vh] bg-white dark:bg-black flex items-center mt-40 md:mt-60 flex-col gap-6 relative'}>
+    <section className="w-full h-[70vh] bg-white dark:bg-black flex items-center mt-40 md:mt-60 flex-col gap-6 relative">
       <div className="dark:text-neutral-200 text-black bg-white dark:bg-black z-10 border border-neutral-700 rounded-full text-sm p-2 px-8 m-5 md:m-3 ">
         <p className={'z-10'}>
           Come and join
-          <span className={'underline px-2'}>millions</span>
+          <span className="underline px-2">millions</span>
           of enthusiasts like you.{' '}
         </p>
       </div>
 
       <h1 className="text-4xl md:text-6xl font-bold  z-10 w-[60%] dark:text-neutral-200 text-black text-center m-2">Welcome to Linkup.</h1>
-      <p className={'w-[70%] text-center z-10 text-lg dark:text-neutral-400 text-black'}>
-        {' '}
+      <p className="w-[70%] text-center z-10 text-lg dark:text-neutral-400 text-black">
         Discover a platform where entrepreneurs meet mentors and investors. Build meaningful connections to drive your business forward. Join us today and transform your entrepreneurial journey.
       </p>
-      <div className={' flex items-center w-[60%] mt-10 z-10'}>
-        <Button className="mr-4 w-[48%] z-10" variant="default">
-          <Link to={'/signup'}>Get Started</Link>
+      <div className="flex items-center w-[60%] mt-10 z-10">
+        <Button className="mr-4 w-[48%] z-10">
+          <Link to={'/signup'} className="w-full h-full">
+            Get Started
+          </Link>
         </Button>
 
         <Button className="mr-4 w-[48%] z-10 text-black dark:text-white border-neutral-700" variant="outline">
           Learn More
         </Button>
       </div>
-      <img className={'absolute top-[-50%] w-full dark:invert opacity-20 '} src={'/background.jpg'} />
+      <img className="absolute top-[-50%] w-full dark:invert opacity-20" src={'/background.jpg'} />
     </section>
   );
 }
