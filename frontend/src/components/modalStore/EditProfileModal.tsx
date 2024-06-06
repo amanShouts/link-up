@@ -1,11 +1,4 @@
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '../ui/button';
 import { useDispatch, useSelector } from 'react-redux';
 import { closeModal } from '@/store/slice/modalSlice';
@@ -21,10 +14,7 @@ export function EditProfile() {
       <DialogContent className="text-white">
         <DialogHeader>
           <DialogTitle>Profile is not complete.</DialogTitle>
-          <DialogDescription className="text-white">
-            To access all features please finish your profile. It will take just
-            5 minutes.
-          </DialogDescription>
+          <DialogDescription className="text-white">To access all features please finish your profile. It will take just 5 minutes.</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Link to="/onboarding">

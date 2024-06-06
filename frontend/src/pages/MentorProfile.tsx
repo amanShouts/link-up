@@ -1,10 +1,6 @@
 import AboutCard, { AboutDataType } from '@/components/AboutCard';
-import MentorProfileCard, {
-  ProfileDataType,
-} from '@/components/MentorProfileCard';
-import WorkExperienceCard, {
-  WorkExperienceDataType,
-} from '@/components/WorkExperienceCard';
+import MentorProfileCard, { ProfileDataType } from '@/components/MentorProfileCard';
+import WorkExperienceCard, { WorkExperienceDataType } from '@/components/WorkExperienceCard';
 import { BACKEND_URL } from '@/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
