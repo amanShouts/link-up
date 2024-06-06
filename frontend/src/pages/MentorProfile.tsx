@@ -19,7 +19,7 @@ export default function MentorProfile() {
   }, [mentorId]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center space-y-2">
+    <div className="w-full h-full min-h-screen flex flex-col items-center justify-center space-y-2">
       <MentorProfileCard data={profile?.profileData} />
       <AboutCard data={profile?.aboutData} />
       <WorkExperienceCard data={profile?.workExperienceData} />
