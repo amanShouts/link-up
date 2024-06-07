@@ -6,6 +6,7 @@ import { getSingleUserDetail } from '@/lib/fetchers/getSingleUserDetail.ts';
 import { Skeleton } from '@/components/ui/skeleton';
 import { Createpost } from '@/components/home/create-post.tsx';
 import { GETTING_SINGLE_USER } from '@/config.ts';
+import { Link } from 'react-router-dom';
 
 export function Profile({ userId }: { userId: number }) {
   const { data, error, isLoading } = useSWR(`${GETTING_SINGLE_USER}/${userId}`, getSingleUserDetail);
@@ -56,10 +57,12 @@ export function Profile({ userId }: { userId: number }) {
             <p className="text-sm text-center text-neutral-500 dark:text-neutral-300">{data?.desc}</p>
             {data.username && <Createpost userId={data.id} />}
 
-            <Button className={'w-full'}>
-              <EditIcon className={'mr-2 h-4 w-4'} />
-              Edit Profile
-            </Button>
+            <Link to={'/edit-profile'}>
+              <Button className={'w-full'}>
+                <EditIcon className={'mr-2 h-4 w-4'} />
+                Edit Profile
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
