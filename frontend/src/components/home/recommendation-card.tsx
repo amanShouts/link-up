@@ -1,9 +1,5 @@
 import { Card } from '@/components/ui/card.tsx';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui/avatar.tsx';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx';
 import { MentorDataType } from '@/components/MentorListCard.tsx';
 
 export function RecommendationCard({ mentor }: { mentor: MentorDataType }) {
@@ -19,9 +15,7 @@ export function RecommendationCard({ mentor }: { mentor: MentorDataType }) {
         </div>
         <div>
           <h4 className="text-sm font-medium">{mentor.name}</h4>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {mentor.currPost}
-          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">{mentor.currPost}</p>
         </div>
       </div>
     </Card>

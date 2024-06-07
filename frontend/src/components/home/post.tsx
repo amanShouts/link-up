@@ -1,16 +1,8 @@
 import { Card } from '@/components/ui/card.tsx';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui/avatar.tsx';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx';
 import { HeartIcon, LinkIcon, MessageCircleIcon, ViewIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button.tsx';
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-} from '@/components/ui/dialog.tsx';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog.tsx';
 import { Comments } from '@/components/home/comments.tsx';
 import { timeAgo } from '@/utils/timeAgo.ts';
 import { useEffect, useRef, useState } from 'react';
@@ -50,19 +42,7 @@ export type PostType = {
   }[];
 };
 
-export function Post({
-  post,
-  userId,
-  name,
-  img,
-  username,
-}: {
-  post: PostType;
-  userId: number;
-  name: string;
-  img: string;
-  username: string;
-}) {
+export function Post({ post, userId, name, img, username }: { post: PostType; userId: number; name: string; img: string; username: string }) {
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.like);
   const postRef = useRef(null);
@@ -148,9 +128,7 @@ export function Post({
             </div>
             <div>
               <h4 className="text-sm font-medium">{post.user.name}</h4>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                @_{post.user.username}
-              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">@_{post.user.username}</p>
             </div>
           </div>
 
@@ -159,27 +137,13 @@ export function Post({
 
         <div className="p-4">
           <h3 className="text-base underline font-semibold">{post.title}</h3>
-          <p className="dark:text-neutral-300 text-neutral-700 text-sm">
-            {post.desc}
-          </p>
+          <p className="dark:text-neutral-300 text-neutral-700 text-sm">{post.desc}</p>
         </div>
 
         <div className="grid grid-cols-1 gap-2 p-4">
-          {post.img && (
-            <img
-              alt="Post Image"
-              className="h-auto w-full rounded-lg object-cover"
-              src={post.img}
-            />
-          )}
+          {post.img && <img alt="Post Image" className="h-auto w-full rounded-lg object-cover" src={post.img} />}
 
-          {post.video && (
-            <video
-              className="h-auto w-full rounded-lg object-cover"
-              src={post.video}
-              controls
-            />
-          )}
+          {post.video && <video className="h-auto w-full rounded-lg object-cover" src={post.video} controls />}
 
           {post.link && (
             <Card className={'p-4 border-neutral-700 flex items-center gap-3'}>
@@ -193,45 +157,22 @@ export function Post({
           <div>
             <div className="flex items-center justify-between pt-2 text-gray-500 dark:text-gray-400">
               <div className="flex items-center justify-between w-full">
-                <Button
-                  size="icon"
-                  variant="ghost"
-                  className={'flex gap-1'}
-                  onClick={likeHandler}
-                >
-                  <HeartIcon
-                    className={cn(
-                      'h-4 w-4 transition-all duration-150 ease-linear',
-                      liked ? 'fill-red-500 text-red-500' : 'text-gray-500',
-                    )}
-                  />
+                <Button size="icon" variant="ghost" className={'flex gap-1'} onClick={likeHandler}>
+                  <HeartIcon className={cn('h-4 w-4 transition-all duration-150 ease-linear', liked ? 'fill-red-500 text-red-500' : 'text-gray-500')} />
                   <span className="sr-only">Like</span>
                   <span className={'text-sm'}>{likes}</span>
                 </Button>
                 <Dialog>
                   <DialogTrigger>
                     {' '}
-                    <Button
-                      size="icon"
-                      variant="ghost"
-                      className={'flex  gap-1'}
-                    >
+                    <Button size="icon" variant="ghost" className={'flex  gap-1'}>
                       <MessageCircleIcon className="h-4 w-4" />
                       <span className="sr-only">Comment</span>
                       <span className={'text-sm'}>{post.comment}</span>
                     </Button>
                   </DialogTrigger>
-                  <DialogContent
-                    className={'border-none bg-transparent max-w-[600px]'}
-                  >
-                    <Comments
-                      comments={post.comments}
-                      userId={userId}
-                      postId={post.id}
-                      name={name}
-                      username={username}
-                      img={img}
-                    />
+                  <DialogContent className={'border-none bg-transparent max-w-[600px]'}>
+                    <Comments comments={post.comments} userId={userId} postId={post.id} name={name} username={username} img={img} />
                   </DialogContent>
                 </Dialog>
                 <Button size="icon" variant="ghost" className={'flex gap-1'}>

@@ -1,9 +1,5 @@
 import { Card } from '@/components/ui/card.tsx';
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/components/ui/avatar.tsx';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar.tsx';
 import { commentType } from './comments.tsx';
 
 export function Comment({ comment }: { comment: commentType }) {
@@ -18,9 +14,7 @@ export function Comment({ comment }: { comment: commentType }) {
         </div>
         <div>
           <h4 className="text-xs font-medium">Emily Johnson</h4>
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            {comment.user.username}
-          </p>
+          <p className="text-xs text-gray-500 dark:text-gray-400">{comment.user.username}</p>
         </div>
       </div>
       <p className={'text-xs px-4 pb-4'}>{comment.commentContent}</p>

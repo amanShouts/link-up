@@ -25,10 +25,7 @@ export function EditProfile() {
       <DialogContent className="text-white">
         <DialogHeader>
           <DialogTitle>Profile is not complete.</DialogTitle>
-          <DialogDescription className="text-white">
-            To access all features please finish your profile. It will take just
-            5 minutes.
-          </DialogDescription>
+          <DialogDescription className="text-white">To access all features please finish your profile. It will take just 5 minutes.</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Link to="/onboarding">

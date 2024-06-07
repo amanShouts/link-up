@@ -44,9 +44,7 @@ export default function App() {
       navigate('/login');
     }
     if (isSignedIn && user) {
-      const currentUser = storedUsers.find(
-        (el) => el.username === user.username,
-      );
+      const currentUser = storedUsers.find((el) => el.username === user.username);
 
       dispatch(addCurrentUser(currentUser));
 
@@ -94,14 +92,8 @@ export default function App() {
 
   if (!isLoaded && window.location.pathname !== '/home') {
     return (
-      <div
-        className={
-          'w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center'
-        }
-      >
-        <Loader2
-          className={'animate-spin text-black dark:text-neutral-200 w-20 h-20'}
-        />
+      <div className={'w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center'}>
+        <Loader2 className={'animate-spin text-black dark:text-neutral-200 w-20 h-20'} />
       </div>
     );
   }
@@ -116,21 +108,12 @@ export default function App() {
         <Route path="/login" element={<CustomSignIn />} />
         <Route path="/signup" element={<CustomSignUp />} />
         <Route path="/signup/continue" element={<CustomSignIn />} />
-        <Route
-          path="/onboarding"
-          element={isSignedIn ? <Onboarding /> : null}
-        />
+        <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
-        <Route
-          path="/edit-profile"
-          element={isSignedIn ? <EditProfile /> : null}
-        />
+        <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
         <Route path="/mentors" element={isSignedIn ? <MentorList /> : null} />
-        <Route
-          path="/mentors/:mentorId"
-          element={isSignedIn ? <MentorProfile /> : null}
-        />
+        <Route path="/mentors/:mentorId" element={isSignedIn ? <MentorProfile /> : null} />
       </Routes>
     </main>
   );

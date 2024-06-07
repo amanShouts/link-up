@@ -14,19 +14,13 @@ export default function MentorList() {
     getAllMentor();
   }, []);
   return (
-    <section
-      id="mentorList"
-      className="w-full h-screen flex flex-col items-center justify-center"
-    >
+    <section id="mentorList" className="w-full h-full min:h-screen flex flex-col items-center justify-center">
       <div className="text-3xl mb-10">Connect to mentors</div>
       <div className="max-w-4xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {mentors?.map((mentor) => {
             return (
-              <div
-                key={mentor.id}
-                className="flex justify-center items-center m-2 col-span-1"
-              >
+              <div key={mentor.id} className="flex justify-center items-center m-2 col-span-1 max-w-sm h">
                 <MentorListCard data={mentor} />
               </div>
             );

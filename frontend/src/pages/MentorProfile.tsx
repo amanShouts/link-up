@@ -1,10 +1,6 @@
 import AboutCard, { AboutDataType } from '@/components/AboutCard';
-import MentorProfileCard, {
-  ProfileDataType,
-} from '@/components/MentorProfileCard';
-import WorkExperienceCard, {
-  WorkExperienceDataType,
-} from '@/components/WorkExperienceCard';
+import MentorProfileCard, { ProfileDataType } from '@/components/MentorProfileCard';
+import WorkExperienceCard, { WorkExperienceDataType } from '@/components/WorkExperienceCard';
 import { BACKEND_URL } from '@/config';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
@@ -23,7 +19,7 @@ export default function MentorProfile() {
   }, [mentorId]);
 
   return (
-    <div className="w-full flex flex-col items-center justify-center space-y-2">
+    <div className="w-full h-full min-h-screen flex flex-col items-center justify-center space-y-2">
       <MentorProfileCard data={profile?.profileData} />
       <AboutCard data={profile?.aboutData} />
       <WorkExperienceCard data={profile?.workExperienceData} />

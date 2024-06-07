@@ -9,12 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import { MentorDataType } from '@/components/MentorListCard';
 
 export function Recommendation() {
-  const { data, isLoading, error } = useSWR(
-    `${GETTING_MENTOR_LIST}`,
-    async (url) => {
-      return await axios.get(url);
-    },
-  );
+  const { data, isLoading, error } = useSWR(`${GETTING_MENTOR_LIST}`, async (url) => {
+    return await axios.get(url);
+  });
 
   const navigate = useNavigate();
 
@@ -26,19 +23,12 @@ export function Recommendation() {
 
   if (data) {
     return (
-      <div
-        className={
-          'col-span-2 hidden xl:flex flex-col gap-4 sticky top-24 h-fit'
-        }
-      >
-        {data.data.mentors.slice(0, 8).map((mentor: MentorDataType) => {
-          return <RecommendationCard mentor={mentor} />;
+      <div className={'col-span-2 hidden xl:flex flex-col gap-4 sticky top-24 h-fit'}>
+        {data.data.mentors.slice(0, 8).map((mentor: MentorDataType, index: number) => {
+          return <RecommendationCard key={index} mentor={mentor} />;
         })}
 
-        <Button
-          onClick={() => navigate('/mentors')}
-          className="flex pl-4 my-2 gap-4 text-center text-sm font-medium"
-        >
+        <Button onClick={() => navigate('/mentors')} className="flex pl-4 my-2 gap-4 text-center text-sm font-medium">
           <User2Icon className={'w-5 h-5'} /> Search for more Mentors...
         </Button>
       </div>

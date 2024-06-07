@@ -4,13 +4,7 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
 import axios from 'axios';
@@ -65,35 +59,14 @@ export default function Onboarding() {
           name: 'industry',
           label: 'Industry',
           type: 'select',
-          options: [
-            'Tech',
-            'Finance',
-            'Healthcare',
-            'Education',
-            'Marketing',
-            'Manufacturing',
-            'Retail',
-            'Consulting',
-          ],
+          options: ['Tech', 'Finance', 'Healthcare', 'Education', 'Marketing', 'Manufacturing', 'Retail', 'Consulting'],
           required: true,
         },
         {
           name: 'skill',
           label: 'Skill',
           type: 'select',
-          options: [
-            'Product Management',
-            'User Experience',
-            'Agile Methodologies',
-            'Data Analysis',
-            'Software Development',
-            'Project Management',
-            'Leadership',
-            'Communication',
-            'Digital Marketing',
-            'Cloud Computing',
-            'Cybersecurity',
-          ],
+          options: ['Product Management', 'User Experience', 'Agile Methodologies', 'Data Analysis', 'Software Development', 'Project Management', 'Leadership', 'Communication', 'Digital Marketing', 'Cloud Computing', 'Cybersecurity'],
           required: true,
         },
       ].filter(Boolean),
@@ -210,14 +183,8 @@ export default function Onboarding() {
             multiple
             options={field.options}
             value={userData[field.name]}
-            onChange={(event, newValue) =>
-              handleAutocompleteChange(field.name, newValue)
-            }
-            renderTags={(tagValue, getTagProps) =>
-              tagValue.map((option, index) => (
-                <Chip {...getTagProps({ index })} key={option} label={option} />
-              ))
-            }
+            onChange={(event, newValue) => handleAutocompleteChange(field.name, newValue)}
+            renderTags={(tagValue, getTagProps) => tagValue.map((option, index) => <Chip {...getTagProps({ index })} key={option} label={option} />)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -229,24 +196,9 @@ export default function Onboarding() {
           />
         );
       case 'boolean':
-        return (
-          <Switch
-            checked={userData.isMentor}
-            onCheckedChange={handleSwitchChange}
-          />
-        );
+        return <Switch checked={userData.isMentor} onCheckedChange={handleSwitchChange} />;
       default:
-        return (
-          <Input
-            type={field.type}
-            name={field.name}
-            value={userData[field.name]}
-            onChange={handleInputChange}
-            className="w-full border border-gray-300 p-2"
-            required={field.required}
-            placeholder={field.label}
-          />
-        );
+        return <Input type={field.type} name={field.name} value={userData[field.name]} onChange={handleInputChange} className="w-full border border-gray-300 p-2" required={field.required} placeholder={field.label} />;
     }
   };
 
@@ -263,21 +215,13 @@ export default function Onboarding() {
                   <div key={field.name} className="mb-4">
                     <p className="block mb-2">{field.label}</p>
                     <div>{renderField(field)}</div>
-                    {errors[field.name] && (
-                      <div className="text-red-500 text-sm">
-                        {errors[field.name]}
-                      </div>
-                    )}
+                    {errors[field.name] && <div className="text-red-500 text-sm">{errors[field.name]}</div>}
                   </div>
                 ))}
-                {question < steps.length - 1 && (
-                  <Button onClick={updateState}>Next</Button>
-                )}
+                {question < steps.length - 1 && <Button onClick={updateState}>Next</Button>}
                 <Progress className="mt-4" value={steps[question].state} />
               </div>
-              {question === steps.length - 1 && (
-                <Button onClick={handleButtonClick}>Complete Onboarding</Button>
-              )}
+              {question === steps.length - 1 && <Button onClick={handleButtonClick}>Complete Onboarding</Button>}
             </div>
           </div>
         </div>

@@ -21,44 +21,24 @@ export default function Navbar() {
       <div
         className={cn(
           'border-b flex md:hidden  justify-between dark:text-white pl-6 dark:border-neutral-800 px-2 py-2 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur',
-          open &&
-            'h-screen bg-white/100 dark:bg-black/100 items-start pt-16 w-screen',
+          open && 'h-screen bg-white/100 dark:bg-black/100 items-start pt-16 w-screen',
         )}
       >
         {open ? (
           <>
             <div className={'flex flex-col  items-start text-xl w-full'}>
-              <Link
-                to={'/home'}
-                className={
-                  'border-b border-neutral-700 w-full text-center p-6 dark:hover:bg-neutral-900 hover:bg-neutral-400'
-                }
-              >
+              <Link to={'/home'} className={'border-b border-neutral-700 w-full text-center p-6 dark:hover:bg-neutral-900 hover:bg-neutral-400'}>
                 Feed
               </Link>{' '}
-              <Link
-                to={'/mentors'}
-                className={
-                  'border-b border-neutral-700 w-full text-center p-6 dark:hover:bg-neutral-900 hover:bg-neutral-400'
-                }
-              >
+              <Link to={'/mentors'} className={'border-b border-neutral-700 w-full text-center p-6 dark:hover:bg-neutral-900 hover:bg-neutral-400'}>
                 Mentor
               </Link>{' '}
-              <Link
-                to={'/profile'}
-                className={
-                  'border-b border-neutral-700 w-full text-center p-6 dark:hover:bg-neutral-900 hover:bg-neutral-400'
-                }
-              >
+              <Link to={'/profile'} className={'border-b border-neutral-700 w-full text-center p-6 dark:hover:bg-neutral-900 hover:bg-neutral-400'}>
                 Profile
               </Link>
             </div>
 
-            <Button
-              variant={'link'}
-              onClick={menuHandler}
-              className={'absolute right-3 top-3'}
-            >
+            <Button variant={'link'} onClick={menuHandler} className={'absolute right-3 top-3'}>
               <X className={'h-5 w-5'} />
             </Button>
 
@@ -77,12 +57,7 @@ export default function Navbar() {
             ) : (
               <>
                 <Link to={'/login'}>Login</Link>
-                <Link
-                  className={
-                    'bg-primary dark:text-black text-neutral-200 px-4 py-2 rounded-lg mr-8 my-3'
-                  }
-                  to={'/signup'}
-                >
+                <Link className={'bg-primary dark:text-black text-neutral-200 px-4 py-2 rounded-lg mr-8 my-3'} to={'/signup'}>
                   Signup
                 </Link>
               </>
@@ -95,11 +70,7 @@ export default function Navbar() {
         )}
       </div>{' '}
       {/* navbar for large windows*/}
-      <div
-        className={
-          'border-b hidden md:flex justify-between dark:text-white pl-6 dark:border-neutral-800 px-2 py-2 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur'
-        }
-      >
+      <div className={'border-b hidden md:flex justify-between dark:text-white pl-6 dark:border-neutral-800 px-2 py-2 items-center sticky top-0 z-[100] bg-white/40 dark:bg-black/40 backdrop-blur'}>
         <Link to={'/'}>
           <h1 className={'font-semibold'}>Link-up.</h1>
         </Link>
@@ -117,12 +88,7 @@ export default function Navbar() {
           ) : (
             <>
               <Link to={'/login'}>Login</Link>
-              <Link
-                className={
-                  'bg-primary dark:text-black text-neutral-200 px-4 py-2 rounded-lg mr-8 my-3'
-                }
-                to={'/signup'}
-              >
+              <Link className={'bg-primary dark:text-black text-neutral-200 px-4 py-2 rounded-lg mr-8 my-3'} to={'/signup'}>
                 Signup
               </Link>
             </>
