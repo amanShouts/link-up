@@ -11,7 +11,7 @@ export default function MentorProfileCard({ data }: { data?: ProfileDataType }) 
       <div className="relative">
         <img
           alt="Background"
-          className="w-full h-48 object-cover"
+          className="w-full min-h-[48px] object-cover"
           height="200"
           src={data.bgImg}
           style={{
