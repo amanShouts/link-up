@@ -8,7 +8,7 @@ import { timeAgo } from '@/utils/timeAgo.ts';
 import { useEffect, useRef, useState } from 'react';
 import { cn } from '@/lib/utils.ts';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BACKEND_URL } from '@/config.ts';
 
 export type PostType = {
@@ -46,6 +46,12 @@ export function Post({ post, userId, name, img, username }: { post: PostType; us
   const [liked, setLiked] = useState(false);
   const [likes, setLikes] = useState(post.like);
   const postRef = useRef(null);
+
+  const navigate = useNavigate();
+
+  const handleNavigateToProfile = () => {
+    navigate(`/profile/${post.user.id}`)
+  }
 
   useEffect(() => {
     setLiked(post.liked);
@@ -118,7 +124,7 @@ export function Post({ post, userId, name, img, username }: { post: PostType; us
     <div ref={postRef}>
       <Card className="rounded-2xl  shadow-neutral-300 dark:border-neutral-700 dark:shadow-none shadow-[0px_0px_20px_1px] ">
         <div className="flex pl-4 mt-4 gap-4 justify-between">
-          <div className={'flex gap-4 items-center'}>
+          <div className={'flex gap-4 items-center user-info-gist cursor-pointer'} onClick={handleNavigateToProfile}>
             <div className="relative">
               <Avatar className="border-2 border-neutral-700">
                 <AvatarImage alt="@shadcn" src={post.user.img} />
