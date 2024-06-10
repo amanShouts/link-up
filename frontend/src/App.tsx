@@ -14,7 +14,7 @@ import DetailsModal from './components/modalStore/DetailsModal';
 import { Toaster } from 'react-hot-toast';
 import UserProfile from './pages/UserProfile';
 import Dm from './components/Messaging/Dm';
-import UserPrefrences from './pages/UserPrefrences';
+import UserPrefrences from './pages/UserPreferences';
 
 const CustomSignIn = React.lazy(() => import('./pages/CustomSignIn'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -120,7 +120,7 @@ export default function App() {
         <Route path="/mentors" element={isSignedIn ? <MentorList /> : null} />
         <Route path="/mentors/:mentorId" element={isSignedIn ? <MentorProfile /> : null} />
 
-        <Route path="/user-prefrence" element={isSignedIn ? <UserPrefrences /> : null} />
+        <Route path="/user-preference" element={isSignedIn ? <UserPrefrences /> : null} />
       </Routes>
     </main>
   );
