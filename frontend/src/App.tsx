@@ -13,6 +13,7 @@ import axios from 'axios';
 import DetailsModal from './components/modalStore/DetailsModal';
 import { Toaster } from 'react-hot-toast';
 import UserProfile from './pages/UserProfile';
+import Dm from './components/Messaging/Dm';
 
 const CustomSignIn = React.lazy(() => import('./pages/CustomSignIn'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -107,6 +108,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<CustomSignIn />} />
+        <Route path="/direct-messages" element={<Dm/>} />
         <Route path="/signup" element={<CustomSignUp />} />
         <Route path="/signup/continue" element={<CustomSignIn />} />
         <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />

@@ -1,17 +1,18 @@
 import { AvatarImage, Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Button } from './ui/button';
+import { Link } from 'react-router-dom';
 
 export default function MentorProfileCard({ data }: { data?: ProfileDataType }) {
   if (!data) {
     return null;
   }
   return (
-    <Card className="w-full max-w-2xl rounded-lg shadow-md overflow-hidden hover:shadow-2xl dark:hover:shadow-slate-200 transition duration-500">
+    <Card className="w-full max-w-2xl rounded-lg shadow-md overflow-hidden hover:shadow-2xl dark:hover:shadow-slate-200 transition duration-500 h-[100%] max-h-[320px]">
       <div className="relative">
         <img
           alt="Background"
-          className="w-full min-h-[48px] object-cover"
+          className="w-full object-cover"
           height="200"
           src={data.bgImg}
           style={{
@@ -35,9 +36,11 @@ export default function MentorProfileCard({ data }: { data?: ProfileDataType }) 
           <Button className="mr-2 active:ring-2" variant="secondary">
             Follow
           </Button>
-          <Button className="mr-2 active:ring-2" variant="secondary">
-            DM
-          </Button>
+          <Link to={'/direct-messages'}>
+            <Button className="mr-2 active:ring-2" variant="secondary">
+              DM
+            </Button>
+          </Link>
         </div>
       </div>
     </Card>
