@@ -30,6 +30,7 @@ export function Posts({
     (url: string) =>
       axios.get(url).then((res) => {
         res.data;
+        console.log(res, res.data, " amnnnnnnnnnnnnnnn", url)
         setPosts(res.data);
       }),
     {
@@ -51,6 +52,7 @@ export function Posts({
           img={img}
         />
       ))}
+     
     </div>
   );
 }

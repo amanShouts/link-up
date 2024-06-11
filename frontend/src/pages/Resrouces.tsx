@@ -83,6 +83,7 @@ export function Resources() {
   const [file, setFile] = useState<string | null>(null);
   const [resourcelist, setResourcelist] = useState([]);
   const [content, setContent] = useState('');
+  const [title, setTitle] = useState('');
 
   console.log(selectedResourcetype, selectedType, file);
   const currentUser = useSelector(
@@ -101,6 +102,7 @@ export function Resources() {
       title: title,
       userId: currentUser.id,
       link: file ? file : null,
+      category : selectedResourcetype,
     };
     const res = await axios.post(`${BACKEND_URL}/resource/add`, resourceObj);
     const data = res.data;
@@ -187,7 +189,8 @@ export function Resources() {
                                 : 'text-left'
                             } pt-0`}
                           >
-                            {resource.author}
+                            <span>{resource.name} </span>
+                            <span className='text-slate-300 text-sm'> {resource.username} </span>
                           </CardDescription>
                         </CardHeader>
                         <CardContent className="w-full p-0">
@@ -240,6 +243,8 @@ export function Resources() {
                         type="email"
                         id="email_input"
                         placeholder="Add Title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
                       />
                     </div>
 
