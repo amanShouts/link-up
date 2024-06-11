@@ -16,7 +16,7 @@ export const getPosts = async (userId: string) => {
             username: true,
           },
         },
-        likedBy: true,
+        // likedBy: true,
         label: true,
         comments: {
           include: {
@@ -32,14 +32,15 @@ export const getPosts = async (userId: string) => {
       },
     });
     // check if user liked the post
-    const postsWithLiked = posts.map((post) => ({
-      ...post,
-      liked: post.likedBy.some((user) => user.userId === parseInt(userId)),
-    }));
+    // const postsWithLiked = posts.map((post) => ({
+    //   ...post,
+    //   liked: post.likedBy.some((user) => user.userId === parseInt(userId)),
+    // }));
 
-    console.log(postsWithLiked[0].comments);
+    // console.log(postsWithLiked[0].comments);
 
-    return postsWithLiked;
+    // return postsWithLiked;
+    return posts;
   } catch (error) {
     throw new Error('Error fetching posts');
   }
@@ -60,11 +61,11 @@ export const likePost = async ({
         like: {
           increment: 1,
         },
-        likedBy: {
-          create: {
-            userId: parseInt(userId),
-          },
-        },
+        // likedBy: {
+        //   create: {
+        //     userId: parseInt(userId),
+        //   },
+        // },
       },
     });
     return post;
@@ -90,12 +91,12 @@ export const unlikePost = async ({
         like: {
           decrement: 1,
         },
-        likedBy: {
-          deleteMany: {
-            userId: parseInt(userId),
-            postId: parseInt(postId),
-          },
-        },
+        // likedBy: {
+        //   deleteMany: {
+        //     userId: parseInt(userId),
+        //     postId: parseInt(postId),
+        //   },
+        // },
       },
     });
     return post;

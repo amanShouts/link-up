@@ -35,8 +35,19 @@ model User {
   receivedMessages Chat[]         @relation("Receiver")
   mentor           Mentor[]       @relation("Mentor")
   entrepreneur     Entrepreneur[] @relation("Entrepreneur")
-  UserLiked        UserLiked[]
   resources        Resource[]     @relation("Resource")
+}
+
+model Resource {
+  id        Int          @id @default(autoincrement())
+  type      ResourceType
+  content   String
+  title     String
+  createdAt DateTime     @default(now())
+  link      String?
+  category  String
+  author    User    @relation("Resource", fields: [authorId], references: [id])
+  authorId  Int     // Define the foreign key field
 }
 
 model Industry {
@@ -130,17 +141,6 @@ model Comment {
   post Post @relation(fields: [postId], references: [id])
 }
 
-model Resource {
-  id        Int          @id @default(autoincrement())
-  type      ResourceType
-  content   String
-  title     String
-  createdAt DateTime     @default(now())
-  link      String?
-  category  String
-  author    User    @relation("Resource", fields: [authorId], references: [id])
-  authorId  Int     // Define the foreign key field
-}
 
 model Chat {
   id         Int      @id @default(autoincrement())

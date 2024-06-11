@@ -13,6 +13,7 @@ export const getPostsController = async (req: Request, res: Response) => {
   const userId = req.params.userId;
   try {
     const posts = await getPosts(userId);
+    console.log(posts, " --------------------------- posts"), userId
     return res.json(posts);
   } catch (error) {
     res.status(500).json({ error: 'Error fetching posts' });
