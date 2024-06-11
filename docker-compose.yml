@@ -1,34 +1,44 @@
 version: "3.9"
 
 services:
-  # backend:
-  #   container_name: link_up_backend
-  #   build:
-  #     context: ./backend
-  #     dockerfile: Dockerfile.backend
-  #   volumes:
-  #     - ./backend:/backend
-  #     - /backend/node_modules
-  #   ports:
-  #     - "3000:3000"
-  #     - "5555:5555"
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
+  backend:
+    container_name: link_up_backend
+    restart: always
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.backend
+    volumes:
+      - ./backend:/backend
+      - /backend/node_modules
+    ports:
+      - "3000:3000"
+      - "5555:5555"
+    env_file:
+      - path: ./backend/.env
+        required: true
 
-  # frontend:
-  #   container_name: link_up_frontend
-  #   build:
-  #     context: ./frontend
-  #     dockerfile: Dockerfile.frontend
-  #   volumes: 
-  #     - ./frontend:/frontend
-  #     - /frontend/node_modules
-  #   ports:
-  #     - "5173:5173"
-  #   depends_on:
-  #     db:
-  #       condition: service_healthy
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    container_name: link_up_frontend
+    restart: always
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.frontend
+    volumes: 
+      - ./frontend:/frontend
+      - /frontend/node_modules
+    ports:
+      - "5173:5173"
+    env_file:
+      - path: ./frontend/.env
+        required: true
+
+    depends_on:
+      db:
+        condition: service_healthy
 
   db:
     container_name: db

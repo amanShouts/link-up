@@ -18,8 +18,8 @@ async function main() {
             and user experience design. He has worked on a variety of projects, from enterprise software to
             consumer-facing applications.`,
       bio: 'Alumni of XYZ University | Major in ABC',
-      city: 'City',
-      country: 'Country',
+      city: 'Pune',
+      country: 'India',
       experience: {
         createMany: {
           data: [
@@ -300,6 +300,7 @@ async function main() {
   });
 
   // Upsert posts
+
   const post1 = await prisma.post.upsert({
     where: { id: 1 },
     update: {},

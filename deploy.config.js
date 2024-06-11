@@ -10,7 +10,7 @@ module.exports = {
         CLOUDINARY_API_KEY: "Your_Cloud_API_Key",
         CLOUDINARY_SECRET: "Your_Cloud_Secret",
       },
-    },
+    }
   ],
   script: "serve",
   env: {

@@ -12,7 +12,8 @@ import { RootState } from './store/store';
 import axios from 'axios';
 import DetailsModal from './components/modalStore/DetailsModal';
 import { Toaster } from 'react-hot-toast';
-import { Resources } from './pages/Resrouces';
+import UserProfile from './pages/UserProfile';
+import Dm from './components/Messaging/Dm';
 
 const CustomSignIn = React.lazy(() => import('./pages/CustomSignIn'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -30,7 +31,8 @@ export default function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const storedUsers = useSelector((state: RootState) => state.users.users);
-  console.log(user, " this is user -------", storedUsers)
+  const { isOpen, refresh } = useSelector((state: RootState) => state.modal);
+
   const toggleModal = (type: string) => {
     dispatch(modalDetails(type));
     dispatch(openModal());
@@ -45,32 +47,21 @@ export default function App() {
       navigate('/login');
     }
     if (isSignedIn && user) {
-      console.log('user: ', user);
-
-      const currentUser = storedUsers.find(
-        (el) => el.username === user.username,
-      );
+      const currentUser = storedUsers.find((el) => el.username === user.username);
 
       dispatch(addCurrentUser(currentUser));
-      console.log('currentUser: ', currentUser);
 
-      if (
-        currentUser &&
-        (currentUser?.age === null ||
-          currentUser?.city === null ||
-          currentUser?.type == null)
-      ) {
-        // console.log('here');
+      if ( currentUser && (currentUser?.age === null || currentUser?.city === null || currentUser?.type == null) ) {
+        console.log('here');
         toggleModal('edit-profile-modal');
       }
-    } else {
-      // console.log('user not signied in');
     }
   }, [isLoaded, isSignedIn, navigate, window.location]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log('refresh',refresh)
         const response = await fetch(BACKEND_URL + '/users');
         const responseData = await response.json();
 
@@ -81,7 +72,7 @@ export default function App() {
     };
 
     fetchData();
-  }, []);
+  }, [isOpen, window.location, refresh]);
 
   useEffect(() => {
     const usernameArray = storedUsers.map((el) => {
@@ -96,25 +87,16 @@ export default function App() {
           img: user.imageUrl,
           lastLogin: user.lastSignInAt,
         })
-        .then((response) => {
-          console.log(response);
-        })
         .catch((error) => {
-          console.log(error);
+          console.error(error);
         });
     }
   }, [storedUsers, user]);
 
   if (!isLoaded && window.location.pathname !== '/home') {
     return (
-      <div
-        className={
-          'w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center'
-        }
-      >
-        <Loader2
-          className={'animate-spin text-black dark:text-neutral-200 w-20 h-20'}
-        />
+      <div className={'w-screen h-screen bg-white dark:bg-black dark:text-white flex items-center justify-center'}>
+        <Loader2 className={'animate-spin text-black dark:text-neutral-200 w-20 h-20'} />
       </div>
     );
   }
@@ -127,24 +109,16 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/login" element={<CustomSignIn />} />
+        <Route path="/direct-messages" element={<Dm/>} />
         <Route path="/signup" element={<CustomSignUp />} />
         <Route path="/signup/continue" element={<CustomSignIn />} />
-        <Route
-          path="/onboarding"
-          element={isSignedIn ? <Onboarding /> : null}
-        />
+        <Route path="/onboarding" element={isSignedIn ? <Onboarding /> : null} />
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
-        <Route
-          path="/edit-profile"
-          element={isSignedIn ? <EditProfile /> : null}
-        />
+        <Route path="/profile/:userId" element={isSignedIn ? <UserProfile/> : null} />
+        <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
         <Route path="/mentors" element={isSignedIn ? <MentorList /> : null} />
-        <Route
-          path="/mentors/:mentorId"
-          element={isSignedIn ? <MentorProfile /> : null}
-        />
-        <Route path="/resources" element={ <Resources /> } />
+        <Route path="/mentors/:mentorId" element={isSignedIn ? <MentorProfile /> : null} />
       </Routes>
     </main>
   );

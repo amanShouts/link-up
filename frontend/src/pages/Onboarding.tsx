@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Progress } from '@/components/ui/progress';
@@ -12,9 +11,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from '@clerk/clerk-react';
 import { useDispatch } from 'react-redux';
-import { closeModal } from '@/store/slice/modalSlice';
+import { closeModal, refreshCalls } from '@/store/slice/modalSlice';
 import Autocomplete from '@mui/material/Autocomplete';
 import { Chip, TextField } from '@mui/material';
+import { BACKEND_URL } from '@/config';
+import { addCurrentUser } from '@/store/slice/userSlice';
 
 export default function Onboarding() {
   const navigate = useNavigate();
@@ -58,35 +59,14 @@ export default function Onboarding() {
           name: 'industry',
           label: 'Industry',
           type: 'select',
-          options: [
-            'Tech',
-            'Finance',
-            'Healthcare',
-            'Education',
-            'Marketing',
-            'Manufacturing',
-            'Retail',
-            'Consulting',
-          ],
+          options: ['Tech', 'Finance', 'Healthcare', 'Education', 'Marketing', 'Manufacturing', 'Retail', 'Consulting'],
           required: true,
         },
         {
           name: 'skill',
           label: 'Skill',
           type: 'select',
-          options: [
-            'Product Management',
-            'User Experience',
-            'Agile Methodologies',
-            'Data Analysis',
-            'Software Development',
-            'Project Management',
-            'Leadership',
-            'Communication',
-            'Digital Marketing',
-            'Cloud Computing',
-            'Cybersecurity',
-          ],
+          options: ['Product Management', 'User Experience', 'Agile Methodologies', 'Data Analysis', 'Software Development', 'Project Management', 'Leadership', 'Communication', 'Digital Marketing', 'Cloud Computing', 'Cybersecurity'],
           required: true,
         },
       ].filter(Boolean),
@@ -137,6 +117,7 @@ export default function Onboarding() {
   };
 
   const updateState = () => {
+    dispatch(refreshCalls());
     if (validateFields()) {
       setQuestion((prevState) => prevState + 1);
     }
@@ -158,11 +139,11 @@ export default function Onboarding() {
   };
 
   const handleButtonClick = () => {
+    addCurrentUser({...userData})
     if (validateFields()) {
       axios
-        .put('http://localhost:3000/edit-user', { ...userData })
-        .then((response) => {
-          console.log(response.data);
+        .put(`${BACKEND_URL}/edit-user`, { ...userData })
+        .then(() => {
           navigate('/home', { replace: true });
         })
         .catch((error) => {
@@ -202,14 +183,8 @@ export default function Onboarding() {
             multiple
             options={field.options}
             value={userData[field.name]}
-            onChange={(event, newValue) =>
-              handleAutocompleteChange(field.name, newValue)
-            }
-            renderTags={(tagValue, getTagProps) =>
-              tagValue.map((option, index) => (
-                <Chip {...getTagProps({ index })} key={option} label={option} />
-              ))
-            }
+            onChange={(event, newValue) => handleAutocompleteChange(field.name, newValue)}
+            renderTags={(tagValue, getTagProps) => tagValue.map((option, index) => <Chip {...getTagProps({ index })} key={option} label={option} />)}
             renderInput={(params) => (
               <TextField
                 {...params}
@@ -221,32 +196,11 @@ export default function Onboarding() {
           />
         );
       case 'boolean':
-        return (
-          <Switch
-            checked={userData.isMentor}
-            onCheckedChange={handleSwitchChange}
-          />
-        );
+        return <Switch checked={userData.isMentor} onCheckedChange={handleSwitchChange} />;
       default:
-        return (
-          <Input
-            type={field.type}
-            name={field.name}
-            value={userData[field.name]}
-            onChange={handleInputChange}
-            className="w-full border border-gray-300 p-2"
-            required={field.required}
-            placeholder={field.label}
-          />
-        );
+        return <Input type={field.type} name={field.name} value={userData[field.name]} onChange={handleInputChange} className="w-full border border-gray-300 p-2" required={field.required} placeholder={field.label} />;
     }
   };
-
-  console.log('userData: ', userData);
-
-  useEffect(() => {
-    dispatch(closeModal());
-  }, [user, dispatch]);
 
   return (
     <div>
@@ -261,21 +215,13 @@ export default function Onboarding() {
                   <div key={field.name} className="mb-4">
                     <p className="block mb-2">{field.label}</p>
                     <div>{renderField(field)}</div>
-                    {errors[field.name] && (
-                      <div className="text-red-500 text-sm">
-                        {errors[field.name]}
-                      </div>
-                    )}
+                    {errors[field.name] && <div className="text-red-500 text-sm">{errors[field.name]}</div>}
                   </div>
                 ))}
-                {question < steps.length - 1 && (
-                  <Button onClick={updateState}>Next</Button>
-                )}
+                {question < steps.length - 1 && <Button onClick={updateState}>Next</Button>}
                 <Progress className="mt-4" value={steps[question].state} />
               </div>
-              {question === steps.length - 1 && (
-                <Button onClick={handleButtonClick}>Complete Onboarding</Button>
-              )}
+              {question === steps.length - 1 && <Button onClick={handleButtonClick}>Complete Onboarding</Button>}
             </div>
           </div>
         </div>

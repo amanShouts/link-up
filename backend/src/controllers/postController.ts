@@ -16,7 +16,10 @@ export const getPostsController = async (req: Request, res: Response) => {
     console.log(posts, " --------------------------- posts"), userId
     return res.json(posts);
   } catch (error) {
-    res.status(500).json({ error: 'Error fetching posts' });
+    console.log('error ', error);
+    res
+      .status(500)
+      .json({ error: 'Error fetching posts 1', msg: JSON.stringify(error) });
   }
 };
 

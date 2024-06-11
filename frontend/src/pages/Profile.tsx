@@ -1,10 +1,6 @@
 import AboutCard, { AboutDataType } from '@/components/AboutCard';
-import MentorProfileCard, {
-  ProfileDataType,
-} from '@/components/MentorProfileCard';
-import WorkExperienceCard, {
-  WorkExperienceDataType,
-} from '@/components/WorkExperienceCard';
+import MentorProfileCard, { ProfileDataType } from '@/components/MentorProfileCard';
+import WorkExperienceCard, { WorkExperienceDataType } from '@/components/WorkExperienceCard';
 import { BACKEND_URL } from '@/config';
 import { useUser } from '@clerk/clerk-react';
 import axios from 'axios';
@@ -16,11 +12,8 @@ export default function Profile() {
   const { username } = user as unknown as { username: string };
   useEffect(() => {
     async function getProfileDetail() {
-      const response = await axios.get(
-        `${BACKEND_URL}/api/profile/${username}`,
-      );
+      const response = await axios.get(`${BACKEND_URL}/api/profile/${username}`);
       const data = await response.data;
-      console.log(data);
       setProfile(data);
     }
     getProfileDetail();

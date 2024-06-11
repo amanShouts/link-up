@@ -6,7 +6,8 @@ import {
   getUserId,
   onboardingRoute,
   saveUserRoute,
-  updateUserIndustriesRoute} from './routes/userRoutes';
+  updateUserIndustriesRoute,
+} from './routes/userRoutes';
 import bodyParser from 'body-parser';
 import mentorRoutes from './routes/mentorRoutes';
 import { getUserProfile } from './controllers/userController';
