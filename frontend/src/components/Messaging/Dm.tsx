@@ -1,15 +1,31 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/UT4LtbNayto
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-import { Input } from "@/components/ui/input"
-import { Link } from "react-router-dom"
-import { Avatar, AvatarFallback } from "@/components/ui/avatar"
-import { Textarea } from "@/components/ui/textarea"
-import { Button } from "@/components/ui/button"
+import { useEffect } from 'react';
+import { io } from 'socket.io-client';
+import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { SendIcon } from "lucide-react";
 
 export default function Dm() {
+  useEffect(() => {
+    const socket = io('http://localhost:3000',{
+      transports: ['websocket']
+    });
+
+    socket.on('connect', () => {
+      console.log('Connected to server');
+    });
+
+    socket.on('connect_error', (error) => {
+      console.error('Connection failed:', error);
+    });
+
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
   return (
     <div className="grid grid-cols-[300px_1fr] h-[80vh] max-h-[800px] w-full bg-white dark:bg-gray-950 rounded-xl overflow-hidden">
       <div className="border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
@@ -130,25 +146,5 @@ export default function Dm() {
         </div>
       </div>
     </div>
-  )
-}
-
-function SendIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="m22 2-7 20-4-9-9-4Z" />
-      <path d="M22 2 11 13" />
-    </svg>
-  )
+  );
 }
