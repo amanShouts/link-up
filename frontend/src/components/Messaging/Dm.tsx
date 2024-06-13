@@ -27,7 +27,7 @@ export default function Dm() {
   }, []);
 
   return (
-    <div className="grid grid-cols-[300px_1fr] h-[80vh] max-h-[800px] w-full bg-white dark:bg-gray-950 rounded-xl overflow-hidden">
+    <div className="direct-messages-container grid grid-cols-[300px_1fr] min-h-[95vh] w-full bg-white dark:bg-gray-950 rounded-xl overflow-hidden">
       <div className="border-r border-gray-200 dark:border-gray-800 overflow-y-auto">
         <div className="sticky top-0 bg-white dark:bg-gray-950 z-10 border-b border-gray-200 dark:border-gray-800 px-4 py-3">
           <Input placeholder="Search conversations" className="bg-gray-100 dark:bg-gray-800 dark:text-gray-50" />
@@ -83,8 +83,8 @@ export default function Dm() {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col">
-        <div className="border-b border-gray-200 dark:border-gray-800 px-6 py-4">
+      <div className="flex flex-col relative">
+        <div className="user-profile-link border-b border-gray-200 dark:border-gray-800 px-6 py-4">
           <div className="flex items-center gap-4">
             <Avatar>
               <img src="/placeholder.svg" alt="John Doe" />
@@ -96,48 +96,12 @@ export default function Dm() {
             </div>
           </div>
         </div>
-        <div className="flex-1 overflow-y-auto px-6 py-4 space-y-4">
-          <div className="flex items-start gap-4">
-            <Avatar>
-              <img src="/placeholder.svg" alt="John Doe" />
-              <AvatarFallback>JD</AvatarFallback>
-            </Avatar>
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[75%]">
-              <div className="font-medium">John Doe</div>
-              <div className="text-sm">Hey, did you see the new design updates?</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">2:34 PM</div>
-            </div>
-          </div>
-          <div className="flex items-start gap-4 justify-end">
-            <div className="bg-blue-500 text-white rounded-lg p-3 max-w-[75%]">
-              <div className="font-medium">You</div>
-              <div className="text-sm">Yeah, I like the new look. It's a big improvement.</div>
-              <div className="text-xs text-gray-300 mt-1">2:35 PM</div>
-            </div>
-            <Avatar>
-              <img src="/placeholder.svg" alt="You" />
-              <AvatarFallback>YO</AvatarFallback>
-            </Avatar>
-          </div>
-          <div className="flex items-start gap-4">
-            <Avatar>
-              <img src="/placeholder.svg" alt="John Doe" />
-              <AvatarFallback>JD</AvatarFallback>
-            </Avatar>
-            <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-3 max-w-[75%]">
-              <div className="font-medium">John Doe</div>
-              <div className="text-sm">Great, I'll share the updates with the team.</div>
-              <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">2:36 PM</div>
-            </div>
-          </div>
+        <div className="messages-container flex-1 overflow-y-auto px-6 py-4 space-y-4">
+          
         </div>
-        <div className="border-t border-gray-200 dark:border-gray-800 px-6 py-4">
-          <div className="relative">
-            <Textarea
-              placeholder="Type your message..."
-              className="w-full bg-gray-100 dark:bg-gray-800 dark:text-gray-50 rounded-lg pr-16 resize-none"
-              rows={1}
-            />
+        <div className="message-box-and-send-btn-container border-t border-gray-200 dark:border-gray-800 px-6 w-[100%] absolute bottom-5">
+          <div className="relative flex item-center gap-4">
+            <Input type="text" placeholder="Type your message" className='w-[100%] box-content p-3' />
             <Button type="submit" size="icon" className="absolute top-1/2 right-3 -translate-y-1/2">
               <SendIcon className="w-5 h-5" />
               <span className="sr-only">Send</span>
