@@ -139,7 +139,7 @@ export default function Onboarding() {
   };
 
   const handleButtonClick = () => {
-    addCurrentUser({...userData})
+    addCurrentUser({ ...userData });
     if (validateFields()) {
       axios
         .put(`${BACKEND_URL}/edit-user`, { ...userData })
