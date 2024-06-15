@@ -9,7 +9,8 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export default function UserProfile() {
-  const [user, setUser] = useState();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [user, setUser] = useState<any>();
   const [username, setUsername] = useState();
 
   const { userId } = useParams();
@@ -18,9 +19,8 @@ export default function UserProfile() {
   const [profile, setProfile] = useState<UserDataType | null>(null);
 
   useEffect(() => {
-    const temp = users.find((user) => user.id.toString() === userId);
-    console.log('temp', temp);
-    console.log('userId', userId);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const temp: any = users.find((user) => user.id.toString() === userId);
     setUsername(temp?.username);
     setUser(temp);
   }, [userId, users]);
