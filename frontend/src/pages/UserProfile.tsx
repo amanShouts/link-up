@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export default function UserProfile() {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
   const [user, setUser] = useState<any>();
   const [username, setUsername] = useState();
 
