@@ -9,25 +9,22 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 export default function UserProfile() {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars
+  const [_, setUser] = useState<any>();
+  const [username, setUsername] = useState();
 
-  const [user, setUser] = useState();
-  const [username, setUsername] = useState()
-
-  const { userId } = useParams()
-  const { users } = useSelector((state:RootState) => state.users )
+  const { userId } = useParams();
+  const { users } = useSelector((state: RootState) => state.users);
 
   const [profile, setProfile] = useState<UserDataType | null>(null);
-  
+
   useEffect(() => {
-    const temp = users.find(user => user.id.toString() === userId);
-    console.log('temp', temp);
-    console.log('userId', userId);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const temp: any = users.find((user) => user.id.toString() === userId);
     setUsername(temp?.username);
     setUser(temp);
-}, [userId, users]);
+  }, [userId, users]);
 
-  
-  
   useEffect(() => {
     async function getProfileDetail() {
       const response = await axios.get(`${BACKEND_URL}/api/profile/${username}`);

@@ -50,8 +50,8 @@ export function Post({ post, userId, name, img, username }: { post: PostType; us
   const navigate = useNavigate();
 
   const handleNavigateToProfile = () => {
-    navigate(`/profile/${post.user.id}`)
-  }
+    navigate(`/profile/${post.user.id}`);
+  };
 
   useEffect(() => {
     setLiked(post.liked);

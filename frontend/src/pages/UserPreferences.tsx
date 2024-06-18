@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 
 const UserPrefrences = () => {
   const [step, setStep] = useState(1);
-  const [selections, setSelections] = useState({ 1: null, 2: null });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selections, setSelections] = useState<any>({ 1: null, 2: null });
   const [isFinished, setIsFinished] = useState(false);
 
   useEffect(() => {
@@ -46,8 +47,10 @@ const UserPrefrences = () => {
     }
   };
 
-  const handleSelection = (preference) => {
-    setSelections((prev) => ({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleSelection = (preference: any) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    setSelections((prev: any) => ({
       ...prev,
       [step]: preference,
     }));
@@ -83,7 +86,7 @@ const UserPrefrences = () => {
           <Progress value={progressValue} className="mb-4" />
           <ToggleGroup type="single" onValueChange={handleSelection}>
             {options[step - 1].preferences.map((preference) => (
-              <ToggleGroupItem key={preference.label} value={preference} onClick={() => handleSelection(preference)} selected={currentSelection && currentSelection.label === preference.label}>
+              <ToggleGroupItem key={preference.label} value={preference.value.toString()} onClick={() => handleSelection(preference)} defaultValue={currentSelection && currentSelection.label === preference.label}>
                 {preference.label}
               </ToggleGroupItem>
             ))}
