@@ -95,6 +95,7 @@ export async function getUserDetailsByUsername(username: string) {
     select: {
       id: true,
       name: true,
+      username: true,
       currDesignation: true,
       img: true,
       bgImg: true,

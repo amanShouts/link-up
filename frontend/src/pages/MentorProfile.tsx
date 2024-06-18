@@ -1,5 +1,6 @@
 import AboutCard, { AboutDataType } from '@/components/AboutCard';
-import MentorProfileCard, { ProfileDataType } from '@/components/MentorProfileCard';
+import ProfileCard from '@/components/ProfileCard';
+import { ProfileDataType } from '@/components/ProfileCard';
 import WorkExperienceCard, { WorkExperienceDataType } from '@/components/WorkExperienceCard';
 import { BACKEND_URL } from '@/config';
 import axios from 'axios';
@@ -20,7 +21,7 @@ export default function MentorProfile() {
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-center justify-center space-y-2">
-      <MentorProfileCard data={profile?.profileData} />
+      <ProfileCard data={profile?.profileData} />
       <AboutCard data={profile?.aboutData} />
       <WorkExperienceCard data={profile?.workExperienceData} />
     </div>

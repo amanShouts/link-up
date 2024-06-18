@@ -24,6 +24,8 @@ import {
   unlikePostRoute,
 } from './routes/postRoute';
 import { updateUserSkillsRoute } from './routes/skillsRoutes';
+import { ClerkExpressWithAuth } from '@clerk/clerk-sdk-node';
+import followRoutes from './routes/followRoytes';
 
 dotenv.config();
 
@@ -36,7 +38,6 @@ const io = new Server(httpServer, {
 
 app.use(bodyParser.json({ limit: '150mb' }));
 app.use(bodyParser.urlencoded({ limit: '150mb', extended: true }));
-app.use(express.json());
 
 app.use(
   cors({
@@ -53,6 +54,9 @@ app.get('/', (req, res) => {
 });
 
 app.use('/api/mentor', mentorRoutes);
+
+app.use('/api/follow', followRoutes);
+
 app.use('/api/onboarding', onboardingRoute);
 
 app.use('/api/profile/:username', getUserProfile);

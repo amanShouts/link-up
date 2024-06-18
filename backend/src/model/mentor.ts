@@ -43,6 +43,7 @@ export async function getMentor(id: number) {
     select: {
       id: true,
       name: true,
+      username: true,
       currDesignation: true,
       img: true,
       bgImg: true,
