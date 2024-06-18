@@ -1,49 +1,93 @@
 import { Request, Response } from 'express';
 import {
   followUserByUsername,
-  getUserFollowerByUsername,
-  getUserFollowingByUsername,
+  getUserFollowerByUserId,
+  getUserFollowingByUserId,
   isUserFollowByUsername,
   unfollowUserByUsername,
 } from '../model/follow';
+import { UserFollowData } from '../utiles/type';
 
-export async function getUserFollower(req: Request, res: Response) {
+export async function getUserFollowing(req: Request, res: Response) {
   try {
     const {
-      username,
+      userId,
     }: {
-      username: string | null;
+      userId: string | null;
     } = req.body;
-    if (!username)
+    let id = parseInt(userId || '');
+    if (!id)
       return res.status(404).json({
         msg: 'Invalid input',
       });
-    const result = await getUserFollowerByUsername(username);
+    const result = await getUserFollowingByUserId(id);
+    if (!result.length) {
+      return res.json({
+        follower: null,
+      });
+    }
+    const body: UserFollowData = {
+      id: result[0].User.id,
+      name: result[0].User.name,
+      username: result[0].User.username,
+      imgSrc: result[0].User.img || '',
+      follow: result.map((each) => {
+        return {
+          userId: each.Follower.id,
+          name: each.Follower.name,
+          username: each.Follower.username,
+          imgSrc: each.Follower.img || '',
+        };
+      }),
+    };
+
     return res.json({
-      follower: result,
+      following: body,
     });
   } catch (error) {
+    console.error(error);
     return res.status(500).json({
       msg: 'Internal server error',
     });
   }
 }
 
-export async function getUserFollowing(req: Request, res: Response) {
+export async function getUserFollower(req: Request, res: Response) {
   try {
     const {
-      username,
+      userId,
     }: {
-      username: string | null;
+      userId: string | null;
     } = req.body;
-    if (!username)
+    let id = parseInt(userId || '');
+    if (!id)
       return res.status(404).json({
         msg: 'Invalid input',
       });
 
-    const result = await getUserFollowingByUsername(username);
+    const result = await getUserFollowerByUserId(id);
+    if (!result.length) {
+      return res.json({
+        following: null,
+      });
+    }
+    const body: UserFollowData = {
+      id: result[0].Follower.id,
+      name: result[0].Follower.name,
+      username: result[0].Follower.username,
+      imgSrc: result[0].Follower.img || '',
+      follow: result.map((each) => {
+        return {
+          userId: each.User.id,
+          name: each.User.name,
+          username: each.User.username,
+          imgSrc: each.User.img || '',
+        };
+      }),
+    };
+
     return res.json({
-      following: result,
+      follower: body,
     });
   } catch (error) {
     return res.status(500).json({

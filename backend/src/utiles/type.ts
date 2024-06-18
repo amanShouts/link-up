@@ -52,3 +52,18 @@ export interface UpdateUserDataParams {
   city: string;
   country: string;
 }
+
+export interface UserFollowData {
+  id: number;
+  name: string;
+  username: string;
+  imgSrc: string;
+  follow: FollowDataType[];
+}
+
+export interface FollowDataType {
+  userId: number;
+  name: string;
+  username: string;
+  imgSrc: string;
+}

@@ -9,15 +9,15 @@ import { useParams } from 'react-router-dom';
 
 export default function MentorProfile() {
   const [profile, setProfile] = useState<UserDataType | null>(null);
-  const { mentorId } = useParams();
+  const { userId } = useParams();
   useEffect(() => {
     async function getProfileDetail() {
-      const response = await axios.get(`${BACKEND_URL}/api/mentor/${mentorId}`);
+      const response = await axios.get(`${BACKEND_URL}/api/mentor/${userId}`);
       const data = await response.data;
       setProfile(data);
     }
     getProfileDetail();
-  }, [mentorId]);
+  }, [userId]);
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-center justify-center space-y-2">
@@ -29,7 +29,7 @@ export default function MentorProfile() {
 }
 
 interface UserDataType {
-  mentorId: string;
+  userId: string;
   profileData: ProfileDataType;
   aboutData: AboutDataType;
   workExperienceData: WorkExperienceDataType;
