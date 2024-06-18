@@ -1,16 +1,18 @@
 import { AvatarImage, Avatar } from '@/components/ui/avatar';
 import { Card } from '@/components/ui/card';
 import { Button } from './ui/button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BACKEND_URL } from '@/config';
 import { useUser } from '@clerk/clerk-react';
 
 export default function ProfileCard({ data }: { data?: ProfileDataType }) {
+  const { userId } = useParams();
   const { user } = useUser();
   const [isFollow, setIsFollow] = useState(false);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     if (!user || !data) return;
     axios
@@ -69,15 +71,35 @@ export default function ProfileCard({ data }: { data?: ProfileDataType }) {
         <h3 className="text-xl font-semibold">{data.name}</h3>
         <p className="text-sm text-gray-500">{data.desc}</p>
         <p className="text-sm text-gray-500">{data.location}</p>
-        <div className="flex mt-3">
-          <Link to={'/direct-messages'}>
-            <Button className="mr-2 active:ring-2" variant="default">
-              DM
+        <div className="flex justify-between mt-3">
+          <div className="flex">
+            <Link to={'/direct-messages'}>
+              <Button className="mr-2 active:ring-2" variant="default">
+                DM
+              </Button>
+            </Link>
+            <Button className={`mr-2 active:ring-2 ${loading ? 'hidden' : 'block'}`} variant="secondary" onClick={followBtnHandler}>
+              {isFollow ? 'Unfollow' : 'Follow'}
             </Button>
-          </Link>
-          <Button className={`mr-2 active:ring-2 ${loading ? 'hidden' : 'block'}`} variant="secondary" onClick={followBtnHandler}>
-            {isFollow ? 'Unfollow' : 'Follow'}
-          </Button>
+          </div>
+          <div className="space-x-2">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                navigate(`/profile/${userId}/follower`);
+              }}
+            >
+              See Follower
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => {
+                navigate(`/profile/${userId}/following`);
+              }}
+            >
+              See Following
+            </Button>
+          </div>
         </div>
       </div>
     </Card>

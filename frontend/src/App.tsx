@@ -15,6 +15,8 @@ import { Toaster } from 'react-hot-toast';
 import UserProfile from './pages/UserProfile';
 import Dm from './components/Messaging/Dm';
 import UserPrefrences from './pages/UserPreferences';
+import FollowerList from './pages/FollowerList';
+import FollowingList from './pages/FollowingList';
 
 const CustomSignIn = React.lazy(() => import('./pages/CustomSignIn'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -52,7 +54,6 @@ export default function App() {
       dispatch(addCurrentUser(currentUser));
 
       if (currentUser && (currentUser?.age === null || currentUser?.city === null || currentUser?.type == null)) {
-        console.log('here');
         toggleModal('edit-profile-modal');
       }
     }
@@ -61,7 +62,6 @@ export default function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('refresh', refresh);
         const response = await fetch(BACKEND_URL + '/users');
         const responseData = await response.json();
 
@@ -102,7 +102,7 @@ export default function App() {
   }
 
   return (
-    <main className="dark:bg-black dark:text-white">
+    <main className="dark:bg-black dark:text-white min-h-screen">
       <Navbar />
       <DetailsModal />
       <Toaster />
@@ -116,9 +116,11 @@ export default function App() {
         <Route path="/home" element={isSignedIn ? <Home /> : null} />
         <Route path="/profile" element={isSignedIn ? <Profile /> : null} />
         <Route path="/profile/:userId" element={isSignedIn ? <UserProfile /> : null} />
+        <Route path="/profile/:userId/follower" element={isSignedIn ? <FollowerList /> : null} />
+        <Route path="/profile/:userId/following" element={isSignedIn ? <FollowingList /> : null} />
         <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
         <Route path="/mentors" element={isSignedIn ? <MentorList /> : null} />
-        <Route path="/mentors/:mentorId" element={isSignedIn ? <MentorProfile /> : null} />
+        <Route path="/mentors/:userId" element={isSignedIn ? <MentorProfile /> : null} />
 
         <Route path="/user-preference" element={isSignedIn ? <UserPrefrences /> : null} />
       </Routes>

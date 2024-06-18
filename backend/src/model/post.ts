@@ -41,7 +41,6 @@ export const getPosts = async (userId: string) => {
     if (!postsWithLiked.length) return posts;
     return postsWithLiked; // Else show liked post only
   } catch (error) {
-    console.log('inside get post ', error);
     throw new Error('Error fetching posts');
   }
 };

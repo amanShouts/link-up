@@ -38,12 +38,22 @@ export async function unfollowUserByUsername(
   });
 }
 
-export async function getUserFollowerByUsername(username: string) {
+export async function getUserFollowingByUserId(userId: number) {
   const result = await prisma.follower.findMany({
     where: {
-      username: username,
+      User: {
+        id: userId,
+      },
     },
     select: {
+      User: {
+        select: {
+          id: true,
+          name: true,
+          username: true,
+          img: true,
+        },
+      },
       Follower: {
         select: {
           name: true,
@@ -57,13 +67,23 @@ export async function getUserFollowerByUsername(username: string) {
   return result;
 }
 
-export async function getUserFollowingByUsername(username: string) {
+export async function getUserFollowerByUserId(userId: number) {
   const result = await prisma.follower.findMany({
     where: {
-      followerUsername: username,
+      Follower: {
+        id: userId,
+      },
     },
     select: {
       User: {
+        select: {
+          id: true,
+          name: true,
+          username: true,
+          img: true,
+        },
+      },
+      Follower: {
         select: {
           name: true,
           username: true,

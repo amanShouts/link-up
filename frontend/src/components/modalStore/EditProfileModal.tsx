@@ -14,7 +14,6 @@ export function EditProfile() {
   useEffect(() => {
     console.log('currentUser: ', currentUser);
     if (currentUser?.age && currentUser?.city && currentUser?.type) {
-      console.log('here');
       dispatch(closeModal());
     }
   }, [currentUser]);
