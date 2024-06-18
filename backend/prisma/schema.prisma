@@ -32,6 +32,7 @@ model User {
   mentor           Mentor[]       @relation("Mentor")
   entrepreneur     Entrepreneur[] @relation("Entrepreneur")
   UserLiked        UserLiked[]
+  Resources        Resource[]     @relation("Resource")
 }
 
 model Industry {
@@ -124,13 +125,19 @@ model Comment {
   user User @relation(fields: [userId], references: [id])
   post Post @relation(fields: [postId], references: [id])
 }
+
 model Resource {
   id        Int          @id @default(autoincrement())
   type      ResourceType
   content   String
   title     String
   createdAt DateTime     @default(now())
+  link      String?
+  category  String?
+  authorId  Int?     // Define the foreign key field
+  author    User?    @relation("Resource", fields: [authorId], references: [id])
 }
+
 model Chat {
   id         Int      @id @default(autoincrement())
   content    String
