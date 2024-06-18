@@ -12,11 +12,7 @@ import { RootState } from './store/store';
 import axios from 'axios';
 import DetailsModal from './components/modalStore/DetailsModal';
 import { Toaster } from 'react-hot-toast';
-import UserProfile from './pages/UserProfile';
 import Dm from './components/Messaging/Dm';
-import UserPrefrences from './pages/UserPreferences';
-import FollowerList from './pages/FollowerList';
-import FollowingList from './pages/FollowingList';
 
 const CustomSignIn = React.lazy(() => import('./pages/CustomSignIn'));
 const Home = React.lazy(() => import('./pages/Home'));
@@ -27,6 +23,10 @@ const MentorList = React.lazy(() => import('./pages/MentorList'));
 const MentorProfile = React.lazy(() => import('./pages/MentorProfile'));
 const EditProfile = React.lazy(() => import('./pages/EditProfile'));
 const Profile = React.lazy(() => import('./pages/Profile'));
+const UserPrefrences = React.lazy(() => import('./pages/UserPreferences'));
+const FollowerList = React.lazy(() => import('./pages/FollowerList'));
+const FollowingList = React.lazy(() => import('./pages/FollowingList'));
+const UserProfile = React.lazy(() => import('./pages/UserProfile'));
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
