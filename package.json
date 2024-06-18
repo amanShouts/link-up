@@ -7,7 +7,8 @@
     "build:frontend": "cd frontend && npm run build && cd ./../",
     "stop": "npx pm2 delete all",
     "build": "npm run build:backend && npm run build:frontend",
-    "deploy": "docker compose up -d"
+    "deploy": "docker compose up -d",
+    "dev": "cd backend && npm run dev && cd ./../ & cd frontend && npm run dev && cd ./../"
   },
   "dependencies": {
     "prettier": "^3.3.0"

@@ -123,6 +123,7 @@ export const getUserProfile = async (req: Request, res: Response) => {
       userId: result.id.toString(),
       profileData: {
         name: result.name,
+        username: result.username,
         profileImg: result.img || '',
         bgImg: result.bgImg || '',
         bio: result.bio || '',

@@ -23,7 +23,7 @@ export function Profile({ userId }: { userId: number }) {
 
             <Avatar className="absolute bottom-0 left-1/2 h-16 w-16 -translate-x-1/2 translate-y-1/2  border-2 border-neutral-700 dark:border-black">
               <AvatarImage alt="@shadcn" src={data?.img} className={'object-cover'} />
-              <AvatarFallback className={'dark:bg-white'}>CN</AvatarFallback>
+              <AvatarFallback className={'dark:bg-white'}>{data?.name || 'U'}</AvatarFallback>
             </Avatar>
           </div>
           <div className={'p-6 flex flex-col items-center w-full gap-6'}>

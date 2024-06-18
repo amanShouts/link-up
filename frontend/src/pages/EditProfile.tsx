@@ -8,6 +8,7 @@ import { closeModal } from '@/store/slice/modalSlice';
 import { User } from '@/store/slice/userSlice';
 import axios from 'axios';
 import { BACKEND_URL } from '@/config';
+import { Switch } from '@/components/ui/switch';
 
 export default function EditProfile() {
   const currentUser: User | undefined = useSelector((state: RootState) => state.users.currentUser as User);
@@ -48,58 +49,66 @@ export default function EditProfile() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto">
-      <CardHeader>
-        <CardTitle>Edit Profile</CardTitle>
-        <CardDescription>Update your profile information.</CardDescription>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <p>Username*</p>
-            <Input id="username" disabled className="border-color-white" value={username} onChange={(e) => setUsername(e.target.value)} />
+    <div className="w-full min-h-screen flex items-center justify-center">
+      <Card className="w-full max-w-md mx-auto">
+        <CardHeader>
+          <CardTitle>Edit Profile</CardTitle>
+          <CardDescription>Update your profile information.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <p>Username*</p>
+              <Input id="username" disabled className="border-color-white" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <p>Name*</p>
+              <Input id="name" className="border-color-white" placeholder="Enter your name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
           </div>
-          <div className="space-y-2">
-            <p>Name*</p>
-            <Input id="name" className="border-color-white" placeholder="Enter your name" type="text" value={name} onChange={(e) => setName(e.target.value)} />
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <p>User Type*</p>
+              <Input id="type" className="border-color-white" placeholder="Enter your user type" type="text" value={type} onChange={(e) => settype(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <p className="text-nowrap">Is Mentor*</p>
+              <div className="p-2 flex items-center justify-start">
+                <Switch
+                  onCheckedChange={(e) => {
+                    setIsMentor(e);
+                  }}
+                />
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <p>User Type*</p>
-            <Input id="type" className="border-color-white" placeholder="Enter your user type" type="text" value={type} onChange={(e) => settype(e.target.value)} />
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <p>Age*</p>
+              <Input id="age" className="border-color-white" placeholder="Enter your age" type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
+            </div>
+            <div className="space-y-2">
+              <p>City*</p>
+              <Input id="city" className="border-color-white" placeholder="Enter your city" value={city} onChange={(e) => setCity(e.target.value)} />
+            </div>
           </div>
-          <div className="space-y-2">
-            <p className="text-nowrap">Is Mentor*</p>
-            <Input id="isMentor" className="border-color-white w-10 rounded bg-transparent" placeholder="Enter if you are a mentor" type="checkbox" checked={isMentor} onChange={(e) => setIsMentor(e.target.checked)} />
+          <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <p>Country</p>
+              <Input id="country" className="border-color-white" placeholder="Enter your country" value={country} onChange={(e) => setCountry(e.target.value)} />
+            </div>
+            <div className="space-y-2">
+              <p>Bio</p>
+              <Input id="bio" className="border-color-white" placeholder="Enter your bio" value={bio} onChange={(e) => setBio(e.target.value)} />
+            </div>
           </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <p>Age*</p>
-            <Input id="age" className="border-color-white" placeholder="Enter your age" type="number" value={age} onChange={(e) => setAge(Number(e.target.value))} />
-          </div>
-          <div className="space-y-2">
-            <p>City*</p>
-            <Input id="city" className="border-color-white" placeholder="Enter your city" value={city} onChange={(e) => setCity(e.target.value)} />
-          </div>
-        </div>
-        <div className="grid grid-cols-2 gap-4">
-          <div className="space-y-2">
-            <p>Country</p>
-            <Input id="country" className="border-color-white" placeholder="Enter your country" value={country} onChange={(e) => setCountry(e.target.value)} />
-          </div>
-          <div className="space-y-2">
-            <p>Bio</p>
-            <Input id="bio" className="border-color-white" placeholder="Enter your bio" value={bio} onChange={(e) => setBio(e.target.value)} />
-          </div>
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button className="ml-auto" onClick={handleSave}>
-          Save Changes
-        </Button>
-      </CardFooter>
-    </Card>
+        </CardContent>
+        <CardFooter>
+          <Button className="ml-auto" onClick={handleSave}>
+            Save Changes
+          </Button>
+        </CardFooter>
+      </Card>
+    </div>
   );
 }

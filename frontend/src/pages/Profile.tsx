@@ -1,5 +1,5 @@
 import AboutCard, { AboutDataType } from '@/components/AboutCard';
-import MentorProfileCard, { ProfileDataType } from '@/components/MentorProfileCard';
+import ProfileCard, { ProfileDataType } from '@/components/ProfileCard';
 import WorkExperienceCard, { WorkExperienceDataType } from '@/components/WorkExperienceCard';
 import { BACKEND_URL } from '@/config';
 import { useUser } from '@clerk/clerk-react';
@@ -21,7 +21,7 @@ export default function Profile() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center justify-center space-y-2">
-      <MentorProfileCard data={profile?.profileData} />
+      <ProfileCard data={profile?.profileData} />
       <AboutCard data={profile?.aboutData} />
       <WorkExperienceCard data={profile?.workExperienceData} />
     </div>

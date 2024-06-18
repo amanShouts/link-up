@@ -20,6 +20,7 @@ export interface UserDataType {
 
 interface ProfileDataType {
   name: string;
+  username: string;
   profileImg: string;
   bgImg: string;
   bio: string;
