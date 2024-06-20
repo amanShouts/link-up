@@ -40,10 +40,10 @@ export default function FollowerList() {
               <Button
                 variant="secondary"
                 onClick={() => {
-                  navigate(`/profile/${userId}/follower`);
+                  navigate(`/profile/${userId}/following`);
                 }}
               >
-                See Followers
+                See Following
               </Button>
             </div>
           </div>

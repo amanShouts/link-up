@@ -21,7 +21,7 @@ export default function FollowerList() {
         setFollowData(data.following);
       });
   }, [userId]);
-  if (!followData) return <span className="flex items-center justify-center min-h-screen text-2xl">No Follower</span>;
+  if (!followData) return <span className="flex items-center justify-center min-h-screen text-2xl">No Following</span>;
   return (
     <div className="mx-auto max-w-3xl w-full py-8 px-4 md:px-0">
       <div className="flex items-center gap-4 mb-6">
