@@ -20,6 +20,7 @@ export interface UserDataType {
 
 interface ProfileDataType {
   name: string;
+  username: string;
   profileImg: string;
   bgImg: string;
   bio: string;
@@ -50,4 +51,19 @@ export interface UpdateUserDataParams {
   bio: string;
   city: string;
   country: string;
+}
+
+export interface UserFollowData {
+  id: number;
+  name: string;
+  username: string;
+  imgSrc: string;
+  follow: FollowDataType[];
+}
+
+export interface FollowDataType {
+  userId: number;
+  name: string;
+  username: string;
+  imgSrc: string;
 }

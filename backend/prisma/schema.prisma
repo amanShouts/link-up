@@ -1,6 +1,7 @@
 generator client {
   provider = "prisma-client-js"
 }
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -32,7 +33,9 @@ model User {
   mentor           Mentor[]       @relation("Mentor")
   entrepreneur     Entrepreneur[] @relation("Entrepreneur")
   UserLiked        UserLiked[]
-  Resources        Resource[]     @relation("Resource")
+  Resource         Resource[]
+  followers        Follower[]     @relation("UserFollowers")
+  following        Follower[]     @relation("UserFollowing")
 }
 
 model Industry {
@@ -41,12 +44,14 @@ model Industry {
   userId User         @relation(fields: [usedId], references: [id])
   type   IndustryType @default(NONE)
 }
+
 model Skill {
   id     Int    @id @default(autoincrement())
   usedId Int
   userId User   @relation(fields: [usedId], references: [id])
   type   String
 }
+
 model Experience {
   id          Int     @id @default(autoincrement())
   userId      Int
@@ -58,6 +63,7 @@ model Experience {
   startYear   String
   endYear     String
 }
+
 model Mentor {
   id             Int            @id @default(autoincrement())
   userId         Int
@@ -66,6 +72,7 @@ model Mentor {
   User           User           @relation("Mentor", fields: [userId], references: [id])
   Entrepreneur   Entrepreneur[]
 }
+
 model Entrepreneur {
   id       Int     @id @default(autoincrement())
   userId   Int
@@ -74,33 +81,36 @@ model Entrepreneur {
   User     User    @relation("Entrepreneur", fields: [userId], references: [id])
   Mentor   Mentor? @relation(fields: [mentorId], references: [id])
 }
+
 model Post {
-  id        Int       @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   userId    Int
   title     String
   desc      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime? @updatedAt
+  createdAt DateTime    @default(now())
+  updatedAt DateTime?   @updatedAt
   type      PostType
   labelId   Int?
-  like      Int       @default(0)
-  comment   Int       @default(0)
-  view      Int       @default(0)
+  like      Int         @default(0)
+  comment   Int         @default(0)
+  view      Int         @default(0)
   img       String?
   video     String?
   link      String?
-  likedBy  UserLiked[]
-  user     User        @relation(fields: [userId], references: [id])
-  label    Label?      @relation(fields: [labelId], references: [id])
-  comments Comment[]
-  View     View[]
+  likedBy   UserLiked[]
+  user      User        @relation(fields: [userId], references: [id])
+  label     Label?      @relation(fields: [labelId], references: [id])
+  comments  Comment[]
+  View      View[]
 }
+
 model View {
   id     Int  @id @default(autoincrement())
   userId Int
   postId Int
   post   Post @relation(fields: [postId], references: [id])
 }
+
 model Label {
   id         Int    @id @default(autoincrement())
   labelTitle String
@@ -112,6 +122,7 @@ model UserLiked {
   postId Int
   User   User @relation(fields: [userId], references: [id])
   Post   Post @relation(fields: [postId], references: [id])
+
   @@id([userId, postId])
 }
 
@@ -122,8 +133,8 @@ model Comment {
   commentContent String    @default("")
   createdAt      DateTime  @default(now())
   updatedAt      DateTime? @updatedAt
-  user User @relation(fields: [userId], references: [id])
-  post Post @relation(fields: [postId], references: [id])
+  user           User      @relation(fields: [userId], references: [id])
+  post           Post      @relation(fields: [postId], references: [id])
 }
 
 model Resource {
@@ -146,30 +157,46 @@ model Chat {
   createdAt  DateTime @default(now())
   chatType   ChatType
   fileLink   String?
-  sender   User @relation("Sender", fields: [senderId], references: [id])
-  receiver User @relation("Receiver", fields: [receiverId], references: [id])
+  sender     User     @relation("Sender", fields: [senderId], references: [id])
+  receiver   User     @relation("Receiver", fields: [receiverId], references: [id])
 }
+
+model Follower {
+  id               Int    @id @default(autoincrement())
+  username         String
+  followerUsername String
+
+  User     User @relation("UserFollowing", fields: [username], references: [username])
+  Follower User @relation("UserFollowers", fields: [followerUsername], references: [username])
+
+  @@unique([username, followerUsername])
+}
+
 enum UserType {
   INVESTOR
   ENTREPRENEUR
 }
+
 enum PostType {
   TEXT
   IMAGE
   VIDEO
   LINK
 }
+
 enum ResourceType {
   ARTICLE
   VIDEO
   PODCAST
   BOOK
 }
+
 enum ChatType {
   TEXT
   FILE
   IMAGE
 }
+
 enum IndustryType {
   NONE
   SaaS

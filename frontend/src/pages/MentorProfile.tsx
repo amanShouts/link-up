@@ -1,5 +1,6 @@
 import AboutCard, { AboutDataType } from '@/components/AboutCard';
-import MentorProfileCard, { ProfileDataType } from '@/components/MentorProfileCard';
+import ProfileCard from '@/components/ProfileCard';
+import { ProfileDataType } from '@/components/ProfileCard';
 import WorkExperienceCard, { WorkExperienceDataType } from '@/components/WorkExperienceCard';
 import { BACKEND_URL } from '@/config';
 import axios from 'axios';
@@ -8,19 +9,19 @@ import { useParams } from 'react-router-dom';
 
 export default function MentorProfile() {
   const [profile, setProfile] = useState<UserDataType | null>(null);
-  const { mentorId } = useParams();
+  const { userId } = useParams();
   useEffect(() => {
     async function getProfileDetail() {
-      const response = await axios.get(`${BACKEND_URL}/api/mentor/${mentorId}`);
+      const response = await axios.get(`${BACKEND_URL}/api/mentor/${userId}`);
       const data = await response.data;
       setProfile(data);
     }
     getProfileDetail();
-  }, [mentorId]);
+  }, [userId]);
 
   return (
     <div className="w-full h-full min-h-screen flex flex-col items-center justify-center space-y-2">
-      <MentorProfileCard data={profile?.profileData} />
+      <ProfileCard data={profile?.profileData} />
       <AboutCard data={profile?.aboutData} />
       <WorkExperienceCard data={profile?.workExperienceData} />
     </div>
@@ -28,7 +29,7 @@ export default function MentorProfile() {
 }
 
 interface UserDataType {
-  mentorId: string;
+  userId: string;
   profileData: ProfileDataType;
   aboutData: AboutDataType;
   workExperienceData: WorkExperienceDataType;

@@ -101,7 +101,6 @@ export const countViewPostController = async (req: Request, res: Response) => {
   const { postId, userId } = req.body;
   try {
     const post = await countViewPost({ postId, userId });
-    console.log('getting views');
     return res.json(post);
   } catch (error) {
     res.status(500).json({ error: 'Error counting view' });

@@ -43,6 +43,7 @@ export async function getMentorDetails(req: Request, res: Response) {
       userId: mentorId,
       profileData: {
         name: result.name,
+        username: result.username,
         profileImg: result.img || '',
         bgImg: result.bgImg || '',
         bio: result.bio || '',
