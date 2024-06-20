@@ -77,7 +77,7 @@ export default function Navbar() {
 
         <div className={'flex gap-8 items-center text-sm'}>
           <Link to={'/home'}>Feed</Link>
-          <Link to={'/'}>Resources</Link>
+          <Link to={'/resource'}>Resources</Link>
           <Link to={'/mentors'}>Mentors</Link>
           <Link to={'/'}>Investors</Link>
           <Link to={'/'}>Entrepreneur</Link>

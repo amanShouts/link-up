@@ -25,6 +25,7 @@ const MentorList = React.lazy(() => import('./pages/MentorList'));
 const MentorProfile = React.lazy(() => import('./pages/MentorProfile'));
 const EditProfile = React.lazy(() => import('./pages/EditProfile'));
 const Profile = React.lazy(() => import('./pages/Profile'));
+const Resource = React.lazy(() => import('./pages/ResourcePage'));
 
 export default function App() {
   const { isSignedIn, isLoaded, user } = useUser();
@@ -119,7 +120,7 @@ export default function App() {
         <Route path="/edit-profile" element={isSignedIn ? <EditProfile /> : null} />
         <Route path="/mentors" element={isSignedIn ? <MentorList /> : null} />
         <Route path="/mentors/:mentorId" element={isSignedIn ? <MentorProfile /> : null} />
-
+        <Route path="/resource" element={isSignedIn ? <Resource /> : null} />
         <Route path="/user-preference" element={isSignedIn ? <UserPrefrences /> : null} />
       </Routes>
     </main>
